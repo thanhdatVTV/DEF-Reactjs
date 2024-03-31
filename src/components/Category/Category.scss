@@ -1,0 +1,21 @@
+// .gutter-box {
+//     padding: 8px 0;
+//     background: #00a0e9;
+//     text-align: center;
+// }
+.box-content {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    background-color: #0092ff;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(19, 132, 185, 0.8);
+    }
+}
+
+.category-container {
+    margin: 3vw;
+}

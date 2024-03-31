@@ -1,0 +1,50 @@
+/* PaymentForm.css */
+
+.payment-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+}
+
+.account-info,
+.page-info {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 45%;
+}
+
+.account-input,
+.pages-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+h2 {
+    color: #333;
+}
+
+/* PaymentForm.css */
+
+/* ... (các style khác) */
+
+.account-info,
+.page-info {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 45%;
+    margin-bottom: 20px;
+    /* Thêm khoảng cách giữa hai phần */
+}
+
+/* ... (các style khác) */
+.btn-thanhtoan {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

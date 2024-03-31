@@ -1,0 +1,75 @@
+.red {
+    border: 1px solid red;
+}
+
+.green {
+    border: 1px solid green;
+}
+
+.yellow {
+    border: 1px solid yellow;
+}
+
+.login-container {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+    padding-top: 60px;
+
+    .content-left {
+        margin-top: 50px;
+        padding-left: 100px;
+
+        .logo-container {
+
+            .logo {
+                max-width: 100px;
+                /* Ensure the logo doesn't exceed its container */
+                height: auto;
+                /* Maintain the aspect ratio */
+                margin-bottom: 20px;
+                /* Adjust the margin as needed */
+            }
+
+            .brand {
+                text-transform: uppercase;
+                font-size: 50px;
+                color: #1877f2;
+            }
+        }
+
+
+        .detail {
+            font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
+            font-size: 28px;
+            font-weight: normal;
+            line-height: 32px;
+            width: 500px;
+        }
+    }
+
+    .content-right {
+        .brand {
+            text-transform: uppercase;
+            font-size: 20px;
+            color: #1877f2;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        border-radius: 10px;
+        background-color: #FFF;
+        box-shadow: 0 2px 4px rab(0 0 0 / 10%),
+        0 8px 16px rab(0 0 0 / 10%);
+        box-sizing: border-box;
+    }
+
+    .input-2 {
+        position: relative;
+
+        i {
+            position: absolute;
+            top: 15px;
+            right: 10px;
+        }
+    }
+}
