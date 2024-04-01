@@ -13,6 +13,7 @@ import Category from "../Category/Category";
 import PurchasePage from '../../components/PurchasePage/PurchasePage';
 import TableUsers from '../TableUsers'
 import Feature from "../Feature/Feature";
+import TableLecturers from "../../components/Lecturers/TableLecturers";
 
 const AppRoutes = () => {
     const { user } = useContext(UserContext);
@@ -59,6 +60,7 @@ const AppRoutes = () => {
                     <Route path='/category' element={<Category />} />
                     <Route path='/purchase' element={<PurchasePage />} />
                     <Route path='/feature' element={<Feature />} />
+                    <Route path="/lecturers" element={<TableLecturers />} />
                 </Routes>
             </>
         )
