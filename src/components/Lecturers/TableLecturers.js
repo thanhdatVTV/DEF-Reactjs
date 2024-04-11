@@ -54,15 +54,12 @@ const TableLecturers = (props) => {
     }, [])
 
     const getLecturerss = async (keyword, pageNumber, perPage) => {
-        console.log(keyword, pageNumber, perPage)
 
         let res = await getLecturersList(keyword, pageNumber, perPage);
-        console.log("dadadadad", res);
         if (res && res.response) {
-
-            //setTotalLecturerss(res.response.total)
-            //setTotalPages(res.response.totalPages)
-            setListLecturers(res)
+            setTotalLecturerss(res.response.total)
+            setTotalPages(res.response.totalPages)
+            setListLecturers(res.response)
         }
     }
 
@@ -85,6 +82,8 @@ const TableLecturers = (props) => {
         // cloneListLecturerss = cloneListLecturerss.filter(item => item.id !== Lecturers.id);
         // setListLecturers(cloneListLecturerss);
         getLecturerss("", 1, 6);
+        console.log('d1', listLecturers);
+
     }
 
     const handleSort = (sortBy, sortField) => {
@@ -93,6 +92,8 @@ const TableLecturers = (props) => {
         let cloneListLecturerss = _.cloneDeep(listLecturers);
         cloneListLecturerss = _.orderBy(cloneListLecturerss, [sortField], [sortBy])
         setListLecturers(cloneListLecturerss);
+        console.log('d1', listLecturers);
+
     }
 
     const handleSearch = debounce((event) => {
@@ -105,6 +106,8 @@ const TableLecturers = (props) => {
         }
         else {
             getLecturerss("", 1, 6);
+            console.log('d1', listLecturers);
+
         }
     }, 500)
 
@@ -144,16 +147,16 @@ const TableLecturers = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>File Type Name</span>
+                                    <span>Tên giảng viên</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "typeName")}
+                                            onClick={() => handleSort("desc", "TenGV")}
                                         >
                                         </i>
                                         <i
                                             className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "typeName")}
+                                            onClick={() => handleSort("asc", "TenGV")}
                                         >
                                         </i>
                                     </span>
@@ -168,7 +171,7 @@ const TableLecturers = (props) => {
                                 return (
                                     <tr key={`users-${index}`}>
                                         <td>{item.id}</td>
-                                        <td>{item.TenGV}</td>
+                                        <td>{item.data.TenGV}</td>
                                         <td>
                                             <button
                                                 className='btn btn-warning mx-3'
