@@ -1,18 +1,17 @@
 
 import { Modal, Button } from "react-bootstrap";
-import { deleteLecturers } from "../../services/LecturersService";
 import { toast } from "react-toastify";
 
 const ModalConfirm = (props) => {
-    const { show, handleClose, dataLecturersDelete, handleDeleteLecturersFromModal } = props;
+    const { show, handleClose, dataDelete, deleteApi, handleDeleteFromModal, title, successMessage } = props;
 
     const confirmDelete = async () => {
-        console.log('dataLecturersDelete.id', dataLecturersDelete.id);
-        let res = await deleteLecturers(dataLecturersDelete.id)
+        console.log('dataDelete.id', dataDelete.id);
+        let res = await deleteApi(dataDelete.id)
         if (res && res.status) {
-            toast.success("Delete file type succeed!");
+            toast.success(successMessage);
             handleClose();
-            handleDeleteLecturersFromModal(dataLecturersDelete);
+            handleDeleteFromModal(dataDelete);
         }
         else {
             toast.error("Error delete")
@@ -27,7 +26,7 @@ const ModalConfirm = (props) => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete a file type</Modal.Title>
+                    <Modal.Title>{title}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className="body-add-new">

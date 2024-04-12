@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { getLecturersList } from '../../services/LecturersService';
+import { getLecturersList, createLecturers, updateLecturers, deleteLecturers } from '../../services/LecturersService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from './ModalAddNew';
-import ModalEdit from './ModalEdit';
-import ModalConfirm from './ModalConfirm';
+import ModalAddNew from '../Modal/AddNew';
+import ModalEdit from '../Modal/Edit';
+import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
 import './Lecturers.scss'
@@ -29,13 +29,23 @@ const TableLecturers = (props) => {
 
     const [keyword, setKeyword] = useState("");
 
+    const inputFieldsAddNew = [
+        { name: "MaGV", label: "Lecturer ID", type: "text" },
+        { name: "TenGV", label: "Lecturer name", type: "text" },
+    ];
+    const inputFieldsEdit = [
+        { name: "Id", label: "ID", type: "text" },
+        { name: "MaGV", label: "Lecturer ID", type: "text" },
+        { name: "TenGV", label: "Lecturer name", type: "text" },
+    ];
+
     const handleClose = () => {
         setIsShowModalAddNew(false);
         setIsShowModalEdit(false);
         setIsShowModalDelete(false);
     }
 
-    const handleUpdateTable = (Lecturers) => {
+    const handleUpdateTable = () => {
         // setListLecturers([Lecturers, ...listLecturers]);
         getLecturerss("", 1, 6);
     }
@@ -147,6 +157,23 @@ const TableLecturers = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
+                                    <span>MaGV</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "MaGV")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "MaGV")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div className='sort-header'>
                                     <span>Tên giảng viên</span>
                                     <span>
                                         <i
@@ -171,6 +198,7 @@ const TableLecturers = (props) => {
                                 return (
                                     <tr key={`users-${index}`}>
                                         <td>{item.id}</td>
+                                        <td>{item.data.MaGV}</td>
                                         <td>{item.data.TenGV}</td>
                                         <td>
                                             <button
@@ -210,19 +238,32 @@ const TableLecturers = (props) => {
                 <ModalAddNew
                     show={isShowModalAddNew}
                     handleClose={handleClose}
+                    createApi={createLecturers}
                     handleUpdateTable={handleUpdateTable}
+                    title="Add new Lecturer"
+                    buttonText="Save changes"
+                    successMessage="A new Lecturer is created successfully!"
+                    errorMessage="Failed to create Lecturer."
+                    inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
                     show={isShowModalEdit}
-                    dataLecturersEdit={dataLecturersEdit}
+                    dataEdit={dataLecturersEdit}
                     handleClose={handleClose}
-                    handleEditLecturersFromModal={handleEditLecturersFromModal}
+                    handleEditFromModal={handleEditLecturersFromModal}
+                    updateApi={updateLecturers}
+                    title="Edit Lecturer"
+                    successMessage='Update lecturer successfully'
+                    inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
                     show={isShowModalDelete}
                     handleClose={handleClose}
-                    dataLecturersDelete={dataLecturersDelete}
-                    handleDeleteLecturersFromModal={handleDeleteLecturersFromModal}
+                    dataDelete={dataLecturersDelete}
+                    handleDeleteFromModal={handleDeleteLecturersFromModal}
+                    deleteApi={deleteLecturers}
+                    title='Delete Lecturer'
+                    successMessage='Delete Lecturer successfully'
                 />
             </div>
         </>)

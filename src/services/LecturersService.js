@@ -5,16 +5,16 @@ const getLecturersList = (keyword, pageNumber, perPage) => {
     return axios.get(`/api/lecturers/get-list?keyword=${keyword}&pageNumber=${pageNumber}&per_page=${perPage}`)
 }
 
-const createLecturers = (typeName) => {
-    return axios.post(`/api/lecturers/add-lecturers?typeName=${typeName}`);
+const createLecturers = ({MaGV, TenGV}) => {
+    return axios.post(`/api/lecturers/add-lecturers`, {MaGV, TenGV});
 }
 
-const updateLecturers = (id, typeName) => {
-    return axios.post(`/api/lecturers/update-lecturer?id=${id}&typeName=${typeName}`);
+const updateLecturers = ({Id, MaGV, TenGV}) => {
+    return axios.post(`/api/lecturers/update-lecturer`, {Id, MaGV, TenGV});
 }
 
-const deleteLecturers = (id) => {
-    return axios.post(`/api/lecturers/delete-lecturer?id=${id}`);
+const deleteLecturers = (Id) => {
+    return axios.post(`/api/lecturers/delete-lecturer`, {Id});
 }
 
 export { getLecturersList, createLecturers, updateLecturers, deleteLecturers };
