@@ -2,7 +2,7 @@ import axios from "../services/customize-axios";
 
 const getLecturersList = (keyword, pageNumber, perPage) => {
     //console.log("ddddddd", `/api/lecturers/get-list?keyword=${keyword}&pageNumber=${pageNumber}&per_page=${perPage}`)
-    return axios.get(`/api/lecturers/get-list?keyword=${keyword}&pageNumber=${pageNumber}&per_page=${perPage}`)
+    return axios.get(`/api/lecturers/get-list`, {keyword, pageNumber, perPage})
 }
 
 const createLecturers = ({MaGV, TenGV}) => {
