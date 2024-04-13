@@ -125,7 +125,7 @@ const TableLecturers = (props) => {
         <>
             <div className='Lecturers-container'>
                 <div className="my-3 add-new">
-                    <span><b>List file types:</b></span>
+                    <span><b>Giảng viên:</b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

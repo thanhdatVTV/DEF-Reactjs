@@ -26,16 +26,13 @@ const Header = (props) => {
                             className="d-inline-block align-top"
                             alt="React Boostrap logo"
                         />
-                        <span>SSPS Print</span>
+                        <span>DEFe-learning</span>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <NavLink to="/" className="nav-link">Home</NavLink>
                             <NavLink to="/users" className="nav-link">Manage Users</NavLink>
-                            <NavLink to="/file-type" className="nav-link">File Type</NavLink>
-                            <NavLink to="/page-size" className="nav-link">Page Size</NavLink>
-                            <NavLink to="/printer" className="nav-link">Printer</NavLink>
                             <NavLink to="/upload" className="nav-link">Upload</NavLink>
                         </Nav>
                         <Nav>

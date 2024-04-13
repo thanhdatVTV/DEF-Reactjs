@@ -5,7 +5,7 @@ import { loginApi } from '../../services/UserService';
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 import { UserContext } from '../context/UserContext';
-import logoApp from '../../assets/images/logobachkhoa.png';
+import logoApp from '../../assets/images/deflogo.png';
 
 
 const Login = () => {
@@ -92,17 +92,23 @@ const Login = () => {
                     <div className="content-left col-12 d-none col-sm-7 d-sm-block">
                         <div className='logo-container'>
                             {/* <img src={logoApp} alt="Logo" className="logo" /> */}
+                            <img
+                                src={logoApp}
+                                width="300"
+                                height="100"
+                                alt='logo'
+                            />
                             <div className="brand">
-                                SSPS PRINT
+                                e-learning
                             </div>
                         </div>
                         <div className="detail">
-                            SSPS PRINT giúp bạn in ấn và chia sẻ tài liệu với mọi người một cách dể dàng.
+                            Unlock Learning. Anywhere. Anytime
                         </div>
                     </div>
                     <div className="content-right col-sm-5 col-12 d-flex flex-column gap-3 py-3">
                         <div className="brand d-sm-none">
-                            SSPS PRINT
+                            DEF e-learning
                         </div>
                         <input
                             type="text"

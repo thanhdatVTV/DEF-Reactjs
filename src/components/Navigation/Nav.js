@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import logoApp from '../../assets/images/logobachkhoa.png';
+import logoApp from '../../assets/images/deflogo.png';
 import { useLocation, NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useEffect, useState, useContext } from 'react';
@@ -40,12 +40,12 @@ const Header = (props) => {
                         <Navbar.Brand href="/">
                             <img
                                 src={logoApp}
-                                width="40"
+                                width="90"
                                 height="30"
                                 className="d-inline-block align-top"
                                 alt="React Boostrap logo"
                             />
-                            <span>SSPS Print</span>
+                            {/* <span>e-learning</span> */}
                         </Navbar.Brand>
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
