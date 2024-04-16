@@ -11,6 +11,7 @@ import PurchasePage from '../../components/PurchasePage/PurchasePage';
 import TableUsers from '../TableUsers'
 import Feature from "../Feature/Feature";
 import TableLecturers from "../../components/Lecturers/TableLecturers";
+import TableMajor from "../../components/Major/TableMajor";
 
 const AppRoutes = () => {
     const { user } = useContext(UserContext);
@@ -54,6 +55,7 @@ const AppRoutes = () => {
                     <Route path='/purchase' element={<PurchasePage />} />
                     <Route path='/feature' element={<Feature />} />
                     <Route path="/lecturers" element={<TableLecturers />} />
+                    <Route path="/major" element={<TableMajor />} />
                 </Routes>
             </>
         )
