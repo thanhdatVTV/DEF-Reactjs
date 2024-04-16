@@ -51,11 +51,12 @@ const Login = () => {
         }
 
         try {
-            let resLogin = true;//await loginApi(valueLogin, password);
-            if (resLogin) {
+            let resLogin = await loginApi(valueLogin, password);
+            if (resLogin && +resLogin.status == 1) {
                 toast.success("Đăng nhập thành công.");
-                let codeId = "2233167"; //resLogin.response.type == 0 ? resLogin.response.studentId : resLogin.response.studentId.teacherId;
-                let fullName = "Nguyen Thanh Dat";//resLogin.response.fullName;
+                console.log(resLogin)
+                let codeId = resLogin.response.type == 0 ? resLogin.response.StudentId : resLogin.response.TeacherId;
+                let fullName = resLogin.response.FullName;
                 let data = {
                     isAuthenticated: true,
                     token: 'fake token',
