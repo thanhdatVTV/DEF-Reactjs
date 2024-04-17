@@ -13,6 +13,8 @@ import Feature from "../Feature/Feature";
 import TableLecturers from "../../components/Lecturers/TableLecturers";
 import TableMajor from "../../components/Major/TableMajor";
 import TableNhomLop from "../../components/NhomLop/TableNhomLop";
+import TableSemester from "../../components/Semester/TableSemester";
+import TableYear from "../../components/Year/TableYear";
 
 
 const AppRoutes = () => {
@@ -59,6 +61,8 @@ const AppRoutes = () => {
                     <Route path="/lecturers" element={<TableLecturers />} />
                     <Route path="/major" element={<TableMajor />} />
                     <Route path="/nhomlop" element={<TableNhomLop />} />
+                    <Route path="/semester" element={<TableSemester />} />
+                    <Route path="/year" element={<TableYear />} />
                 </Routes>
             </>
         )

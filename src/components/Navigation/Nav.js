@@ -58,6 +58,8 @@ const Header = (props) => {
                                 <NavLink to="/lecturers" className="nav-link">Lecturer</NavLink>
                                 <NavLink to="/major" className="nav-link">Major</NavLink>
                                 <NavLink to="/nhomlop" className="nav-link">NhomLop</NavLink>
+                                <NavLink to="/semester" className="nav-link">Semester</NavLink>
+                                <NavLink to="/year" className="nav-link">Year</NavLink>
                             </Nav>
                             <Nav>
                                 <NavDropdown title={user.account.fullName} id="basic-nav-dropdown">
