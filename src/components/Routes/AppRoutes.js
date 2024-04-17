@@ -11,6 +11,8 @@ import PurchasePage from '../../components/PurchasePage/PurchasePage';
 import TableUsers from '../TableUsers'
 import Feature from "../Feature/Feature";
 import TableLecturers from "../../components/Lecturers/TableLecturers";
+import TableFaculty from "../../components/Faculty/TableFaculty";
+import TableBuilding from "../../components/Building/TableBuilding";
 import TableMajor from "../../components/Major/TableMajor";
 
 const AppRoutes = () => {
@@ -55,6 +57,8 @@ const AppRoutes = () => {
                     <Route path='/purchase' element={<PurchasePage />} />
                     <Route path='/feature' element={<Feature />} />
                     <Route path="/lecturers" element={<TableLecturers />} />
+                    <Route path="/faculty" element={<TableFaculty />} />
+                    <Route path="/building" element={<TableBuilding />} />
                     <Route path="/major" element={<TableMajor />} />
                 </Routes>
             </>
