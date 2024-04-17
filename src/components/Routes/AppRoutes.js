@@ -12,6 +12,8 @@ import TableUsers from '../TableUsers'
 import Feature from "../Feature/Feature";
 import TableLecturers from "../../components/Lecturers/TableLecturers";
 import TableMajor from "../../components/Major/TableMajor";
+import TableNhomLop from "../../components/NhomLop/TableNhomLop";
+
 
 const AppRoutes = () => {
     const { user } = useContext(UserContext);
@@ -56,6 +58,7 @@ const AppRoutes = () => {
                     <Route path='/feature' element={<Feature />} />
                     <Route path="/lecturers" element={<TableLecturers />} />
                     <Route path="/major" element={<TableMajor />} />
+                    <Route path="/nhomlop" element={<TableNhomLop />} />
                 </Routes>
             </>
         )
