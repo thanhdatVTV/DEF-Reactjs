@@ -14,6 +14,10 @@ import TableLecturers from "../../components/Lecturers/TableLecturers";
 import TableFaculty from "../../components/Faculty/TableFaculty";
 import TableBuilding from "../../components/Building/TableBuilding";
 import TableMajor from "../../components/Major/TableMajor";
+import TableNhomLop from "../../components/NhomLop/TableNhomLop";
+import TableSemester from "../../components/Semester/TableSemester";
+import TableYear from "../../components/Year/TableYear";
+
 
 const AppRoutes = () => {
     const { user } = useContext(UserContext);
@@ -60,6 +64,9 @@ const AppRoutes = () => {
                     <Route path="/faculty" element={<TableFaculty />} />
                     <Route path="/building" element={<TableBuilding />} />
                     <Route path="/major" element={<TableMajor />} />
+                    <Route path="/nhomlop" element={<TableNhomLop />} />
+                    <Route path="/semester" element={<TableSemester />} />
+                    <Route path="/year" element={<TableYear />} />
                 </Routes>
             </>
         )
