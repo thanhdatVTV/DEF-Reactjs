@@ -76,6 +76,8 @@ const TableTestSchedules = (props) => {
 
   const getTestScheduless = async (keyword, pageNumber, perPage) => {
     let res = await getTestScheduleList(keyword, pageNumber, perPage);
+    console.log(res);
+    console.log(res.response);
     if (res && res.response) {
       setTotalTestScheduless(res.response.total);
       setTotalPages(res.response.totalPages);

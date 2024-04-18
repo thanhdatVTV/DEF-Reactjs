@@ -86,6 +86,9 @@ const Header = (props) => {
                 <NavLink to="/testschedules" className="nav-link">
                   Test Schedule
                 </NavLink>
+                <NavLink to="/subjects" className="nav-link">
+                  Subject
+                </NavLink>
               </Nav>
               <Nav>
                 <NavDropdown title={user.account.fullName} id="basic-nav-dropdown">
