@@ -19,6 +19,7 @@ import TableSemester from '../../components/Semester/TableSemester';
 import TableYear from '../../components/Year/TableYear';
 import TableTestSchedules from '../TestSchedules/TableTestSchedules';
 import TableSubjects from '../Subjects/TableSubjects';
+import TableSubjectGroups from '../SubjectGroups/TableSubjectGroups';
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -68,6 +69,7 @@ const AppRoutes = () => {
           <Route path="/year" element={<TableYear />} />
           <Route path="/testschedules" element={<TableTestSchedules />} />
           <Route path="/subjects" element={<TableSubjects />} />
+          <Route path="/subjectgroups" element={<TableSubjectGroups />} />
         </Routes>
       </>
     );
