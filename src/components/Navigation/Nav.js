@@ -92,6 +92,12 @@ const Header = (props) => {
                 <NavLink to="/subjectgroups" className="nav-link">
                   Subject Group
                 </NavLink>
+                <NavLink to="/coso" className="nav-link">
+                  Co So
+                </NavLink>
+                <NavLink to="/eduprogram" className="nav-link">
+                  Education Program
+                </NavLink>
               </Nav>
 
               <Nav>
