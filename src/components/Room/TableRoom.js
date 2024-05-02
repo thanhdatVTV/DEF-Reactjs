@@ -1,26 +1,28 @@
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { getCoSoList, createCoSo, updateCoSo, deleteCoSo } from '../../services/CoSoService';
+import { getRoomList, createRoom, updateRoom, deleteRoom } from '../../services/RoomService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from '../Modal/AddNew';
-import ModalEdit from '../Modal/Edit';
+import ModalAddNew from './AddNew';
+import ModalEdit from './Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
-import './CoSo.scss'
+import './Room.scss'
 
-const TableCoSo = (props) => {
-    const [listCoSo, setListCoSo] = useState([]);
-    const [totalCoSo, setTotalCoSo] = useState(0);
+
+const TableBuilding = (props) => {
+
+    const [listBuilding, setListBuilding] = useState([]);
+    const [totalBuilding, setTotalBuilding] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
     const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
 
     const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-    const [dataCoSoEdit, setDataCoSoEdit] = useState({});
+    const [dataBuildingEdit, setDataBuildingEdit] = useState({});
 
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
-    const [dataCoSoDelete, setDataCoSoDelete] = useState({});
+    const [dataBuildingDelete, setDataBuildingDelete] = useState({});
 
     const [sortBy, setSortBy] = useState("asc");
     const [sortField, setSortField] = useState("id");
@@ -28,15 +30,15 @@ const TableCoSo = (props) => {
     const [keyword, setKeyword] = useState("");
 
     const inputFieldsAddNew = [
-        { name: "MaCS", label: "CoSo ID", type: "text" },
-        { name: "DiaChi", label: "Địa chỉ", type: "text" },
-        { name: "TenCS", label: "CoSo name", type: "text" },
+        { name: "MaPhong", label: "Room ID", type: "text" },
+        { name: "TenPhong", label: "Room name", type: "text" },
+        { name: "ToaNhaId", label: "Building ID", type: "text" },
     ];
     const inputFieldsEdit = [
         { name: "Id", label: "ID", type: "text" },
-        { name: "MaCS", label: "CoSo ID", type: "text" },
-        { name: "DiaChi", label: "Địa chỉ", type: "text" },
-        { name: "TenCS", label: "CoSo name", type: "text" },
+        { name: "MaPhong", label: "Room ID", type: "text" },
+        { name: "TenPhong", label: "Room name", type: "text" },
+        { name: "ToaNhaId", label: "Building ID", type: "text" },
     ];
 
     const handleClose = () => {
@@ -47,62 +49,62 @@ const TableCoSo = (props) => {
 
     const handleUpdateTable = () => {
         // setListLecturers([Lecturers, ...listLecturers]);
-        getCoSo("", 1, 6);
+        getBuilding("", 1, 6);
     }
 
-    const handleEditCoSoFromModal = (CoSo) => {
+    const handleEditBuildingFromModal = (Building) => {
         // let cloneListLecturerss = _.cloneDeep(listLecturers);
         // let index = listLecturers.findIndex(item => item.id === Lecturers.id);
         // cloneListLecturerss[index].typeName = Lecturers.typeName;
         // setListLecturers(cloneListLecturerss);
-        getCoSo("", 1, 6);
+        getBuilding("", 1, 6);
     }
 
     useEffect(() => {
         //call api
-        getCoSo("", 1, 6);
+        getBuilding("", 1, 6);
     }, [])
 
-    const getCoSo = async (keyword, pageNumber, perPage) => {
+    const getBuilding = async (keyword, pageNumber, perPage) => {
 
-        let res = await getCoSoList(keyword, pageNumber, perPage);
+        let res = await getRoomList(keyword, pageNumber, perPage);
         if (res && res.response) {
-            setTotalCoSo(res.response.total)
+            setTotalBuilding(res.response.total)
             setTotalPages(res.response.totalPages)
-            setListCoSo(res.response)
+            setListBuilding(res.response)
         }
     }
 
     const handlePageClick = (event) => {
-        getCoSo("", +event.selected + 1, 6)
+        getBuilding("", +event.selected + 1, 6)
     }
 
-    const handleEditCoSo = (CoSo) => {
-        setDataCoSoEdit(CoSo);
+    const handleEditBuilding = (Building) => {
+        setDataBuildingEdit(Building);
         setIsShowModalEdit(true);
     }
 
-    const handleDeleteCoSo = (CoSo) => {
+    const handleDeleteBuilding = (Building) => {
         setIsShowModalDelete(true);
-        setDataCoSoDelete(CoSo);
+        setDataBuildingDelete(Building);
     }
 
-    const handleDeleteCoSoFromModal = (CoSo) => {
+    const handleDeleteBuildingFromModal = (Building) => {
         // let cloneListLecturerss = _.cloneDeep(listLecturers);
         // cloneListLecturerss = cloneListLecturerss.filter(item => item.id !== Lecturers.id);
         // setListLecturers(cloneListLecturerss);
-        getCoSo("", 1, 6);
-        console.log('d1', listCoSo);
+        getBuilding("", 1, 6);
+        console.log('d1', listBuilding);
 
     }
 
     const handleSort = (sortBy, sortField) => {
         setSortBy(sortBy);
         setSortField(sortField);
-        let cloneListCoSo = _.cloneDeep(listCoSo);
-        cloneListCoSo = _.orderBy(cloneListCoSo, [sortField], [sortBy])
-        setListCoSo(cloneListCoSo);
-        console.log('d1', listCoSo);
+        let cloneListBuilding = _.cloneDeep(listBuilding);
+        cloneListBuilding = _.orderBy(cloneListBuilding, [sortField], [sortBy])
+        setListBuilding(cloneListBuilding);
+        console.log('d1', listBuilding);
 
     }
 
@@ -110,22 +112,23 @@ const TableCoSo = (props) => {
         console.log(event.target.value)
         let term = event.target.value;
         if (term) {
-            let cloneListCoSo = _.cloneDeep(listCoSo);
-            cloneListCoSo = cloneListCoSo.filter(item => item.typeName.includes(term))
-            setListCoSo(cloneListCoSo);
+            let cloneListBuilding = _.cloneDeep(listBuilding);
+            cloneListBuilding = cloneListBuilding.filter(item => item.typeName.includes(term))
+            setListBuilding(cloneListBuilding);
         }
         else {
-            getCoSo("", 1, 6);
-            console.log('d1', listCoSo);
+            getBuilding("", 1, 6);
+            console.log('d1', listBuilding);
 
         }
     }, 500)
+
     return (
         <>
-            <div className='CoSo-container'>
+            <div className='Building-container'>
                 <div className="my-3 add-new">
-                    <span><b>Co So:</b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <span><b>Phòng:</b></span>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new room type</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -156,16 +159,16 @@ const TableCoSo = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Ma Co So</span>
+                                    <span>MaPhong</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "MaCS")}
+                                            onClick={() => handleSort("desc", "MaPhong")}
                                         >
                                         </i>
                                         <i
                                             className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "MaCS")}
+                                            onClick={() => handleSort("asc", "MaPhong")}
                                         >
                                         </i>
                                     </span>
@@ -173,16 +176,33 @@ const TableCoSo = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Co So</span>
+                                    <span>Tên Phòng</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "TenCS")}
+                                            onClick={() => handleSort("desc", "TenPhong")}
                                         >
                                         </i>
                                         <i
                                             className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "TenCS")}
+                                            onClick={() => handleSort("asc", "TenPhong")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div className='sort-header'>
+                                    <span>Tên Toà Nhà</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "TenTN")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "TenTN")}
                                         >
                                         </i>
                                     </span>
@@ -192,21 +212,22 @@ const TableCoSo = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listCoSo && listCoSo.length > 0 &&
-                            listCoSo.map((item, index) => {
+                        {listBuilding && listBuilding.length > 0 &&
+                            listBuilding.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
                                         <td>{item.id}</td>
-                                        <td>{item.data.MaCS}</td>
-                                        <td>{item.data.TenCS}</td>
+                                        <td>{item.data.MaPhong}</td>
+                                        <td>{item.data.TenPhong}</td>
+                                        <td>{item.data.TenTN}</td>
                                         <td>
                                             <button
                                                 className='btn btn-warning mx-3'
-                                                onClick={() => handleEditCoSo(item)}
+                                                onClick={() => handleEditBuilding(item)}
                                             >Edit</button>
                                             <button
                                                 className='btn btn-danger'
-                                                onClick={() => handleDeleteCoSo(item)}
+                                                onClick={() => handleDeleteBuilding(item)}
                                             >Delete
                                             </button>
                                         </td>
@@ -237,36 +258,35 @@ const TableCoSo = (props) => {
                 <ModalAddNew
                     show={isShowModalAddNew}
                     handleClose={handleClose}
-                    createApi={createCoSo}
+                    createApi={createRoom}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new CoSo"
+                    title="Add new Building"
                     buttonText="Save changes"
-                    successMessage="A new CoSo is created successfully!"
-                    errorMessage="Failed to create CoSo."
+                    successMessage="A new Building is created successfully!"
+                    errorMessage="Failed to create Building."
                     inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
                     show={isShowModalEdit}
-                    dataEdit={dataCoSoEdit}
+                    dataEdit={dataBuildingEdit}
                     handleClose={handleClose}
-                    handleEditFromModal={handleEditCoSoFromModal}
-                    updateApi={updateCoSo}
-                    title="Edit CoSo"
-                    successMessage='Update CoSo successfully'
+                    handleEditFromModal={handleEditBuildingFromModal}
+                    updateApi={updateRoom}
+                    title="Edit Building"
+                    successMessage='Update Building successfully'
                     inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
                     show={isShowModalDelete}
                     handleClose={handleClose}
-                    dataDelete={dataCoSoDelete}
-                    handleDeleteFromModal={handleDeleteCoSoFromModal}
-                    deleteApi={deleteCoSo}
-                    title='Delete CoSo'
-                    successMessage='Delete CoSo successfully'
+                    dataDelete={dataBuildingDelete}
+                    handleDeleteFromModal={handleDeleteBuildingFromModal}
+                    deleteApi={deleteRoom}
+                    title='Delete Building'
+                    successMessage='Delete Building successfully'
                 />
             </div>
-        </>
-    )
+        </>)
 }
 
-export default TableCoSo;
+export default TableBuilding;

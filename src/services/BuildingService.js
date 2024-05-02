@@ -5,12 +5,12 @@ const getBuildingList = (keyword, pageNumber, perPage) => {
     return axios.get(`/api/toa-nha/get-list`, {keyword, pageNumber, perPage})
 }
 
-const createBuilding = ({MaTN, TenTN}) => {
-    return axios.post(`/api/toa-nha/add-toa-nha`, {MaTN, TenTN});
+const createBuilding = ({MaTN, TenTN, CoSoId, TenCS}) => {
+    return axios.post(`/api/toa-nha/add-toa-nha`, {MaTN, TenTN, CoSoId, TenCS});
 }
 
-const updateBuilding = ({Id, MaTN, TenTN}) => {
-    return axios.post(`/api/toa-nha/update-toa-nha`, {Id, MaTN, TenTN});
+const updateBuilding = ({Id, MaTN, TenTN, CoSoId, TenCS}) => {
+    return axios.post(`/api/toa-nha/update-toa-nha`, {Id, MaTN, TenTN, CoSoId, TenCS});
 }
 
 const deleteBuilding = (Id) => {

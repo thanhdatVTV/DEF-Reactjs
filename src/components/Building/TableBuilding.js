@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { getBuildingList, createBuilding, updateBuilding, deleteBuilding } from '../../services/BuildingService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from '../Modal/AddNew';
-import ModalEdit from '../Modal/Edit';
+import ModalAddNew from './AddNew';
+import ModalEdit from './Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
@@ -32,11 +32,13 @@ const TableBuilding = (props) => {
     const inputFieldsAddNew = [
         { name: "MaTN", label: "Building ID", type: "text" },
         { name: "TenTN", label: "Building name", type: "text" },
+        { name: "CoSoId", label: "CoSo ID", type: "text" },
     ];
     const inputFieldsEdit = [
         { name: "Id", label: "ID", type: "text" },
         { name: "MaTN", label: "Building ID", type: "text" },
         { name: "TenTN", label: "Building name", type: "text" },
+        { name: "CoSoId", label: "CoSo ID", type: "text" },
     ];
 
     const handleClose = () => {
@@ -189,6 +191,23 @@ const TableBuilding = (props) => {
                                     </span>
                                 </div>
                             </th>
+                            <th>
+                                <div className='sort-header'>
+                                    <span>Tên Cơ Sở</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "TenCS")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "TenCS")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -200,6 +219,7 @@ const TableBuilding = (props) => {
                                         <td>{item.id}</td>
                                         <td>{item.data.MaTN}</td>
                                         <td>{item.data.TenTN}</td>
+                                        <td>{item.data.TenCS}</td>
                                         <td>
                                             <button
                                                 className='btn btn-warning mx-3'

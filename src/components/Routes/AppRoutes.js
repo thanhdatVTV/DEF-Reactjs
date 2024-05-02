@@ -22,6 +22,7 @@ import TableSubjects from '../Subjects/TableSubjects';
 import TableSubjectGroups from '../SubjectGroups/TableSubjectGroups';
 import TableCoSo from '../CoSo/TableCoSo';
 import TableEduProgram from '../EducationProgram/TableEduProgram';
+import TableRoom from '../Room/TableRoom';
 import Profile from '../Profile/Profile';
 
 const AppRoutes = () => {
@@ -76,6 +77,7 @@ const AppRoutes = () => {
           <Route path="/coso" element={<TableCoSo />} />
           <Route path="/eduprogram" element={<TableEduProgram />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/room" element={<TableRoom />} />
         </Routes>
       </>
     );
