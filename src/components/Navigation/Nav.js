@@ -103,9 +103,7 @@ const Header = (props) => {
               <Nav>
                 <NavDropdown title={user.account.fullName} id="basic-nav-dropdown">
                   {/* <NavLink to="/login" className="dropdown-item">Login</NavLink> */}
-                  <NavLink to="/feature" className="dropdown-item">
-                    Thông tin cá nhân
-                  </NavLink>
+                  <NavDropdown.Item href="/profile">Thông tin tài khoản</NavDropdown.Item>
                   <NavDropdown.Item onClick={() => handleLogout()}>Logout</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
