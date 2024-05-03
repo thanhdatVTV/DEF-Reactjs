@@ -10,7 +10,7 @@ const Home = () => {
 
     const redirectToOtherPage = (item) => {
         if (item === 1) {
-            navigate("/upload")
+            navigate("/dotdangky")
         }
         if (item === 2) {
             navigate("/purchase")
@@ -37,7 +37,7 @@ const Home = () => {
             <div className="home-container">
                 <div className="col-12 d-flex flex-wrap w-100">
                     <Button className="col-md-4 col-6 btn btn-primary btn-home" onClick={() => redirectToOtherPage(1)}>
-                        <span className="title"><i className="fa-solid fa-file"></i> In tài liệu</span>
+                        <span className="title"><i className="fa-solid fa-file"></i> Đợt đăng ký</span>
                     </Button>
                     <Button className="col-md-4 col-6 btn btn-secondary btn-home" onClick={() => redirectToOtherPage(2)}>
                         <span className="title"><i className="fa-solid fa-money-bill"></i> Mua trang in</span>

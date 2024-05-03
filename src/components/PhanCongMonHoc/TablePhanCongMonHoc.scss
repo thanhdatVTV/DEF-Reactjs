@@ -1,0 +1,12 @@
+.multi-column-dropdown .dropdown-columns {
+    column-count: 8; /* Số cột muốn hiển thị */
+    column-gap: 1px; /* Khoảng cách giữa các cột */
+    //display: flex;
+    flex-wrap: wrap;
+}
+
+.multi-column-dropdown .dropdown-columns label {
+    display: block;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}

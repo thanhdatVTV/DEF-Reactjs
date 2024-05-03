@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { getDotDangKys, createDotDangKy, updateDotDangKy, deleteDotDangKy } from '../../services/DotDangKyService';
+import { getDotDangKyList, createDotDangKy, updateDotDangKy, deleteDotDangKy } from '../../services/DotDangKyService';
 import { getSubjectList } from '../../services/SubjectsService';
 import { getPhanCongMonHocs, createPhanCongMonHoc, updatePhanCongMonHoc, deletePhanCongMonHoc } from '../../services/PhanCongMonHocService';
 import ReactPaginate from 'react-paginate';
@@ -11,22 +11,21 @@ import '../TableUser.scss'
 import _, { debounce } from "lodash";
 import { useNavigate } from 'react-router-dom';
 
-
 const DotDangKy = (props) => {
 
     const navigate = useNavigate();
 
-    const [listLecturers, setListLecturers] = useState([]);
-    const [totalLecturerss, setTotalLecturerss] = useState(0);
+    const [listDotDangKy, setListDotDangKy] = useState([]);
+    const [totalDotDangKys, setTotalDotDangKys] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
     const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
 
     const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-    const [dataLecturersEdit, setDataLecturersEdit] = useState({});
+    const [dataDotDangKyEdit, setDataDotDangKyEdit] = useState({});
 
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
-    const [dataLecturersDelete, setDataLecturersDelete] = useState({});
+    const [dataDotDangKyDelete, setDataDotDangKyDelete] = useState({});
 
     const [sortBy, setSortBy] = useState("asc");
     const [sortField, setSortField] = useState("id");
@@ -51,7 +50,7 @@ const DotDangKy = (props) => {
         { name: "ThoiGianKetThuc", label: "Thời gian kết thúc", type: "text" },
     ];
 
-    const tableHeads = ['id', 'MaDDK', 'MoTa', 'NamHoc', 'HocKy', 'ThoiGianBatDau', 'ThoiGianKetThuc']
+    const tableHeads = ['MaDDK', 'MoTa', 'NamHoc', 'HocKy', 'ThoiGianBatDau', 'ThoiGianKetThuc']
 
     const handleClose = () => {
         setIsShowModalAddNew(false);
@@ -60,78 +59,82 @@ const DotDangKy = (props) => {
     }
 
     const handleUpdateTable = () => {
-        // setListLecturers([Lecturers, ...listLecturers]);
-        getLecturerss("", 1, 6);
+        // setListDotDangKy([DotDangKy, ...listDotDangKy]);
+        getDotDangKys("", 1, 6);
     }
 
-    const handleEditLecturersFromModal = (Lecturers) => {
-        // let cloneListLecturerss = _.cloneDeep(listLecturers);
-        // let index = listLecturers.findIndex(item => item.id === Lecturers.id);
-        // cloneListLecturerss[index].typeName = Lecturers.typeName;
-        // setListLecturers(cloneListLecturerss);
-        getLecturerss("", 1, 6);
+    const handleEditDotDangKyFromModal = (DotDangKy) => {
+        // let cloneListDotDangKys = _.cloneDeep(listDotDangKy);
+        // let index = listDotDangKy.findIndex(item => item.id === DotDangKy.id);
+        // cloneListDotDangKys[index].typeName = DotDangKy.typeName;
+        // setListDotDangKy(cloneListDotDangKys);
+        getDotDangKys("", 1, 6);
     }
 
     useEffect(() => {
         //call api
-        getLecturerss("", 1, 6);
-    }, [])
+        getDotDangKys("", 1, 6);
+    }, []);
 
-    const getLecturerss = async (keyword, pageNumber, perPage) => {
+    const getDotDangKys = async (keyword, pageNumber, perPage) => {
 
-        let res = await getDotDangKys(keyword, pageNumber, perPage);
+        let res = await getDotDangKyList(keyword, pageNumber, perPage);
         if (res && res.response) {
-            setTotalLecturerss(res.response.total)
+            setTotalDotDangKys(res.response.total)
             setTotalPages(res.response.totalPages)
-            setListLecturers(res.response)
+            setListDotDangKy(res.response)
         }
     }
 
     const handlePageClick = (event) => {
-        getLecturerss("", +event.selected + 1, 6)
+        getDotDangKys("", +event.selected + 1, 6)
     }
 
-    const handleEditLecturers = (Lecturers) => {
-        setDataLecturersEdit(Lecturers);
+    const handleEditDotDangKy = (DotDangKy) => {
+        setDataDotDangKyEdit(DotDangKy);
         setIsShowModalEdit(true);
     }
 
-    const handleDeleteLecturers = (Lecturers) => {
+    const handleDeleteDotDangKy = (DotDangKy) => {
         setIsShowModalDelete(true);
-        setDataLecturersDelete(Lecturers);
+        setDataDotDangKyDelete(DotDangKy);
     }
 
-    const handleDeleteLecturersFromModal = (Lecturers) => {
-        // let cloneListLecturerss = _.cloneDeep(listLecturers);
-        // cloneListLecturerss = cloneListLecturerss.filter(item => item.id !== Lecturers.id);
-        // setListLecturers(cloneListLecturerss);
-        getLecturerss("", 1, 6);
-        console.log('d1', listLecturers);
+    const handleDeleteDotDangKyFromModal = (DotDangKy) => {
+        // let cloneListDotDangKys = _.cloneDeep(listDotDangKy);
+        // cloneListDotDangKys = cloneListDotDangKys.filter(item => item.id !== DotDangKy.id);
+        // setListDotDangKy(cloneListDotDangKys);
+        getDotDangKys("", 1, 6);
+        console.log('d1', listDotDangKy);
 
     }
 
     const handleSort = (sortBy, sortField) => {
         setSortBy(sortBy);
         setSortField(sortField);
-        let cloneListLecturerss = _.cloneDeep(listLecturers);
-        cloneListLecturerss = _.orderBy(cloneListLecturerss, [sortField], [sortBy])
-        setListLecturers(cloneListLecturerss);
-        console.log('d1', listLecturers);
+        let cloneListDotDangKys = _.cloneDeep(listDotDangKy);
+        cloneListDotDangKys = _.orderBy(cloneListDotDangKys, [sortField], [sortBy])
+        setListDotDangKy(cloneListDotDangKys);
+        console.log('d1', listDotDangKy);
 
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
-            let cloneListLecturerss = _.cloneDeep(listLecturers);
-            cloneListLecturerss = cloneListLecturerss.filter(item => item.typeName.includes(term))
-            setListLecturers(cloneListLecturerss);
+            let cloneListDotDangKys = _.cloneDeep(listDotDangKy);
+            cloneListDotDangKys = cloneListDotDangKys.filter(item => {
+                return (
+                    item.data.MaDDK.includes(term) ||
+                    item.data.NamHoc.includes(term) ||
+                    item.data.MoTa.includes(term)
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
+            setListDotDangKy(cloneListDotDangKys);
         }
         else {
-            getLecturerss("", 1, 6);
-            console.log('d1', listLecturers);
-
+            getDotDangKys("", 1, 6);
         }
     }, 500)
 
@@ -146,22 +149,20 @@ const DotDangKy = (props) => {
             // console.log("Subjects List", subjects);
             subjects.forEach(subject => {
                 createPhanCongMonHoc({
-                    MaDDK: item.id, 
-                    NganhHoc: '', 
-                    MaMH: subject.MaMH, 
-                    TenMH: subject.TenMH, 
-                    NamHoc: item.data.NamHoc, 
-                    HocKy: item.data.HocKy, 
-                    CoSo: '', 
-                    ToaNha: '', 
-                    Phong: '', 
-                    TuanHocBatDau: '', 
-                    TuanHocKetThuc: '', 
-                    Thu: '', 
-                    TietHocBatDau: '', 
-                    TietHocKetThuc: '', 
-                    SiSo: '', 
-                    TeacherCode: '' 
+                    MaDDK: item.id,
+                    NganhHoc: '',
+                    MaMH: subject.MaMH,
+                    TenMH: subject.TenMH,
+                    NamHoc: item.data.NamHoc,
+                    HocKy: item.data.HocKy,
+                    CoSo: '',
+                    ToaNha: '',
+                    Phong: '',
+                    TuanHoc: '',
+                    Thu: '',
+                    TietHoc: '',
+                    SiSo: '',
+                    TeacherCode: ''
                 }).then(response => {
                     // console.log("PhanCongMonHoc created", response);
                 }).catch(error => {
@@ -172,13 +173,14 @@ const DotDangKy = (props) => {
             console.error("Error fetching subjects", error);
         }).finally(() => {
             // Navigate to @TablePhanCongMonHoc after operations are completed
-            navigate("/phancongmonhoc");
+            //navigate("/phancongmonhoc");
+            navigate(`/phancongmonhoc/${item.id}`, { state: { MaDDK: item.id } });
         });
     }
 
     return (
         <>
-            <div className='Lecturers-container' style={{margin: '3vw'}}>
+            <div className='DotDangKy-container' style={{ margin: '3vw' }}>
                 <div className="my-3 add-new">
                     <span><b>Giảng viên:</b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new</button>
@@ -216,11 +218,16 @@ const DotDangKy = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listLecturers && listLecturers.length > 0 &&
-                            listLecturers.map((item) => {
+                        {listDotDangKy && listDotDangKy.length > 0 &&
+                            listDotDangKy.map((item) => {
+                                // Kiểm tra thời gian hiện tại có nằm trong phạm vi từ ThoiGianBatDau đến ThoiGianKetThuc
+                                const currentTime = new Date();
+                                const startTime = new Date(item.data.ThoiGianBatDau);
+                                const endTime = new Date(item.data.ThoiGianKetThuc);
+                                const isTimeInRange = currentTime >= startTime && currentTime <= endTime;
                                 return (
                                     <tr key={item.id}>
-                                        <td>{item.id}</td>
+                                        {/* <td>{item.id}</td> */}
                                         <td>{item.data.MaDDK}</td>
                                         <td>{item.data.MoTa}</td>
                                         <td>{item.data.NamHoc}</td>
@@ -230,17 +237,18 @@ const DotDangKy = (props) => {
                                         <td>
                                             <button
                                                 className='btn btn-warning mx-3'
-                                                onClick={() => handleEditLecturers(item)}
+                                                onClick={() => handleEditDotDangKy(item)}
                                             >Edit</button>
                                             <button
                                                 className='btn btn-danger mx-3'
-                                                onClick={() => handleDeleteLecturers(item)}
+                                                onClick={() => handleDeleteDotDangKy(item)}
                                             >Delete
                                             </button>
                                             <button
                                                 className='btn btn-info'
                                                 onClick={() => handleDotDangKy(item)}
-                                            >Xác nhận</button>
+                                                disabled={!isTimeInRange}
+                                            >Cấu hình</button>
                                         </td>
                                     </tr>
                                 )
@@ -279,9 +287,9 @@ const DotDangKy = (props) => {
                 />
                 <ModalEdit
                     show={isShowModalEdit}
-                    dataEdit={dataLecturersEdit}
+                    dataEdit={dataDotDangKyEdit}
                     handleClose={handleClose}
-                    handleEditFromModal={handleEditLecturersFromModal}
+                    handleEditFromModal={handleEditDotDangKyFromModal}
                     updateApi={updateDotDangKy}
                     title="Edit Enrollment"
                     successMessage='Update Enrollment successfully'
@@ -290,8 +298,8 @@ const DotDangKy = (props) => {
                 <ModalConfirm
                     show={isShowModalDelete}
                     handleClose={handleClose}
-                    dataDelete={dataLecturersDelete}
-                    handleDeleteFromModal={handleDeleteLecturersFromModal}
+                    dataDelete={dataDotDangKyDelete}
+                    handleDeleteFromModal={handleDeleteDotDangKyFromModal}
                     deleteApi={deleteDotDangKy}
                     title='Delete Enrollment'
                     successMessage='Delete Enrollment successfully'

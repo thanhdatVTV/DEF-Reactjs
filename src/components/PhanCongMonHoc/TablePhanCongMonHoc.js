@@ -1,32 +1,46 @@
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { getPhanCongMonHocs, createPhanCongMonHoc, updatePhanCongMonHoc, deletePhanCongMonHoc } from '../../services/PhanCongMonHocService';
+import { getPhanCongMonHocList, createPhanCongMonHoc, updatePhanCongMonHoc, deletePhanCongMonHoc } from '../../services/PhanCongMonHocService';
+import { getCoSoList } from '../../services/CoSoService';
+import { getBuildingList } from '../../services/BuildingService';
+import { getRoomList } from '../../services/RoomService';
 import ReactPaginate from 'react-paginate';
 import ModalAddNew from '../Modal/AddNew';
 import ModalEdit from '../Modal/Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
+import { useParams } from 'react-router-dom';
+import { Form, Dropdown } from 'react-bootstrap';
+import './TablePhanCongMonHoc.scss';
 
 
-const TableLecturers = (props) => {
-
-    const [listLecturers, setListLecturers] = useState([]);
-    const [totalLecturerss, setTotalLecturerss] = useState(0);
+const TablePhanCongMonHoc = (props) => {
+    const { MaDDK } = useParams();
+    const [listPhanCongMonHoc, setListPhanCongMonHoc] = useState([]);
+    const [totalPhanCongMonHocs, setTotalPhanCongMonHocs] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
     const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
 
     const [isShowModalEdit, setIsShowModalEdit] = useState(false);
-    const [dataLecturersEdit, setDataLecturersEdit] = useState({});
+    const [dataPhanCongMonHocEdit, setDataPhanCongMonHocEdit] = useState({});
 
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
-    const [dataLecturersDelete, setDataLecturersDelete] = useState({});
+    const [dataPhanCongMonHocDelete, setDataPhanCongMonHocDelete] = useState({});
 
     const [sortBy, setSortBy] = useState("asc");
     const [sortField, setSortField] = useState("id");
 
     const [keyword, setKeyword] = useState("");
+    const [listCoSo, setListCoSo] = useState([]);
+    const [listToaNha, setListToaNha] = useState([]);
+    const [listPhong, setListPhong] = useState([]);
+    const [selectedWeeks, setSelectedWeeks] = useState({}); // State lưu trữ thông tin tuần được chọn cho mỗi hàng
+    const [selectedDays, setSelectedDays] = useState({}); // State lưu trữ thông tin thứ được chọn cho mỗi hàng
+
+    const [updatedRecords, setUpdatedRecords] = useState([]); // Store updated records
+    const [isDropdownChanged, setIsDropdownChanged] = useState(false); // Track dropdown changes
 
     const inputFieldsAddNew = [
         { name: "MaGV", label: "Lecturer ID", type: "text" },
@@ -46,11 +60,9 @@ const TableLecturers = (props) => {
         'CoSo',
         'ToaNha',
         'Phong',
-        'TuanHocBatDau',
-        'TuanHocKetThuc',
+        'TuanHoc',
         'Thu',
-        'TietHocBatDau',
-        'TietHocKetThuc',
+        'TietHoc',
         'SiSo',
         'TeacherCode'
     ];
@@ -62,87 +74,282 @@ const TableLecturers = (props) => {
     }
 
     const handleUpdateTable = () => {
-        // setListLecturers([Lecturers, ...listLecturers]);
-        getLecturerss("", 1, 6);
+        // setListPhanCongMonHoc([PhanCongMonHoc, ...listPhanCongMonHoc]);
+        getPhanCongMonHocs("", MaDDK, 1, 6);
     }
 
-    const handleEditLecturersFromModal = (Lecturers) => {
-        // let cloneListLecturerss = _.cloneDeep(listLecturers);
-        // let index = listLecturers.findIndex(item => item.id === Lecturers.id);
-        // cloneListLecturerss[index].typeName = Lecturers.typeName;
-        // setListLecturers(cloneListLecturerss);
-        getLecturerss("", 1, 6);
+    const handleEditPhanCongMonHocFromModal = (PhanCongMonHoc) => {
+        // let cloneListPhanCongMonHocs = _.cloneDeep(listPhanCongMonHoc);
+        // let index = listPhanCongMonHoc.findIndex(item => item.id === PhanCongMonHoc.id);
+        // cloneListPhanCongMonHocs[index].typeName = PhanCongMonHoc.typeName;
+        // setListPhanCongMonHoc(cloneListPhanCongMonHocs);
+        getPhanCongMonHocs("", MaDDK, 1, 6);
     }
 
     useEffect(() => {
-        //call api
-        getLecturerss("", 1, 6);
+        getPhanCongMonHocs("", MaDDK, 1, 6);
+        getCoSos("", 1, 20);
+        getToaNhas("", 1, 20);
+        getToaPhongs("", 1, 20);
     }, [])
 
-    const getLecturerss = async (keyword, pageNumber, perPage) => {
+    // const getPhanCongMonHocs = async (keyword, MaDDK, pageNumber, perPage) => {
+    //     let res = await getPhanCongMonHocList(keyword, MaDDK, pageNumber, perPage);
+    //     console.log('MaDDK', res.response);
+    //     if (res && res.response) {
+    //         setTotalPhanCongMonHocs(res.response.total)
+    //         setTotalPages(res.response.totalPages)
+    //         setListPhanCongMonHoc(res.response)
+    //     }
+    // }
 
-        let res = await getPhanCongMonHocs(keyword, pageNumber, perPage);
+    const getPhanCongMonHocs = async (keyword, MaDDK, pageNumber, perPage) => {
+        let res = await getPhanCongMonHocList(keyword, MaDDK, pageNumber, perPage);
         if (res && res.response) {
-            setTotalLecturerss(res.response.total)
-            setTotalPages(res.response.totalPages)
-            setListLecturers(res.response)
+            setTotalPages(res.response.totalPages);
+            setListPhanCongMonHoc(res.response);
+            // Khởi tạo state cho selectedWeeks với giá trị mặc định là mỗi hàng đều không có tuần nào được chọn
+            let initialSelectedWeeks = {};
+            res.response.forEach(item => {
+                initialSelectedWeeks[item.id] = new Array(52).fill(false);
+            });
+
+            // Khởi tạo state cho selectedDays với giá trị mặc định là mỗi hàng đều không có tuần nào được chọn
+            let initialSelectedDays = {};
+            res.response.forEach(item => {
+                initialSelectedDays[item.id] = new Array(7).fill(false);
+            });
+            setSelectedWeeks(initialSelectedWeeks);
+            setSelectedDays(initialSelectedDays);
+        }
+    };
+
+    const getCoSos = async (keyword, pageNumber, perPage) => {
+        let res = await getCoSoList(keyword, pageNumber, perPage);
+        if (res && res.response) {
+            setListCoSo(res.response)
+        }
+    }
+
+    const getToaNhas = async (keyword, pageNumber, perPage) => {
+        let res = await getBuildingList(keyword, pageNumber, perPage);
+        if (res && res.response) {
+            setListToaNha(res.response)
+        }
+    }
+
+    const getToaPhongs = async (keyword, pageNumber, perPage) => {
+        let res = await getRoomList(keyword, pageNumber, perPage);
+        if (res && res.response) {
+            setListPhong(res.response)
         }
     }
 
     const handlePageClick = (event) => {
-        getLecturerss("", +event.selected + 1, 6)
+        getPhanCongMonHocs("", MaDDK, +event.selected + 1, 6)
     }
 
-    const handleEditLecturers = (Lecturers) => {
-        setDataLecturersEdit(Lecturers);
+    const handleEditPhanCongMonHoc = (PhanCongMonHoc) => {
+        setDataPhanCongMonHocEdit(PhanCongMonHoc);
         setIsShowModalEdit(true);
     }
 
-    const handleDeleteLecturers = (Lecturers) => {
+    const handleDeletePhanCongMonHoc = (PhanCongMonHoc) => {
         setIsShowModalDelete(true);
-        setDataLecturersDelete(Lecturers);
+        setDataPhanCongMonHocDelete(PhanCongMonHoc);
     }
 
-    const handleDeleteLecturersFromModal = (Lecturers) => {
-        // let cloneListLecturerss = _.cloneDeep(listLecturers);
-        // cloneListLecturerss = cloneListLecturerss.filter(item => item.id !== Lecturers.id);
-        // setListLecturers(cloneListLecturerss);
-        getLecturerss("", 1, 6);
-        console.log('d1', listLecturers);
+    const handleDeletePhanCongMonHocFromModal = (PhanCongMonHoc) => {
+        // let cloneListPhanCongMonHocs = _.cloneDeep(listPhanCongMonHoc);
+        // cloneListPhanCongMonHocs = cloneListPhanCongMonHocs.filter(item => item.id !== PhanCongMonHoc.id);
+        // setListPhanCongMonHoc(cloneListPhanCongMonHocs);
+        getPhanCongMonHocs("", MaDDK, 1, 6);
 
     }
 
     const handleSort = (sortBy, sortField) => {
         setSortBy(sortBy);
         setSortField(sortField);
-        let cloneListLecturerss = _.cloneDeep(listLecturers);
-        cloneListLecturerss = _.orderBy(cloneListLecturerss, [sortField], [sortBy])
-        setListLecturers(cloneListLecturerss);
-        console.log('d1', listLecturers);
+        let cloneListPhanCongMonHocs = _.cloneDeep(listPhanCongMonHoc);
+        cloneListPhanCongMonHocs = _.orderBy(cloneListPhanCongMonHocs, [sortField], [sortBy])
+        setListPhanCongMonHoc(cloneListPhanCongMonHocs);
 
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
-            let cloneListLecturerss = _.cloneDeep(listLecturers);
-            cloneListLecturerss = cloneListLecturerss.filter(item => item.typeName.includes(term))
-            setListLecturers(cloneListLecturerss);
+            let cloneListPhanCongMonHocs = _.cloneDeep(listPhanCongMonHoc);
+            cloneListPhanCongMonHocs = cloneListPhanCongMonHocs.filter(item => item.typeName.includes(term))
+            setListPhanCongMonHoc(cloneListPhanCongMonHocs);
         }
         else {
-            getLecturerss("", 1, 6);
-            console.log('d1', listLecturers);
-
+            getPhanCongMonHocs("", MaDDK, 1, 6);
         }
     }, 500)
 
+    // Cập nhật handleEditField để lưu trữ id cùng với dữ liệu đã thay đổi
+    const handleEditField = (index, field, value) => {
+        let updatedRecord = { ...listPhanCongMonHoc[index] };
+        console.log('updatedRecord', updatedRecord);
+        updatedRecord.data[field] = value;
+        setListPhanCongMonHoc(prevState => {
+            let newState = [...prevState];
+            newState[index] = updatedRecord;
+            return newState;
+        });
+        setIsDropdownChanged(true); // Set dropdown changed flag
+        setUpdatedRecords(prevState => {
+            let newRecords = [...prevState];
+            if (!newRecords.includes(updatedRecord)) {
+                newRecords.push(updatedRecord);
+            }
+            return newRecords;
+        });
+    };
+
+    const handleUpdateRecords = async () => {
+        // Call API to update all records
+        await Promise.all(updatedRecords.map(async record => {
+            updatePhanCongMonHoc({
+                Id: record.id,
+                MaDDK: record.data.MaDDK,
+                NganhHoc: record.data.NganhHoc,
+                MaMH: record.data.MaMH,
+                TenMH: record.data.TenMH,
+                NamHoc: record.data.NamHoc,
+                HocKy: record.data.HocKy,
+                CoSo: record.data.CoSo,
+                ToaNha: record.data.ToaNha,
+                Phong: record.data.Phong,
+                TuanHoc: record.data.TuanHoc,
+                Thu: record.data.Thu,
+                TietHoc: record.data.TietHoc,
+                SiSo: record.data.SiSo,
+                TeacherCode: record.data.TeacherCode
+            }).then(response => {
+                getPhanCongMonHocs("", MaDDK, 1, 6);
+            }).catch(error => {
+                console.error("Error creating PhanCongMonHoc", error);
+            });
+            //await updatePhanCongMonHoc(record.data); // Assuming API function to update record
+            //console.log(record);
+        }));
+        setIsDropdownChanged(false);
+        setUpdatedRecords([]);
+    };
+
+    const handleWeekSelect = (id, index, indexItem) => {
+        setSelectedWeeks((selectedWeeks) => {
+            const updatedSelectedWeeks = { ...selectedWeeks };
+            updatedSelectedWeeks[id] = updatedSelectedWeeks[id].map((week, i) => {
+                if (i === index) {
+                    return !week; // Đảo trạng thái của tuần được chọn
+                }
+                return week; // Giữ nguyên trạng thái của các tuần khác
+            });
+            setIsDropdownChanged(true);
+            // Lưu giá trị của tuần học vào biến TuanHoc
+            const weekString = generateWeekString(updatedSelectedWeeks[id]);
+            handleEditField(indexItem, 'TuanHoc', weekString);
+            console.log('weekString', weekString);
+            return updatedSelectedWeeks;
+        });
+    };
+
+    const handleDaySelect = (id, index, indexItem) => {
+        setSelectedDays((selectedDays) => {
+            const updatedSelectedDays = { ...selectedDays };
+            updatedSelectedDays[id] = updatedSelectedDays[id].map((selected, i) => {
+                if (i === index) {
+                    return !selected; // Đảo trạng thái của thứ được chọn
+                }
+                return selected; // Giữ nguyên trạng thái của các thứ khác
+            });
+            setIsDropdownChanged(true);
+            // Lưu giá trị của thứ vào biến Thu
+            const dayString = generateDayString(updatedSelectedDays[id]);
+            handleEditField(indexItem, 'Thu', dayString);
+            return updatedSelectedDays;
+        });
+    };
+
+    const generateWeekString = (selectedWeeks, tuanHoc) => {
+        if (tuanHoc) {
+            return tuanHoc;
+        }
+
+        if (!selectedWeeks || !Array.isArray(selectedWeeks)) {
+            return '';
+        }
+
+        let weekString = '';
+        for (let i = 0; i < selectedWeeks.length; i++) {
+            weekString += selectedWeeks[i] ? i + 1 : '-';
+        }
+        return weekString;
+    };
+
+    const generateDayString = (selectedDays, thu) => {
+        if (thu) {
+            return thu;
+        }
+
+        if (!selectedDays || !Array.isArray(selectedDays)) {
+            return '';
+        }
+
+        const daysOfWeek = ['2', '3', '4', '5', '6', '7', 'CN'];
+        let dayString = '';
+        for (let i = 0; i < selectedDays.length; i++) {
+            dayString += selectedDays[i] ? daysOfWeek[i] + ' ' : '- ';
+        }
+        return dayString.trim();
+    };
+
+    const weekDropdown = (id, indexItem) => (
+        <Dropdown.Menu className="multi-column-dropdown">
+            <div className="dropdown-columns">
+                {selectedWeeks[id] && selectedWeeks[id].map((week, index) => (
+                    <Form.Check
+                        key={index}
+                        inline
+                        label={`Tuần ${index + 1}`}
+                        type="checkbox"
+                        checked={week}
+                        onChange={() => handleWeekSelect(id, index, indexItem)}
+                    />
+                ))}
+            </div>
+        </Dropdown.Menu>
+    );
+
+    const dayDropdown = (id, indexItem) => (
+        <Dropdown.Menu className="multi-column-dropdown">
+            <div className="dropdown-columns">
+                {selectedDays[id] && selectedDays[id].map((selected, index) => (
+                    <Form.Check
+                        key={index}
+                        inline
+                        label={`Thứ ${index + 2}`}
+                        type="checkbox"
+                        checked={selected}
+                        onChange={() => handleDaySelect(id, index, indexItem)}
+                    />
+                ))}
+            </div>
+        </Dropdown.Menu>
+    );
+
     return (
         <>
-            <div className='Lecturers-container'>
+            <div className='PhanCongMonHoc-container'>
                 <div className="my-3 add-new">
-                    <span><b>Giảng viên:</b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <span><b>Đợt đăng ký:</b> {MaDDK}</span>
+                    {isDropdownChanged && (
+                        <button className='btn btn-primary ml-3' onClick={handleUpdateRecords}>Xác nhận</button>
+                    )}
+                    {/* <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button> */}
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -176,34 +383,90 @@ const TableLecturers = (props) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {listLecturers && listLecturers.length > 0 &&
-                            listLecturers.map((item, index) => {
+                        {listPhanCongMonHoc && listPhanCongMonHoc.length > 0 &&
+                            listPhanCongMonHoc.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        {/* <td>{item.data.MaDDK}</td> */}
-                                        {/* <td>{item.data.NganhHoc}</td> */}
+                                        {/* <td style={{ display: 'none' }} id={`${item.id}`}>{item.id}</td> */}
                                         <td>{item.data.MaMH}</td>
                                         <td>{item.data.TenMH}</td>
                                         <td>{item.data.NamHoc}</td>
                                         <td>{item.data.HocKy}</td>
-                                        <td>{item.data.CoSo}</td>
-                                        <td>{item.data.ToaNha}</td>
-                                        <td>{item.data.Phong}</td>
-                                        <td>{item.data.TuanHocBatDau}</td>
-                                        <td>{item.data.TuanHocKetThuc}</td>
-                                        <td>{item.data.Thu}</td>
-                                        <td>{item.data.TietHocBatDau}</td>
-                                        <td>{item.data.TietHocKetThuc}</td>
+                                        <td>
+                                            <select
+                                                className="form-control"
+                                                value={item.data.CoSo}
+                                                onChange={(e) => handleEditField(index, 'CoSo', e.target.value)}
+                                            >
+                                                <option value="">None</option>
+                                                {listCoSo.map((coso) => (
+                                                    <option key={coso.id} value={coso.data.MaCS}>
+                                                        {coso.data.TenCS}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </td>
+                                        {/* <td>{item.data.ToaNha}</td> */}
+                                        <td>
+                                            <select
+                                                className="form-control"
+                                                value={item.data.ToaNha}
+                                                onChange={(e) => handleEditField(index, 'ToaNha', e.target.value)}
+                                            >
+                                                <option value="">None</option>
+                                                {listToaNha.map((toaNha) => (
+                                                    <option key={toaNha.id} value={toaNha.data.TenTN}>
+                                                        {toaNha.data.TenTN}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </td>
+                                        {/* <td>{item.data.Phong}</td> */}
+                                        <td>
+                                            <select
+                                                className="form-control"
+                                                value={item.data.Phong}
+                                                onChange={(e) => handleEditField(index, 'Phong', e.target.value)}
+                                            >
+                                                <option value="">None</option>
+                                                {listPhong.map((phong) => (
+                                                    <option key={phong.id} value={phong.data.TenPhong}>
+                                                        {phong.data.TenPhong}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </td>
+                                        {/* item.data.TuanHoc */}
+                                        <td>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="secondary" id={`dropdown-week-${index}`}>
+                                                    Chọn tuần
+                                                </Dropdown.Toggle>
+                                                {weekDropdown(item.id, index)}
+                                            </Dropdown>
+                                            {generateWeekString(item.data.TuanHoc[item.id], item.data.TuanHoc)}
+                                        </td>
+                                        {/* <td>{item.data.Thu}</td> */}
+                                        <td>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="secondary" id={`dropdown-day-${index}`}>
+                                                    Chọn thứ
+                                                </Dropdown.Toggle>
+                                                {dayDropdown(item.id, index)}
+                                            </Dropdown>
+                                            {generateDayString(item.data.Thu[item.id], item.data.Thu)}
+                                        </td>
+                                        <td>{item.data.TietHoc}</td>
                                         <td>{item.data.SiSo}</td>
                                         <td>{item.data.TeacherCode}</td>
                                         {/* <td>
                                             <button
                                                 className='btn btn-warning mx-3'
-                                                onClick={() => handleEditLecturers(item)}
+                                                onClick={() => handleEditPhanCongMonHoc(item)}
                                             >Edit</button>
                                             <button
                                                 className='btn btn-danger'
-                                                onClick={() => handleDeleteLecturers(item)}
+                                                onClick={() => handleDeletePhanCongMonHoc(item)}
                                             >Delete
                                             </button>
                                         </td> */}
@@ -234,7 +497,7 @@ const TableLecturers = (props) => {
                 <ModalAddNew
                     show={isShowModalAddNew}
                     handleClose={handleClose}
-                    // createApi={createLecturers}
+                    // createApi={createPhanCongMonHoc}
                     handleUpdateTable={handleUpdateTable}
                     title="Add new Lecturer"
                     buttonText="Save changes"
@@ -244,10 +507,10 @@ const TableLecturers = (props) => {
                 />
                 <ModalEdit
                     show={isShowModalEdit}
-                    dataEdit={dataLecturersEdit}
+                    dataEdit={dataPhanCongMonHocEdit}
                     handleClose={handleClose}
-                    handleEditFromModal={handleEditLecturersFromModal}
-                    // updateApi={updateLecturers}
+                    handleEditFromModal={handleEditPhanCongMonHocFromModal}
+                    // updateApi={updatePhanCongMonHoc}
                     title="Edit Lecturer"
                     successMessage='Update lecturer successfully'
                     inputFields={inputFieldsEdit}
@@ -255,9 +518,9 @@ const TableLecturers = (props) => {
                 <ModalConfirm
                     show={isShowModalDelete}
                     handleClose={handleClose}
-                    dataDelete={dataLecturersDelete}
-                    handleDeleteFromModal={handleDeleteLecturersFromModal}
-                    // deleteApi={deleteLecturers}
+                    dataDelete={dataPhanCongMonHocDelete}
+                    handleDeleteFromModal={handleDeletePhanCongMonHocFromModal}
+                    // deleteApi={deletePhanCongMonHoc}
                     title='Delete Lecturer'
                     successMessage='Delete Lecturer successfully'
                 />
@@ -265,4 +528,4 @@ const TableLecturers = (props) => {
         </>)
 }
 
-export default TableLecturers;
+export default TablePhanCongMonHoc;

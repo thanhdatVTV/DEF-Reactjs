@@ -27,6 +27,13 @@ const ModalAddNew = (props) => {
         }
     };
 
+    const handleYearChange = (value) => {
+        // Lấy năm từ giá trị input
+        const year = value.substring(0, 4);
+        // Cập nhật inputValues cho trường NamHoc với năm đã chọn
+        handleInputChange('NamHoc', year);
+    };
+
     return (
         <>
             <Modal
