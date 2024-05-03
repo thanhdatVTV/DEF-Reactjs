@@ -16,7 +16,7 @@ const Home = () => {
             navigate("/purchase")
         }
         if (item === 3) {
-            navigate("/feature")
+            navigate("/user/eduprogram")
         }
         if (item === 4) {
             navigate("/feature")
@@ -43,10 +43,10 @@ const Home = () => {
                         <span className="title"><i className="fa-solid fa-money-bill"></i> Mua trang in</span>
                     </Button>
                     <Button className="col-md-4 col-6 btn btn-success btn-home" onClick={() => redirectToOtherPage(3)}>
-                        <span className="title"><i className="fa-solid fa-clipboard"></i> Lịch sử in ấn</span>
+                        <span className="title"><i className="fa-solid fa-clipboard"></i> Xem chương trình đào tạo</span>
                     </Button>
                     <Button className="col-md-4 col-6 btn btn-danger btn-home" onClick={() => redirectToOtherPage(4)}>
-                        <span className="title"> <i className="fa-solid fa-database"></i> Kho tài liệu</span>
+                        <span className="title"> <i className="fa-solid fa-database"></i> feature</span>
                     </Button>
                     <Button className="col-md-4 col-6 btn btn-warning btn-home" onClick={() => redirectToOtherPage(5)}>
                         <span className="title"><i className="fa-solid fa-table"></i> Xuất báo cáo</span>

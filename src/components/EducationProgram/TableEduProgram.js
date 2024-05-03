@@ -32,6 +32,7 @@ const TableEduProgram = (props) => {
         { name: "TenNganh", label: "Ten Nganh", type: "text" },
         { name: "MaMonHoc", label: "Ma Mon Hoc", type: "text" },
         { name: "TenMonHoc", label: "Ten Mon Hoc", type: "text" },
+        { name: "SoTC", label: "So tin chi", type: "text" },
         { name: "GroupId", label: "Group ID", type: "text" },
         { name: "IsCompulsory", label: "Is Compulsory", type: "text" },
     ];
@@ -41,6 +42,7 @@ const TableEduProgram = (props) => {
         { name: "TenNganh", label: "Ten Nganh", type: "text" },
         { name: "MaMonHoc", label: "Ma Mon Hoc", type: "text" },
         { name: "TenMonHoc", label: "Ten Mon Hoc", type: "text" },
+        { name: "SoTC", label: "So tin chi", type: "text" },
         { name: "GroupId", label: "Group ID", type: "text" },
         { name: "IsCompulsory", label: "Is Compulsory", type: "text" },
     ];
@@ -230,6 +232,23 @@ const TableEduProgram = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
+                                    <span>So tin chi</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "SoTC")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "SoTC")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div className='sort-header'>
                                     <span>Group ID</span>
                                     <span>
                                         <i
@@ -275,6 +294,7 @@ const TableEduProgram = (props) => {
                                         <td>{item.data.TenNganh}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
+                                        <td>{item.data.SoTC}</td>
                                         <td>{item.data.GroupId}</td>
                                         <td>{item.data.IsCompulsory}</td>
                                         <td>

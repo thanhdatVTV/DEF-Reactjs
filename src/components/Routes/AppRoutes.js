@@ -26,6 +26,7 @@ import TableRoom from '../Room/TableRoom';
 import Profile from '../Profile/Profile';
 import TableDotDangKy from '../DotDangKy/TableDotDangKy';
 import TablePhanCongMonHoc from '../PhanCongMonHoc/TablePhanCongMonHoc';
+import EduProgram from '../User/EduProgram'
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -78,6 +79,7 @@ const AppRoutes = () => {
           <Route path="/subjectgroups" element={<TableSubjectGroups />} />
           <Route path="/coso" element={<TableCoSo />} />
           <Route path="/eduprogram" element={<TableEduProgram />} />
+          <Route path="/user/eduprogram" element={<EduProgram />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/room" element={<TableRoom />} />
           <Route path="/dotdangky" element={<TableDotDangKy />} />

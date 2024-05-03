@@ -5,16 +5,20 @@ const getEduProgramList = (keyword, pageNumber, perPage) => {
     return axios.get(`/api/EducationProgram/get-list`, {keyword, pageNumber, perPage})
 }
 
-const createEduProgram = ({NganhId, TenNganh, MaMonHoc, TenMonHoc, GroupId, IsCompulsory}) => {
-    return axios.post(`/api/EducationProgram/add-EducationProgram`, {NganhId, TenNganh, MaMonHoc, TenMonHoc, GroupId, IsCompulsory});
+const getListByMajor = (TenNganh) => {
+    return axios.get(`/api/EducationProgram/get-list-by-major`, {TenNganh})
 }
 
-const updateEduProgram = ({Id, NganhId, TenNganh, MaMonHoc, TenMonHoc, GroupId, IsCompulsory}) => {
-    return axios.post(`/api/EducationProgram/update-EducationProgram`, {Id, NganhId, TenNganh, MaMonHoc, TenMonHoc, GroupId, IsCompulsory});
+const createEduProgram = ({NganhId, TenNganh, MaMonHoc, TenMonHoc, SoTC, GroupId, IsCompulsory}) => {
+    return axios.post(`/api/EducationProgram/add-EducationProgram`, {NganhId, TenNganh, MaMonHoc, TenMonHoc, SoTC, GroupId, IsCompulsory});
+}
+
+const updateEduProgram = ({Id, NganhId, TenNganh, MaMonHoc, TenMonHoc, SoTC, GroupId, IsCompulsory}) => {
+    return axios.post(`/api/EducationProgram/update-EducationProgram`, {Id, NganhId, TenNganh, MaMonHoc, TenMonHoc, SoTC, GroupId, IsCompulsory});
 }
 
 const deleteEduProgram = (Id) => {
     return axios.post(`/api/EducationProgram/delete-EducationProgram`, {Id});
 }
 
-export { getEduProgramList, createEduProgram, updateEduProgram, deleteEduProgram };
+export { getEduProgramList, getListByMajor, createEduProgram, updateEduProgram, deleteEduProgram };

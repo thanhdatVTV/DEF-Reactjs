@@ -62,7 +62,13 @@ const Login = () => {
         let dateOfBirth = resLogin.response.DateOfBirth;
         let firstName = resLogin.response.FirstName;
         let lastName = resLogin.response.LastName;
-        let majorId = resLogin.response.MajorId;
+        let majorName;
+        let facultyName;
+        if(resLogin.response.Type == 0) {
+          majorName = resLogin.response.MajorName;
+        } else {
+          facultyName = resLogin.response.FacultyName;
+        }
         let data = {
           isAuthenticated: true,
           token: 'fake token',
@@ -72,7 +78,8 @@ const Login = () => {
             dateOfBirth,
             firstName,
             lastName,
-            majorId,
+            majorName,
+            facultyName
           },
         };
         sessionStorage.setItem('account', JSON.stringify(data));

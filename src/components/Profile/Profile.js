@@ -17,8 +17,8 @@ const Profile = () => {
           <p>Date Of Birth: {user.account.dateOfBirth}</p>
           <p>First Name: {user.account.firstName}</p>
           <p>Last Name: {user.account.lastName}</p>
-          <p>Code ID: {user.account.codeId}</p>
-          <p>Major ID: {user.account.majorId}</p>
+          <p>ID: {user.account.codeId}</p>
+          {user.account.majorName ? <p>Major: {user.account.majorName}</p> : <p>Faculty: {user.account.facultyName}</p>}
         </div>
       </div>
     </div>

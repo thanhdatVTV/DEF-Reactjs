@@ -29,7 +29,8 @@ const UserProvider = ({ children }) => {
       let dateOfBirth = account.account.dateOfBirth;
       let firstName = account.account.firstName;
       let lastName = account.account.lastName;
-      let majorId = account.account.majorId;
+      let majorName = account.account.majorName;
+      let facultyName = account.account.facultyName;
       let data = {
         isAuthenticated: true,
         token: 'fake token',
@@ -39,14 +40,11 @@ const UserProvider = ({ children }) => {
           dateOfBirth,
           firstName,
           lastName,
-          majorId,
+          majorName,
+          facultyName
         },
       };
-      console.log('huhu');
-      console.log(data);
-      console.log(data);
-      console.log(data);
-      console.log('hihi');
+      console.log('data in context', data)
       setUser(data);
     }
   }, []);
