@@ -4,6 +4,7 @@ import { getPhanCongMonHocList, createPhanCongMonHoc, updatePhanCongMonHoc, dele
 import { getCoSoList } from '../../services/CoSoService';
 import { getBuildingList } from '../../services/BuildingService';
 import { getRoomList } from '../../services/RoomService';
+import { getLecturersList } from '../../services/LecturersService';
 import ReactPaginate from 'react-paginate';
 import ModalAddNew from '../Modal/AddNew';
 import ModalEdit from '../Modal/Edit';
@@ -36,8 +37,10 @@ const TablePhanCongMonHoc = (props) => {
     const [listCoSo, setListCoSo] = useState([]);
     const [listToaNha, setListToaNha] = useState([]);
     const [listPhong, setListPhong] = useState([]);
+    const [listGv, setListGv] = useState([]);
     const [selectedWeeks, setSelectedWeeks] = useState({}); // State lưu trữ thông tin tuần được chọn cho mỗi hàng
     const [selectedDays, setSelectedDays] = useState({}); // State lưu trữ thông tin thứ được chọn cho mỗi hàng
+    const [selectedTietHocs, setSelectedTietHocs] = useState({});
 
     const [updatedRecords, setUpdatedRecords] = useState([]); // Store updated records
     const [isDropdownChanged, setIsDropdownChanged] = useState(false); // Track dropdown changes
@@ -88,20 +91,11 @@ const TablePhanCongMonHoc = (props) => {
 
     useEffect(() => {
         getPhanCongMonHocs("", MaDDK, 1, 6);
-        getCoSos("", 1, 20);
-        getToaNhas("", 1, 20);
-        getToaPhongs("", 1, 20);
+        getCoSos("", 1, 50);
+        getToaNhas("", 1, 50);
+        getToaPhongs("", 1, 50);
+        getGvs("", 1, 50)
     }, [])
-
-    // const getPhanCongMonHocs = async (keyword, MaDDK, pageNumber, perPage) => {
-    //     let res = await getPhanCongMonHocList(keyword, MaDDK, pageNumber, perPage);
-    //     console.log('MaDDK', res.response);
-    //     if (res && res.response) {
-    //         setTotalPhanCongMonHocs(res.response.total)
-    //         setTotalPages(res.response.totalPages)
-    //         setListPhanCongMonHoc(res.response)
-    //     }
-    // }
 
     const getPhanCongMonHocs = async (keyword, MaDDK, pageNumber, perPage) => {
         let res = await getPhanCongMonHocList(keyword, MaDDK, pageNumber, perPage);
@@ -113,14 +107,21 @@ const TablePhanCongMonHoc = (props) => {
             res.response.forEach(item => {
                 initialSelectedWeeks[item.id] = new Array(52).fill(false);
             });
+            setSelectedWeeks(initialSelectedWeeks);
 
             // Khởi tạo state cho selectedDays với giá trị mặc định là mỗi hàng đều không có tuần nào được chọn
             let initialSelectedDays = {};
             res.response.forEach(item => {
                 initialSelectedDays[item.id] = new Array(7).fill(false);
             });
-            setSelectedWeeks(initialSelectedWeeks);
             setSelectedDays(initialSelectedDays);
+
+            // Khởi tạo state cho selectedDays với giá trị mặc định là mỗi hàng đều không có tuần nào được chọn
+            let initialSelectedTietHocs = {};
+            res.response.forEach(item => {
+                initialSelectedTietHocs[item.id] = new Array(17).fill(false);
+            });
+            setSelectedTietHocs(initialSelectedTietHocs);
         }
     };
 
@@ -142,6 +143,13 @@ const TablePhanCongMonHoc = (props) => {
         let res = await getRoomList(keyword, pageNumber, perPage);
         if (res && res.response) {
             setListPhong(res.response)
+        }
+    }
+
+    const getGvs = async (keyword, pageNumber, perPage) => {
+        let res = await getLecturersList(keyword, pageNumber, perPage);
+        if (res && res.response) {
+            setListGv(res.response)
         }
     }
 
@@ -180,7 +188,14 @@ const TablePhanCongMonHoc = (props) => {
         let term = event.target.value;
         if (term) {
             let cloneListPhanCongMonHocs = _.cloneDeep(listPhanCongMonHoc);
-            cloneListPhanCongMonHocs = cloneListPhanCongMonHocs.filter(item => item.typeName.includes(term))
+            //cloneListPhanCongMonHocs = cloneListPhanCongMonHocs.filter(item => item.data.MaMH.includes(term))
+            cloneListPhanCongMonHocs = cloneListPhanCongMonHocs.filter(item => {
+                return (
+                    item.data.MaMH.includes(term) ||
+                    item.data.TenMH.includes(term)
+                );
+            });
+
             setListPhanCongMonHoc(cloneListPhanCongMonHocs);
         }
         else {
@@ -232,8 +247,6 @@ const TablePhanCongMonHoc = (props) => {
             }).catch(error => {
                 console.error("Error creating PhanCongMonHoc", error);
             });
-            //await updatePhanCongMonHoc(record.data); // Assuming API function to update record
-            //console.log(record);
         }));
         setIsDropdownChanged(false);
         setUpdatedRecords([]);
@@ -252,7 +265,6 @@ const TablePhanCongMonHoc = (props) => {
             // Lưu giá trị của tuần học vào biến TuanHoc
             const weekString = generateWeekString(updatedSelectedWeeks[id]);
             handleEditField(indexItem, 'TuanHoc', weekString);
-            console.log('weekString', weekString);
             return updatedSelectedWeeks;
         });
     };
@@ -271,6 +283,23 @@ const TablePhanCongMonHoc = (props) => {
             const dayString = generateDayString(updatedSelectedDays[id]);
             handleEditField(indexItem, 'Thu', dayString);
             return updatedSelectedDays;
+        });
+    };
+
+    const handleTietHocSelect = (id, index, indexItem) => {
+        setSelectedTietHocs((selectedTietHocs) => {
+            const updatedSelectedTietHocs = { ...selectedTietHocs };
+            updatedSelectedTietHocs[id] = updatedSelectedTietHocs[id].map((selected, i) => {
+                if (i === index) {
+                    return !selected; // Đảo trạng thái của tiết được chọn
+                }
+                return selected; // Giữ nguyên trạng thái của các tiết khác
+            });
+            setIsDropdownChanged(true);
+            // Lưu giá trị của thứ vào biến Thu
+            const tietHocString = generateTietHocString(updatedSelectedTietHocs[id]);
+            handleEditField(indexItem, 'TietHoc', tietHocString);
+            return updatedSelectedTietHocs;
         });
     };
 
@@ -307,6 +336,23 @@ const TablePhanCongMonHoc = (props) => {
         return dayString.trim();
     };
 
+    const generateTietHocString = (selectedTietHocs, tietHoc) => {
+        if (tietHoc) {
+            return tietHoc;
+        }
+
+        if (!selectedTietHocs || !Array.isArray(selectedTietHocs)) {
+            return '';
+        }
+
+        const tietsOfDay = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17'];
+        let tietHocString = '';
+        for (let i = 0; i < selectedTietHocs.length; i++) {
+            tietHocString += selectedTietHocs[i] ? tietsOfDay[i] + ' ' : '- ';
+        }
+        return tietHocString.trim();
+    };
+
     const weekDropdown = (id, indexItem) => (
         <Dropdown.Menu className="multi-column-dropdown">
             <div className="dropdown-columns">
@@ -341,6 +387,23 @@ const TablePhanCongMonHoc = (props) => {
         </Dropdown.Menu>
     );
 
+    const tietHocDropdown = (id, indexItem) => (
+        <Dropdown.Menu className="multi-column-dropdown">
+            <div className="dropdown-columns">
+                {selectedTietHocs[id] && selectedTietHocs[id].map((selected, index) => (
+                    <Form.Check
+                        key={index}
+                        inline
+                        label={`Tiết ${index + 2}`}
+                        type="checkbox"
+                        checked={selected}
+                        onChange={() => handleTietHocSelect(id, index, indexItem)}
+                    />
+                ))}
+            </div>
+        </Dropdown.Menu>
+    );
+
     return (
         <>
             <div className='PhanCongMonHoc-container'>
@@ -349,7 +412,6 @@ const TablePhanCongMonHoc = (props) => {
                     {isDropdownChanged && (
                         <button className='btn btn-primary ml-3' onClick={handleUpdateRecords}>Xác nhận</button>
                     )}
-                    {/* <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button> */}
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -387,7 +449,6 @@ const TablePhanCongMonHoc = (props) => {
                             listPhanCongMonHoc.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        {/* <td style={{ display: 'none' }} id={`${item.id}`}>{item.id}</td> */}
                                         <td>{item.data.MaMH}</td>
                                         <td>{item.data.TenMH}</td>
                                         <td>{item.data.NamHoc}</td>
@@ -406,7 +467,6 @@ const TablePhanCongMonHoc = (props) => {
                                                 ))}
                                             </select>
                                         </td>
-                                        {/* <td>{item.data.ToaNha}</td> */}
                                         <td>
                                             <select
                                                 className="form-control"
@@ -421,7 +481,6 @@ const TablePhanCongMonHoc = (props) => {
                                                 ))}
                                             </select>
                                         </td>
-                                        {/* <td>{item.data.Phong}</td> */}
                                         <td>
                                             <select
                                                 className="form-control"
@@ -436,7 +495,6 @@ const TablePhanCongMonHoc = (props) => {
                                                 ))}
                                             </select>
                                         </td>
-                                        {/* item.data.TuanHoc */}
                                         <td>
                                             <Dropdown>
                                                 <Dropdown.Toggle variant="secondary" id={`dropdown-week-${index}`}>
@@ -446,7 +504,6 @@ const TablePhanCongMonHoc = (props) => {
                                             </Dropdown>
                                             {generateWeekString(item.data.TuanHoc[item.id], item.data.TuanHoc)}
                                         </td>
-                                        {/* <td>{item.data.Thu}</td> */}
                                         <td>
                                             <Dropdown>
                                                 <Dropdown.Toggle variant="secondary" id={`dropdown-day-${index}`}>
@@ -456,9 +513,38 @@ const TablePhanCongMonHoc = (props) => {
                                             </Dropdown>
                                             {generateDayString(item.data.Thu[item.id], item.data.Thu)}
                                         </td>
-                                        <td>{item.data.TietHoc}</td>
-                                        <td>{item.data.SiSo}</td>
-                                        <td>{item.data.TeacherCode}</td>
+                                        <td>
+                                            <Dropdown>
+                                                <Dropdown.Toggle variant="secondary" id={`dropdown-day-${index}`}>
+                                                    Chọn thứ
+                                                </Dropdown.Toggle>
+                                                {tietHocDropdown(item.id, index)}
+                                            </Dropdown>
+                                            {generateTietHocString(item.data.TietHoc[item.id], item.data.TietHoc)}
+                                        </td>
+                                        <td>
+                                            <input
+                                                type="number"
+                                                value={item.data.SiSo}
+                                                onChange={(e) => handleEditField(index, 'SiSo', e.target.value)}
+                                                className="form-control"
+                                            />
+                                        </td>
+                                        <td>
+                                            <select
+                                                className="form-control"
+                                                value={item.data.TeacherCode}
+                                                onChange={(e) => handleEditField(index, 'TeacherCode', e.target.value)}
+                                            >
+                                                <option value="">None</option>
+                                                {listGv.map((gv) => (
+                                                    <option key={gv.id} value={gv.id}>
+                                                        {gv.data.TenGV + " " + gv.data.MaGV}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </td>
+
                                         {/* <td>
                                             <button
                                                 className='btn btn-warning mx-3'
@@ -497,7 +583,6 @@ const TablePhanCongMonHoc = (props) => {
                 <ModalAddNew
                     show={isShowModalAddNew}
                     handleClose={handleClose}
-                    // createApi={createPhanCongMonHoc}
                     handleUpdateTable={handleUpdateTable}
                     title="Add new Lecturer"
                     buttonText="Save changes"
@@ -510,7 +595,6 @@ const TablePhanCongMonHoc = (props) => {
                     dataEdit={dataPhanCongMonHocEdit}
                     handleClose={handleClose}
                     handleEditFromModal={handleEditPhanCongMonHocFromModal}
-                    // updateApi={updatePhanCongMonHoc}
                     title="Edit Lecturer"
                     successMessage='Update lecturer successfully'
                     inputFields={inputFieldsEdit}
@@ -520,7 +604,6 @@ const TablePhanCongMonHoc = (props) => {
                     handleClose={handleClose}
                     dataDelete={dataPhanCongMonHocDelete}
                     handleDeleteFromModal={handleDeletePhanCongMonHocFromModal}
-                    // deleteApi={deletePhanCongMonHoc}
                     title='Delete Lecturer'
                     successMessage='Delete Lecturer successfully'
                 />

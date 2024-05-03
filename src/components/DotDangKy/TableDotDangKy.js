@@ -182,7 +182,7 @@ const DotDangKy = (props) => {
         <>
             <div className='DotDangKy-container' style={{ margin: '3vw' }}>
                 <div className="my-3 add-new">
-                    <span><b>Giảng viên:</b></span>
+                    <span><b>Danh sách đợt đăng ký</b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new</button>
                 </div>
                 <div className='col-4 my-3'>
@@ -224,7 +224,7 @@ const DotDangKy = (props) => {
                                 const currentTime = new Date();
                                 const startTime = new Date(item.data.ThoiGianBatDau);
                                 const endTime = new Date(item.data.ThoiGianKetThuc);
-                                const isTimeInRange = currentTime >= startTime && currentTime <= endTime;
+                                const isTimeInRange = currentTime <= startTime;// && currentTime <= endTime;
                                 return (
                                     <tr key={item.id}>
                                         {/* <td>{item.id}</td> */}
