@@ -113,17 +113,23 @@ const TableSubjects = (props) => {
   };
 
   const handleSearch = debounce((event) => {
-    console.log(event.target.value);
     let term = event.target.value;
     if (term) {
-      let cloneListSubjects = _.cloneDeep(listSubjects);
-      cloneListSubjects = cloneListSubjects.filter((item) => item.typeName.includes(term));
-      setListSubjects(cloneListSubjects);
-    } else {
-      getSubjects('', 1, 6);
-      console.log('d1', listSubjects);
+        let cloneListSubjects = _.cloneDeep(listSubjects);
+        cloneListSubjects = cloneListSubjects.filter(item => {
+            return (
+                item.data.MaMonHoc.includes(term) ||
+                item.data.TenMonHoc.includes(term) ||
+                item.data.PrerequisiteCourseID.includes(term)
+                // Thêm các điều kiện khác nếu cần
+            );
+        });
+        setListSubjects(cloneListSubjects);
     }
-  }, 500);
+    else {
+        getSubjects("", 1, 6);
+    }
+}, 500)
 
   return (
     <>

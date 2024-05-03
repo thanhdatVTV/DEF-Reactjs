@@ -111,17 +111,21 @@ const TableNhomLop = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListNhomLop = _.cloneDeep(listNhomLop);
-            cloneListNhomLop = cloneListNhomLop.filter(item => item.typeName.includes(term))
+            cloneListNhomLop = cloneListNhomLop.filter(item => {
+                return (
+                    item.data.MaMH.includes(term) ||
+                    item.data.TenNhom.includes(term) ||
+                    item.data.MaHK.includes(term)
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListNhomLop(cloneListNhomLop);
         }
         else {
             getNhomLop("", 1, 6);
-            console.log('d1', listNhomLop);
-
         }
     }, 500)
 

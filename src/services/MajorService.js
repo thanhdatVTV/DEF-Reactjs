@@ -5,12 +5,12 @@ const getMajorList = (keyword, pageNumber, perPage) => {
     return axios.get(`/api/Major/get-list`, {keyword, pageNumber, perPage})
 }
 
-const createMajor = ({MaNganh, TenNganh}) => {
-    return axios.post(`/api/Major/add-Major`, {MaNganh, TenNganh});
+const createMajor = ({MaKhoa, TenKhoa,MaNganh, TenNganh}) => {
+    return axios.post(`/api/Major/add-Major`, {MaKhoa, TenKhoa,MaNganh, TenNganh});
 }
 
-const updateMajor = ({Id, MaNganh, TenNganh}) => {
-    return axios.post(`/api/Major/update-Major`, {Id, MaNganh, TenNganh});
+const updateMajor = ({Id, MaKhoa, TenKhoa, MaNganh, TenNganh}) => {
+    return axios.post(`/api/Major/update-Major`, {Id, MaKhoa, TenKhoa, MaNganh, TenNganh});
 }
 
 const deleteMajor = (Id) => {

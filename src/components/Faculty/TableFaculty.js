@@ -107,17 +107,20 @@ const TableFaculty = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListFaculty = _.cloneDeep(listFaculty);
-            cloneListFaculty = cloneListFaculty.filter(item => item.typeName.includes(term))
+            cloneListFaculty = cloneListFaculty.filter(item => {
+                return (
+                    item.data.MaKhoa.includes(term) ||
+                    item.data.TenKhoa.includes(term)
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListFaculty(cloneListFaculty);
         }
         else {
             getFaculty("", 1, 6);
-            console.log('d1', listFaculty);
-
         }
     }, 500)
 

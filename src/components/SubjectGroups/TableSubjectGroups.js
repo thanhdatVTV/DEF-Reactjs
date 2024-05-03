@@ -111,19 +111,23 @@ const TableSubjectGroups = (props) => {
   };
 
   const handleSearch = debounce((event) => {
-    console.log(event.target.value);
     let term = event.target.value;
     if (term) {
-      let cloneListSubjectGroups = _.cloneDeep(listSubjectGroups);
-      cloneListSubjectGroups = cloneListSubjectGroups.filter((item) =>
-        item.typeName.includes(term)
-      );
-      setListSubjectGroups(cloneListSubjectGroups);
-    } else {
-      getSubjectGroups('', 1, 6);
-      console.log('d1', listSubjectGroups);
+        let cloneListSubjectGroups = _.cloneDeep(listSubjectGroups);
+        cloneListSubjectGroups = cloneListSubjectGroups.filter(item => {
+            return (
+                item.data.SubjectGroupID.includes(term) ||
+                item.data.SubjectGroupName.includes(term) ||
+                item.data.SoTCYeuCau.includes(term)
+                // Thêm các điều kiện khác nếu cần
+            );
+        });
+        setListSubjectGroups(cloneListSubjectGroups);
     }
-  }, 500);
+    else {
+        getSubjectGroups("", 1, 6);
+    }
+}, 500)
 
   return (
     <>

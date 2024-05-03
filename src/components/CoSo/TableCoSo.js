@@ -107,17 +107,20 @@ const TableCoSo = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListCoSo = _.cloneDeep(listCoSo);
-            cloneListCoSo = cloneListCoSo.filter(item => item.typeName.includes(term))
+            cloneListCoSo = cloneListCoSo.filter(item => {
+                return (
+                    item.data.MaCS.includes(term) ||
+                    item.data.TenCS.includes(term) 
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListCoSo(cloneListCoSo);
         }
         else {
             getCoSo("", 1, 6);
-            console.log('d1', listCoSo);
-
         }
     }, 500)
     return (

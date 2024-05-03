@@ -105,17 +105,20 @@ const TableSemester = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListSemester = _.cloneDeep(listSemester);
-            cloneListSemester = cloneListSemester.filter(item => item.typeName.includes(term))
+            cloneListSemester = cloneListSemester.filter(item => {
+                return (
+                    item.data.MaHocKy.includes(term) ||
+                    item.data.HocKy.includes(term) 
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListSemester(cloneListSemester);
         }
         else {
             getSemester("", 1, 6);
-            console.log('d1', listSemester);
-
         }
     }, 500)
     return (

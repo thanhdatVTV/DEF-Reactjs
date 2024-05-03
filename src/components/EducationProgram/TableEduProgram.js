@@ -115,17 +115,23 @@ const TableEduProgram = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListEduProgram = _.cloneDeep(listEduProgram);
-            cloneListEduProgram = cloneListEduProgram.filter(item => item.typeName.includes(term))
+            cloneListEduProgram = cloneListEduProgram.filter(item => {
+                return (
+                    item.data.TenNganh.includes(term) ||
+                    item.data.TenMonHoc.includes(term) ||
+                    item.data.MaMonHoc.includes(term)||
+                    item.data.NganhId.includes(term)||
+                    item.data.GroupId.includes(term)
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListEduProgram(cloneListEduProgram);
         }
         else {
             getEduProgram("", 1, 6);
-            console.log('d1', listEduProgram);
-
         }
     }, 500)
     return (

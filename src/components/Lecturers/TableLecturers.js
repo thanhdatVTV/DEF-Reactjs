@@ -107,17 +107,20 @@ const TableLecturers = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListLecturerss = _.cloneDeep(listLecturers);
-            cloneListLecturerss = cloneListLecturerss.filter(item => item.typeName.includes(term))
+            cloneListLecturerss = cloneListLecturerss.filter(item => {
+                return (
+                    item.data.MaGV.includes(term) ||
+                    item.data.TenGV.includes(term) 
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListLecturers(cloneListLecturerss);
         }
         else {
             getLecturerss("", 1, 6);
-            console.log('d1', listLecturers);
-
         }
     }, 500)
 

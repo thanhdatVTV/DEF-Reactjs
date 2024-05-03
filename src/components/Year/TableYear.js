@@ -105,17 +105,20 @@ const TableYear = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListYear = _.cloneDeep(listYear);
-            cloneListYear = cloneListYear.filter(item => item.typeName.includes(term))
+            cloneListYear = cloneListYear.filter(item => {
+                return (
+                    item.data.MaNamHoc.includes(term) ||
+                    item.data.NamHoc.includes(term) 
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListYear(cloneListYear);
         }
         else {
             getYear("", 1, 6);
-            console.log('d1', listYear);
-
         }
     }, 500)
     return (

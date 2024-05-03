@@ -109,17 +109,21 @@ const TableBuilding = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListBuilding = _.cloneDeep(listBuilding);
-            cloneListBuilding = cloneListBuilding.filter(item => item.typeName.includes(term))
+            cloneListBuilding = cloneListBuilding.filter(item => {
+                return (
+                    item.data.MaTN.includes(term) ||
+                    item.data.TenCS.includes(term) ||
+                    item.data.TenTN.includes(term)
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListBuilding(cloneListBuilding);
         }
         else {
             getBuilding("", 1, 6);
-            console.log('d1', listBuilding);
-
         }
     }, 500)
 

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { getMajorList, createMajor, updateMajor, deleteMajor } from '../../services/MajorService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from '../Modal/AddNew';
-import ModalEdit from '../Modal/Edit';
+import ModalAddNew from './AddNew';
+import ModalEdit from './Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
@@ -28,11 +28,15 @@ const TableMajor = (props) => {
     const [keyword, setKeyword] = useState("");
 
     const inputFieldsAddNew = [
+        { name: "MaKhoa", label: "Faculty ID", type: "text" },
+        { name: "TenKhoa", label: "Faculty name", type: "text" },
         { name: "MaNganh", label: "Major ID", type: "text" },
         { name: "TenNganh", label: "Major name", type: "text" },
     ];
     const inputFieldsEdit = [
         { name: "Id", label: "ID", type: "text" },
+        { name: "MaKhoa", label: "Faculty ID", type: "text" },
+        { name: "TenKhoa", label: "Faculty name", type: "text" },
         { name: "MaNganh", label: "Major ID", type: "text" },
         { name: "TenNganh", label: "Major name", type: "text" },
     ];
@@ -105,19 +109,25 @@ const TableMajor = (props) => {
     }
 
     const handleSearch = debounce((event) => {
-        console.log(event.target.value)
         let term = event.target.value;
         if (term) {
             let cloneListMajor = _.cloneDeep(listMajor);
-            cloneListMajor = cloneListMajor.filter(item => item.typeName.includes(term))
+            cloneListMajor = cloneListMajor.filter(item => {
+                return (
+                    item.data.MaKhoa.includes(term) ||
+                    item.data.TenKhoa.includes(term) ||
+                    item.data.MaNganh.includes(term)||
+                    item.data.TenNganh.includes(term)
+                    // Thêm các điều kiện khác nếu cần
+                );
+            });
             setListMajor(cloneListMajor);
         }
         else {
             getMajor("", 1, 6);
-            console.log('d1', listMajor);
-
         }
     }, 500)
+
     return (
         <>
             <div className='Major-container'>
@@ -171,6 +181,40 @@ const TableMajor = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
+                                    <span>Ma Khoa</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "MaKhoa")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "MaKhoa")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div className='sort-header'>
+                                    <span>Ten Khoa</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "TenKhoa")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "TenKhoa")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div className='sort-header'>
                                     <span>Tên Nganh Hoc</span>
                                     <span>
                                         <i
@@ -195,6 +239,8 @@ const TableMajor = (props) => {
                                 return (
                                     <tr key={`users-${index}`}>
                                         <td>{item.id}</td>
+                                        <td>{item.data.MaKhoa}</td>
+                                        <td>{item.data.TenKhoa}</td>
                                         <td>{item.data.MaNganh}</td>
                                         <td>{item.data.TenNganh}</td>
                                         <td>
