@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import { getPhanCongMonHocList, updatePhanCongMonHoc } from '../../services/PhanCongMonHocService';
-import { getDangKyMonHocList, createDangKyMonHoc } from '../../services/DangKyMonHocService';
+import { getDangKyMonHocList, createDangKyMonHoc, deleteDangKyMonHoc } from '../../services/DangKyMonHocService';
 import ReactPaginate from 'react-paginate';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
@@ -223,13 +223,37 @@ const TableDangKyMonHoc = (props) => {
                     //success
                     toast.success("Đăng ký môn thành công.");
                     getPhanCongMonHocs("", MaDDK, 1, 6);
+                    getMonHocDaDangKys("", MaDDK, user.account.codeId, 1, 10);
                 }
                 else {
                     //error
-                    toast.error("Copy thất bại");
+                    toast.error(res.message);
                 }
             } catch (error) {
                 console.error("Copy failed:", error);
+            }
+        }
+    };
+
+    const handleBoChonMonHoc = async (item) => {
+        const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa Phân công môn học này?");
+        if (confirmDelete) {
+            try {
+                // Sau khi xóa thành công, làm mới danh sách
+                let res = await deleteDangKyMonHoc(item.id);
+                console.log('dat', res);
+                if (res && res.status) {
+                    //success
+                    toast.success("Bỏ chọn thành công thành công");
+                    getPhanCongMonHocs("", MaDDK, 1, 6);
+                    getMonHocDaDangKys("", MaDDK, user.account.codeId, 1, 10);
+                }
+                else {
+                    //error
+                    toast.error("Xóa thất bại");
+                }
+            } catch (error) {
+                console.error("Delete failed:", error);
             }
         }
     };
@@ -386,7 +410,7 @@ const TableDangKyMonHoc = (props) => {
                                         <td>{item.data.SiSo}</td>
                                         <td>{item.data.TeacherCode}</td>
                                         <td>
-                                            <button className='btn btn-warning mx-3' onClick={() => handleChonMonHoc(item)}>Chọn</button>
+                                            <button className='btn btn-warning mx-3' onClick={() => handleBoChonMonHoc(item)}>Bỏ chọn</button>
                                         </td>
                                     </tr>
                                 )
