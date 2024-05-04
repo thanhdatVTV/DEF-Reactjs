@@ -138,7 +138,7 @@ const TableNhomLop = (props) => {
                 </div>
                 <div className="my-3 add-new">
                     <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Nhóm Lớp Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -169,7 +169,7 @@ const TableNhomLop = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Ten nhom</span>
+                                    <span>Tên Nhóm</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -271,7 +271,7 @@ const TableNhomLop = (props) => {
                     handleClose={handleClose}
                     createApi={createNhomLop}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new NhomLop"
+                    title="Thêm nhóm lớp"
                     buttonText="Save changes"
                     successMessage="A new NhomLop is created successfully!"
                     errorMessage="Failed to create NhomLop."
@@ -283,7 +283,7 @@ const TableNhomLop = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditNhomLopFromModal}
                     updateApi={updateNhomLop}
-                    title="Edit NhomLop"
+                    title="Sửa nhóm lớp"
                     successMessage='Update NhomLop successfully'
                     inputFields={inputFieldsEdit}
                 />

@@ -157,21 +157,6 @@ const TableSubjectGroups = (props) => {
             <tr>
               <th>
                 <div className="sort-header">
-                  <span>ID</span>
-                  <span>
-                    <i
-                      className="fa-solid fa-arrow-down-long"
-                      onClick={() => handleSort('desc', 'id')}
-                    ></i>
-                    <i
-                      className="fa-solid fa-arrow-up-long"
-                      onClick={() => handleSort('asc', 'id')}
-                    ></i>
-                  </span>
-                </div>
-              </th>
-              <th>
-                <div className="sort-header">
                   <span>Mã Nhóm Môn Học</span>
                   <span>
                     <i
@@ -224,7 +209,6 @@ const TableSubjectGroups = (props) => {
               listSubjectGroups.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
-                    <td>{item.id}</td>
                     <td>{item.data.SubjectGroupID}</td>
                     <td>{item.data.SubjectGroupName}</td>
                     <td>{item.data.SoTCYeuCau}</td>
@@ -270,7 +254,7 @@ const TableSubjectGroups = (props) => {
           handleClose={handleClose}
           createApi={createSubjectGroups}
           handleUpdateTable={handleUpdateTable}
-          title="Add new SubjectGroup"
+          title="Thêm nhóm môn"
           buttonText="Save changes"
           successMessage="A new SubjectGroup is created successfully!"
           errorMessage="Failed to create SubjectGroup."
@@ -282,7 +266,7 @@ const TableSubjectGroups = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditSubjectGroupsFromModal}
           updateApi={updateSubjectGroups}
-          title="Edit SubjectGroup"
+          title="Sửa nhóm môn"
           successMessage="Update SubjectGroup successfully"
           inputFields={inputFieldsEdit}
         />

@@ -159,21 +159,6 @@ const TableSubjects = (props) => {
             <tr>
               <th>
                 <div className="sort-header">
-                  <span>ID</span>
-                  <span>
-                    <i
-                      className="fa-solid fa-arrow-down-long"
-                      onClick={() => handleSort('desc', 'id')}
-                    ></i>
-                    <i
-                      className="fa-solid fa-arrow-up-long"
-                      onClick={() => handleSort('asc', 'id')}
-                    ></i>
-                  </span>
-                </div>
-              </th>
-              <th>
-                <div className="sort-header">
                   <span>Mã Môn Học</span>
                   <span>
                     <i
@@ -241,7 +226,6 @@ const TableSubjects = (props) => {
               listSubjects.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
-                    <td>{item.id}</td>
                     <td>{item.data.MaMonHoc}</td>
                     <td>{item.data.TenMonHoc}</td>
                     <td>{item.data.PrerequisiteCourseID}</td>
@@ -285,7 +269,7 @@ const TableSubjects = (props) => {
           handleClose={handleClose}
           createApi={createSubjects}
           handleUpdateTable={handleUpdateTable}
-          title="Add new Subject"
+          title="Thêm môn học"
           buttonText="Save changes"
           successMessage="A new Subject is created successfully!"
           errorMessage="Failed to create Subject."
@@ -297,7 +281,7 @@ const TableSubjects = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditSubjectsFromModal}
           updateApi={updateSubjects}
-          title="Edit Subject"
+          title="Sửa môn học"
           successMessage="Update Subject successfully"
           inputFields={inputFieldsEdit}
         />
