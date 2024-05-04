@@ -156,6 +156,7 @@ const TableSubjects = (props) => {
             <tr>
               {/* <th>
                 <div className="sort-header">
+<<<<<<< HEAD
                   <span>ID</span>
                   <span>
                     <i
@@ -171,6 +172,8 @@ const TableSubjects = (props) => {
               </th> */}
               <th>
                 <div className="sort-header">
+=======
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
                   <span>Mã Môn Học</span>
                   <span>
                     <i
@@ -238,7 +241,10 @@ const TableSubjects = (props) => {
               listSubjects.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
+<<<<<<< HEAD
                     {/* <td>{item.id}</td> */}
+=======
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
                     <td>{item.data.MaMonHoc}</td>
                     <td>{item.data.TenMonHoc}</td>
                     <td>{item.data.PrerequisiteCourseID}</td>
@@ -282,8 +288,13 @@ const TableSubjects = (props) => {
           handleClose={handleClose}
           createApi={createSubjects}
           handleUpdateTable={handleUpdateTable}
+<<<<<<< HEAD
           title="Thêm Môn Học Mới"
           buttonText="Xác nhận"
+=======
+          title="Thêm môn học"
+          buttonText="Save changes"
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
           successMessage="A new Subject is created successfully!"
           errorMessage="Failed to create Subject."
           inputFields={inputFieldsAddNew}
@@ -294,7 +305,7 @@ const TableSubjects = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditSubjectsFromModal}
           updateApi={updateSubjects}
-          title="Edit Subject"
+          title="Sửa môn học"
           successMessage="Update Subject successfully"
           inputFields={inputFieldsEdit}
         />

@@ -133,7 +133,7 @@ const TableCoSo = (props) => {
                 </div>
                 <div className="my-3 add-new">
                     <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Cơ Sở Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -147,24 +147,7 @@ const TableCoSo = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>Ma Co So</span>
+                                    <span>Mã Cơ Sở</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -181,7 +164,7 @@ const TableCoSo = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Co So</span>
+                                    <span>Cơ Sở</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -204,7 +187,6 @@ const TableCoSo = (props) => {
                             listCoSo.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
                                         <td>{item.data.MaCS}</td>
                                         <td>{item.data.TenCS}</td>
                                         <td>
@@ -247,7 +229,7 @@ const TableCoSo = (props) => {
                     handleClose={handleClose}
                     createApi={createCoSo}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new CoSo"
+                    title="Thêm cơ sở mới"
                     buttonText="Save changes"
                     successMessage="A new CoSo is created successfully!"
                     errorMessage="Failed to create CoSo."
@@ -259,7 +241,7 @@ const TableCoSo = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditCoSoFromModal}
                     updateApi={updateCoSo}
-                    title="Edit CoSo"
+                    title="chỉnh sửa cơ sở"
                     successMessage='Update CoSo successfully'
                     inputFields={inputFieldsEdit}
                 />

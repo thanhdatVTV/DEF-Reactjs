@@ -154,6 +154,7 @@ const TableSubjectGroups = (props) => {
             <tr>
               {/* <th>
                 <div className="sort-header">
+<<<<<<< HEAD
                   <span>ID</span>
                   <span>
                     <i
@@ -169,6 +170,8 @@ const TableSubjectGroups = (props) => {
               </th> */}
               <th>
                 <div className="sort-header">
+=======
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
                   <span>Mã Nhóm Môn Học</span>
                   <span>
                     <i
@@ -221,7 +224,10 @@ const TableSubjectGroups = (props) => {
               listSubjectGroups.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
+<<<<<<< HEAD
                     {/* <td>{item.id}</td> */}
+=======
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
                     <td>{item.data.SubjectGroupID}</td>
                     <td>{item.data.SubjectGroupName}</td>
                     <td>{item.data.SoTCYeuCau}</td>
@@ -267,8 +273,13 @@ const TableSubjectGroups = (props) => {
           handleClose={handleClose}
           createApi={createSubjectGroups}
           handleUpdateTable={handleUpdateTable}
+<<<<<<< HEAD
           title="Thêm Nhóm Môn Học Mới"
           buttonText="Xác nhận"
+=======
+          title="Thêm nhóm môn"
+          buttonText="Save changes"
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
           successMessage="A new SubjectGroup is created successfully!"
           errorMessage="Failed to create SubjectGroup."
           inputFields={inputFieldsAddNew}
@@ -279,7 +290,11 @@ const TableSubjectGroups = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditSubjectGroupsFromModal}
           updateApi={updateSubjectGroups}
+<<<<<<< HEAD
           title="Chỉnh Sửa Nhóm Môn Học"
+=======
+          title="Sửa nhóm môn"
+>>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
           successMessage="Update SubjectGroup successfully"
           inputFields={inputFieldsEdit}
         />

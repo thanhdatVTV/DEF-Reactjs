@@ -62,9 +62,10 @@ const Login = () => {
         let dateOfBirth = resLogin.response.DateOfBirth;
         let firstName = resLogin.response.FirstName;
         let lastName = resLogin.response.LastName;
+        let type = resLogin.response.Type;
         let majorName;
         let facultyName;
-        if(resLogin.response.Type == 0) {
+        if (resLogin.response.Type == 0) {
           majorName = resLogin.response.MajorName;
         } else {
           facultyName = resLogin.response.FacultyName;
@@ -79,7 +80,8 @@ const Login = () => {
             firstName,
             lastName,
             majorName,
-            facultyName
+            facultyName,
+            type
           },
         };
         sessionStorage.setItem('account', JSON.stringify(data));

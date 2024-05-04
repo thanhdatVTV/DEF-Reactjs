@@ -113,8 +113,8 @@ const ModalEdit = (props) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => handleClose()}>Close</Button>
-                    <Button variant="primary" onClick={() => handleEdit()}>Confirm</Button>
+                    <Button variant="secondary" onClick={() => handleClose()}>Đóng</Button>
+                    <Button variant="primary" onClick={() => handleEdit()}>Xác Nhận</Button>
                 </Modal.Footer>
             </Modal>
         </>

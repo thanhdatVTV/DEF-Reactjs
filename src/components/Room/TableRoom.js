@@ -128,7 +128,7 @@ const TableBuilding = (props) => {
             <div className='Building-container'>
                 <div className="my-3 add-new">
                     <span><b>Phòng:</b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new room type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Phòng Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -142,24 +142,7 @@ const TableBuilding = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>MaPhong</span>
+                                    <span>Mã Phòng</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -216,7 +199,6 @@ const TableBuilding = (props) => {
                             listBuilding.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
                                         <td>{item.data.MaPhong}</td>
                                         <td>{item.data.TenPhong}</td>
                                         <td>{item.data.TenTN}</td>
@@ -260,7 +242,7 @@ const TableBuilding = (props) => {
                     handleClose={handleClose}
                     createApi={createRoom}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new Building"
+                    title="Thêm phòng"
                     buttonText="Save changes"
                     successMessage="A new Building is created successfully!"
                     errorMessage="Failed to create Building."
@@ -272,7 +254,7 @@ const TableBuilding = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditBuildingFromModal}
                     updateApi={updateRoom}
-                    title="Edit Building"
+                    title="Sửa phòng"
                     successMessage='Update Building successfully'
                     inputFields={inputFieldsEdit}
                 />

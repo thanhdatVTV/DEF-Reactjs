@@ -30,6 +30,8 @@ import TableDotDangKySinhVien from '../DangKyMonHoc/TableDotDangKySinhVien';
 import TableDangKyMonHoc from '../DangKyMonHoc/TableDangKyMonHoc';
 import EduProgram from '../User/EduProgram';
 import ThoiKhoaBieu from '../User/ThoiKhoaBieu';
+import MyCourse from '../User/MyCourse';
+import ViewCourse from '../User/ViewCourse';
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -84,6 +86,8 @@ const AppRoutes = () => {
           <Route path="/eduprogram" element={<TableEduProgram />} />
           <Route path="/user/eduprogram" element={<EduProgram />} />
           <Route path="/user/thoikhoabieu" element={<ThoiKhoaBieu />} />
+          <Route path="/user/mycourse" element={<MyCourse />} />
+          <Route path="/user/view-course/:id" element={<ViewCourse />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/room" element={<TableRoom />} />
           <Route path="/dotdangky" element={<TableDotDangKy />} />

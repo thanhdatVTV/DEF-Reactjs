@@ -131,7 +131,7 @@ const TableSemester = (props) => {
                 </div>
                 <div className="my-3 add-new">
                     <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Học Kỳ Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -145,24 +145,7 @@ const TableSemester = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>Ma Hoc Ky</span>
+                                    <span>Mã Học Kỳ</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -179,7 +162,7 @@ const TableSemester = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Hoc Ky</span>
+                                    <span>Học Kỳ</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -202,7 +185,6 @@ const TableSemester = (props) => {
                             listSemester.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
                                         <td>{item.data.MaHocKy}</td>
                                         <td>{item.data.HocKy}</td>
                                         <td>
@@ -245,7 +227,7 @@ const TableSemester = (props) => {
                     handleClose={handleClose}
                     createApi={createSemester}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new Semester"
+                    title="Thêm học kỳ"
                     buttonText="Save changes"
                     successMessage="A new Semester is created successfully!"
                     errorMessage="Failed to create Semester."
@@ -257,7 +239,7 @@ const TableSemester = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditSemesterFromModal}
                     updateApi={updateSemester}
-                    title="Edit Semester"
+                    title="Sửa Học Kỳ"
                     successMessage='Update Semester successfully'
                     inputFields={inputFieldsEdit}
                 />

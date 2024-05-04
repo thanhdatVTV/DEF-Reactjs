@@ -34,8 +34,8 @@ const ModalConfirm = (props) => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => handleClose()}>Close</Button>
-                    <Button variant="primary" onClick={() => confirmDelete()}>Confirm</Button>
+                    <Button variant="secondary" onClick={() => handleClose()}>Đóng</Button>
+                    <Button variant="primary" onClick={() => confirmDelete()}>Xác Nhận</Button>
                 </Modal.Footer>
             </Modal>
         </>

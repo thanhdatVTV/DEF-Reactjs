@@ -134,7 +134,7 @@ const TableFaculty = (props) => {
                 </div>
                 <div className="my-3 add-new">
                     <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Khoa Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -148,24 +148,7 @@ const TableFaculty = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>MaKhoa</span>
+                                    <span>Mã Khoa</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -205,7 +188,6 @@ const TableFaculty = (props) => {
                             listFaculty.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
                                         <td>{item.data.MaKhoa}</td>
                                         <td>{item.data.TenKhoa}</td>
                                         <td>
@@ -248,7 +230,7 @@ const TableFaculty = (props) => {
                     handleClose={handleClose}
                     createApi={createFaculty}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new Faculty"
+                    title="Thêm khoa"
                     buttonText="Save changes"
                     successMessage="A new Faculty is created successfully!"
                     errorMessage="Failed to create Faculty."
@@ -260,7 +242,7 @@ const TableFaculty = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditFacultyFromModal}
                     updateApi={updateFaculty}
-                    title="Edit Faculty"
+                    title="Sửa khoa"
                     successMessage='Update faculty successfully'
                     inputFields={inputFieldsEdit}
                 />

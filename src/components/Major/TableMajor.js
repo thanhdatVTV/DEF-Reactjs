@@ -138,7 +138,7 @@ const TableMajor = (props) => {
                 </div>
                 <div className="my-3 add-new">
                     <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Ngành Học Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -152,41 +152,7 @@ const TableMajor = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>Ma Nganh Hoc</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "MaNganh")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "MaNganh")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>Ma Khoa</span>
+                                    <span>Mã Khoa</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -203,7 +169,7 @@ const TableMajor = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Ten Khoa</span>
+                                    <span>Tên Khoa</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -220,7 +186,24 @@ const TableMajor = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Tên Nganh Hoc</span>
+                                    <span>Mã Ngành Học</span>
+                                    <span>
+                                        <i
+                                            className="fa-solid fa-arrow-down-long"
+                                            onClick={() => handleSort("desc", "MaNganh")}
+                                        >
+                                        </i>
+                                        <i
+                                            className="fa-solid fa-arrow-up-long"
+                                            onClick={() => handleSort("asc", "MaNganh")}
+                                        >
+                                        </i>
+                                    </span>
+                                </div>
+                            </th>
+                            <th>
+                                <div className='sort-header'>
+                                    <span>Tên Ngành Học</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -243,7 +226,6 @@ const TableMajor = (props) => {
                             listMajor.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
                                         <td>{item.data.MaKhoa}</td>
                                         <td>{item.data.TenKhoa}</td>
                                         <td>{item.data.MaNganh}</td>
@@ -288,8 +270,8 @@ const TableMajor = (props) => {
                     handleClose={handleClose}
                     createApi={createMajor}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new Major"
-                    buttonText="Save changes"
+                    title="Thêm mới Ngành Học"
+                    buttonText="Xác Nhận"
                     successMessage="A new Major is created successfully!"
                     errorMessage="Failed to create Major."
                     inputFields={inputFieldsAddNew}
