@@ -155,6 +155,7 @@ const DotDangKy = (props) => {
                     TenMH: subject.TenMH,
                     NamHoc: item.data.NamHoc,
                     HocKy: item.data.HocKy,
+                    NhomLop: '',
                     CoSo: '',
                     ToaNha: '',
                     Phong: '',

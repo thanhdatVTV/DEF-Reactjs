@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import { getPhanCongMonHocList, createPhanCongMonHoc, updatePhanCongMonHoc, deletePhanCongMonHoc } from '../../services/PhanCongMonHocService';
 import { getCoSoList } from '../../services/CoSoService';
+import { getNhomLopList } from '../../services/NhomLopService';
 import { getBuildingList } from '../../services/BuildingService';
 import { getRoomList } from '../../services/RoomService';
 import { getLecturersList } from '../../services/LecturersService';
@@ -36,6 +37,7 @@ const TablePhanCongMonHoc = (props) => {
 
     const [keyword, setKeyword] = useState("");
     const [listCoSo, setListCoSo] = useState([]);
+    const [listNhomLop, setListNhomLop] = useState([]);
     const [listToaNha, setListToaNha] = useState([]);
     const [listPhong, setListPhong] = useState([]);
     const [listGv, setListGv] = useState([]);
@@ -61,6 +63,7 @@ const TablePhanCongMonHoc = (props) => {
         'TenMH',
         'NamHoc',
         'HocKy',
+        'NhomLop',
         'CoSo',
         'ToaNha',
         'Phong',
@@ -95,7 +98,8 @@ const TablePhanCongMonHoc = (props) => {
         getCoSos("", 1, 50);
         getToaNhas("", 1, 50);
         getToaPhongs("", 1, 50);
-        getGvs("", 1, 50)
+        getGvs("", 1, 50);
+        getNhomLops("", 1, 50);
     }, [])
 
     const getPhanCongMonHocs = async (keyword, MaDDK, pageNumber, perPage) => {
@@ -151,6 +155,13 @@ const TablePhanCongMonHoc = (props) => {
         let res = await getLecturersList(keyword, pageNumber, perPage);
         if (res && res.response) {
             setListGv(res.response)
+        }
+    }
+
+    const getNhomLops = async (keyword, pageNumber, perPage) => {
+        let res = await getNhomLopList(keyword, pageNumber, perPage);
+        if (res && res.response) {
+            setListNhomLop(res.response)
         }
     }
 
@@ -235,6 +246,7 @@ const TablePhanCongMonHoc = (props) => {
                 TenMH: record.data.TenMH,
                 NamHoc: record.data.NamHoc,
                 HocKy: record.data.HocKy,
+                NhomLop: record.data.NhomLop,
                 CoSo: record.data.CoSo,
                 ToaNha: record.data.ToaNha,
                 Phong: record.data.Phong,
@@ -245,6 +257,7 @@ const TablePhanCongMonHoc = (props) => {
                 TeacherCode: record.data.TeacherCode
             }).then(response => {
                 getPhanCongMonHocs("", MaDDK, 1, 6);
+                toast.success("Dữ liệu đã được cập nhật");
             }).catch(error => {
                 console.error("Error creating PhanCongMonHoc", error);
             });
@@ -417,6 +430,7 @@ const TablePhanCongMonHoc = (props) => {
                     TenMH: item.data.TenMH,
                     NamHoc: item.data.NamHoc,
                     HocKy: item.data.HocKy,
+                    NhomLop: item.data.NhomLop,
                     CoSo: item.data.CoSo,
                     ToaNha: item.data.ToaNha,
                     Phong: item.data.Phong,
@@ -513,6 +527,20 @@ const TablePhanCongMonHoc = (props) => {
                                         <td>{item.data.TenMH}</td>
                                         <td>{item.data.NamHoc}</td>
                                         <td>{item.data.HocKy}</td>
+                                        <td>
+                                            <select
+                                                className="form-control"
+                                                value={item.data.NhomLop}
+                                                onChange={(e) => handleEditField(index, 'NhomLop', e.target.value)}
+                                            >
+                                                <option value="">None</option>
+                                                {listNhomLop.map((nhomLop) => (
+                                                    <option key={nhomLop.id} value={nhomLop.data.MaNhom}>
+                                                        {nhomLop.data.TenNhom}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </td>
                                         <td>
                                             <select
                                                 className="form-control"
