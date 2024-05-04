@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import Table from 'react-bootstrap/Table';
 import { getPhanCongMonHocList, updatePhanCongMonHoc } from '../../services/PhanCongMonHocService';
 import { getDangKyMonHocList, createDangKyMonHoc, deleteDangKyMonHoc } from '../../services/DangKyMonHocService';
+import { getDotDangKyList } from '../../services/DotDangKyService';
 import ReactPaginate from 'react-paginate';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
@@ -17,6 +18,7 @@ const TableDangKyMonHoc = (props) => {
 
     const { MaDDK } = useParams();
     const [listPhanCongMonHoc, setListPhanCongMonHoc] = useState([]);
+    const [dotDangKyDetail, setDotDangKyDetail] = useState([]);
     const [totalPhanCongMonHocs, setTotalPhanCongMonHocs] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
 
@@ -67,7 +69,15 @@ const TableDangKyMonHoc = (props) => {
     useEffect(() => {
         getPhanCongMonHocs("", MaDDK, 1, 6);
         getMonHocDaDangKys("", MaDDK, user.account.codeId, 1, 10);
+        getDotDangKyDetail("", MaDDK, 1, 6);
     }, [])
+
+    const getDotDangKyDetail = async (keyword, MaDDK, pageNumber, perPage) => {
+        let res = await getDotDangKyList(keyword, MaDDK, pageNumber, perPage);
+        if (res && res.response) {
+            setDotDangKyDetail(res.response)
+        }
+    }
 
     const getPhanCongMonHocs = async (keyword, MaDDK, pageNumber, perPage) => {
         let res = await getPhanCongMonHocList(keyword, MaDDK, pageNumber, perPage);
@@ -260,165 +270,213 @@ const TableDangKyMonHoc = (props) => {
 
     return (
         <>
-            <div className='PhanCongMonHoc-container'>
-                <div className="my-3 add-new">
-                    <span><b>Đợt đăng ký:</b> {MaDDK}</span>
-                </div>
-                <div className='col-4 my-3'>
-                    <input
-                        className='form-control'
-                        placeholder='Search...'
-                        onChange={(event) => handleSearch(event)}
-                    />
-                </div>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            {tableHeads.map(th => (
-                                <th key={th}>
-                                    <div className='sort-header'>
-                                        <span>{th}</span>
-                                        <span>
-                                            <i
-                                                className="fa-solid fa-arrow-down-long"
-                                                onClick={() => handleSort("desc", th)}
-                                            >
-                                            </i>
-                                            <i
-                                                className="fa-solid fa-arrow-up-long"
-                                                onClick={() => handleSort("asc", th)}
-                                            >
-                                            </i>
-                                        </span>
+            <section class="col-md-12">
+                <div id="div-DangKyMonHoc" class="box box-primary box-solid">
+
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            ĐĂNG KÝ/ HIỆU CHỈNH
+                        </h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="row">
+                                    <div id="" class="col-md-12">
+                                        <div>
+                                            <h3>Lịch đăng ký</h3>
+                                            <div id="divLichDangKyResponse">
+                                                <table className="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Từ ngày</th>
+                                                            <th>Đến ngày</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {dotDangKyDetail.map((item, index) => (
+                                                            <tr key={index}>
+                                                                <td>{item.data.ThoiGianBatDau}</td>
+                                                                <td>{item.data.ThoiGianKetThuc}</td>
+                                                            </tr>
+                                                        ))}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listPhanCongMonHoc && listPhanCongMonHoc.length > 0 &&
-                            listPhanCongMonHoc.map((item, index) => {
-                                return (
-                                    <tr key={`users-${index}`}>
-                                        <td>{item.data.MaMH}</td>
-                                        <td>{item.data.TenMH}</td>
-                                        <td>{item.data.NamHoc}</td>
-                                        <td>{item.data.HocKy}</td>
-                                        <td>{item.data.NhomLop}</td>
-                                        <td>{item.data.CoSo}</td>
-                                        <td>{item.data.ToaNha}</td>
-                                        <td>{item.data.Phong}</td>
-                                        <td>
-                                            {generateWeekString(item.data.TuanHoc[item.id], item.data.TuanHoc)}
-                                        </td>
-                                        <td>
-                                            {generateDayString(item.data.Thu[item.id], item.data.Thu)}
-                                        </td>
-                                        <td>
-                                            {generateTietHocString(item.data.TietHoc[item.id], item.data.TietHoc)}
-                                        </td>
-                                        <td>{item.data.SiSo}</td>
-                                        <td>{item.data.TeacherCode}</td>
-                                        <td>
-                                            <button className='btn btn-warning mx-3' onClick={() => handleChonMonHoc(item)}>Chọn</button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </Table>
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
-                    pageCount={totalPages}
-                    previousLabel="< previous"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    previousClassName="page-item"
-                    previousLinkClassName="page-link"
-                    nextClassName="page-item"
-                    nextLinkClassName="page-link"
-                    breakClassName="page-item"
-                    breakLinkClassName="page-link"
-                    containerClassName="pagination"
-                    activeClassName='active'
-                />
-            </div>
-
-
-
-            <div className='MonHocDaDangKy-container'>
-                <div className="my-3 add-new">
-                    <span><b>Danh sách môn học đã đăng ký:</b></span>
-                </div>
-                <div className='col-4 my-3'>
-                    <input
-                        className='form-control'
-                        placeholder='Search...'
-                        onChange={(event) => handleSearchMonHocDaDangKy(event)}
-                    />
-                </div>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            {tableMonHocDaDangKyHeads.map(th => (
-                                <th key={th}>
-                                    <div className='sort-header'>
-                                        <span>{th}</span>
-                                        <span>
-                                            <i
-                                                className="fa-solid fa-arrow-down-long"
-                                                onClick={() => handleSortMonHocDaDangKy("desc", th)}
-                                            >
-                                            </i>
-                                            <i
-                                                className="fa-solid fa-arrow-up-long"
-                                                onClick={() => handleSortMonHocDaDangKy("asc", th)}
-                                            >
-                                            </i>
-                                        </span>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div id="divDanhSachMH">
+                                    <div className='PhanCongMonHoc-container'>
+                                        <div className="my-3 add-new">
+                                            <span><b>Chọn môn học đăng ký</b></span>
+                                        </div>
+                                        <div className='col-4 my-3'>
+                                            <input
+                                                className='form-control'
+                                                placeholder='Search...'
+                                                onChange={(event) => handleSearch(event)}
+                                            />
+                                        </div>
+                                        <Table striped bordered hover>
+                                            <thead>
+                                                <tr>
+                                                    {tableHeads.map(th => (
+                                                        <th key={th}>
+                                                            <div className='sort-header'>
+                                                                <span>{th}</span>
+                                                                <span>
+                                                                    <i
+                                                                        className="fa-solid fa-arrow-down-long"
+                                                                        onClick={() => handleSort("desc", th)}
+                                                                    >
+                                                                    </i>
+                                                                    <i
+                                                                        className="fa-solid fa-arrow-up-long"
+                                                                        onClick={() => handleSort("asc", th)}
+                                                                    >
+                                                                    </i>
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                    ))}
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {listPhanCongMonHoc && listPhanCongMonHoc.length > 0 &&
+                                                    listPhanCongMonHoc.map((item, index) => {
+                                                        return (
+                                                            <tr key={`users-${index}`}>
+                                                                <td>{item.data.MaMH}</td>
+                                                                <td>{item.data.TenMH}</td>
+                                                                <td>{item.data.NamHoc}</td>
+                                                                <td>{item.data.HocKy}</td>
+                                                                <td>{item.data.NhomLop}</td>
+                                                                <td>{item.data.CoSo}</td>
+                                                                <td>{item.data.ToaNha}</td>
+                                                                <td>{item.data.Phong}</td>
+                                                                <td>
+                                                                    {generateWeekString(item.data.TuanHoc[item.id], item.data.TuanHoc)}
+                                                                </td>
+                                                                <td>
+                                                                    {generateDayString(item.data.Thu[item.id], item.data.Thu)}
+                                                                </td>
+                                                                <td>
+                                                                    {generateTietHocString(item.data.TietHoc[item.id], item.data.TietHoc)}
+                                                                </td>
+                                                                <td>{item.data.SiSo}</td>
+                                                                <td>{item.data.TeacherCode}</td>
+                                                                <td>
+                                                                    <button className='btn btn-warning mx-3' onClick={() => handleChonMonHoc(item)}>Chọn</button>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })
+                                                }
+                                            </tbody>
+                                        </Table>
+                                        <ReactPaginate
+                                            breakLabel="..."
+                                            nextLabel="next >"
+                                            onPageChange={handlePageClick}
+                                            pageRangeDisplayed={5}
+                                            pageCount={totalPages}
+                                            previousLabel="< previous"
+                                            pageClassName="page-item"
+                                            pageLinkClassName="page-link"
+                                            previousClassName="page-item"
+                                            previousLinkClassName="page-link"
+                                            nextClassName="page-item"
+                                            nextLinkClassName="page-link"
+                                            breakClassName="page-item"
+                                            breakLinkClassName="page-link"
+                                            containerClassName="pagination"
+                                            activeClassName='active'
+                                        />
                                     </div>
-                                </th>
-                            ))}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listMonHocDaDangKy && listMonHocDaDangKy.length > 0 &&
-                            listMonHocDaDangKy.map((item, index) => {
-                                return (
-                                    <tr key={`users-${index}`}>
-                                        <td>{item.data.MaMH}</td>
-                                        <td>{item.data.TenMH}</td>
-                                        <td>{item.data.NamHoc}</td>
-                                        <td>{item.data.HocKy}</td>
-                                        <td>{item.data.NhomLop}</td>
-                                        <td>{item.data.CoSo}</td>
-                                        <td>{item.data.ToaNha}</td>
-                                        <td>{item.data.Phong}</td>
-                                        <td>
-                                            {generateWeekString(item.data.TuanHoc[item.id], item.data.TuanHoc)}
-                                        </td>
-                                        <td>
-                                            {generateDayString(item.data.Thu[item.id], item.data.Thu)}
-                                        </td>
-                                        <td>
-                                            {generateTietHocString(item.data.TietHoc[item.id], item.data.TietHoc)}
-                                        </td>
-                                        <td>{item.data.SiSo}</td>
-                                        <td>{item.data.TeacherCode}</td>
-                                        <td>
-                                            <button className='btn btn-warning mx-3' onClick={() => handleBoChonMonHoc(item)}>Bỏ chọn</button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </Table>
-            </div>
+                                </div>
+
+                                <div className='MonHocDaDangKy-container'>
+                                    <div className="my-3 add-new">
+                                        <span><b>Phiếu đăng ký</b></span>
+                                    </div>
+                                    <div className='col-4 my-3'>
+                                        <input
+                                            className='form-control'
+                                            placeholder='Search...'
+                                            onChange={(event) => handleSearchMonHocDaDangKy(event)}
+                                        />
+                                    </div>
+                                    <Table striped bordered hover>
+                                        <thead>
+                                            <tr>
+                                                {tableMonHocDaDangKyHeads.map(th => (
+                                                    <th key={th}>
+                                                        <div className='sort-header'>
+                                                            <span>{th}</span>
+                                                            <span>
+                                                                <i
+                                                                    className="fa-solid fa-arrow-down-long"
+                                                                    onClick={() => handleSortMonHocDaDangKy("desc", th)}
+                                                                >
+                                                                </i>
+                                                                <i
+                                                                    className="fa-solid fa-arrow-up-long"
+                                                                    onClick={() => handleSortMonHocDaDangKy("asc", th)}
+                                                                >
+                                                                </i>
+                                                            </span>
+                                                        </div>
+                                                    </th>
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {listMonHocDaDangKy && listMonHocDaDangKy.length > 0 &&
+                                                listMonHocDaDangKy.map((item, index) => {
+                                                    return (
+                                                        <tr key={`users-${index}`}>
+                                                            <td>{item.data.MaMH}</td>
+                                                            <td>{item.data.TenMH}</td>
+                                                            <td>{item.data.NamHoc}</td>
+                                                            <td>{item.data.HocKy}</td>
+                                                            <td>{item.data.NhomLop}</td>
+                                                            <td>{item.data.CoSo}</td>
+                                                            <td>{item.data.ToaNha}</td>
+                                                            <td>{item.data.Phong}</td>
+                                                            <td>
+                                                                {generateWeekString(item.data.TuanHoc[item.id], item.data.TuanHoc)}
+                                                            </td>
+                                                            <td>
+                                                                {generateDayString(item.data.Thu[item.id], item.data.Thu)}
+                                                            </td>
+                                                            <td>
+                                                                {generateTietHocString(item.data.TietHoc[item.id], item.data.TietHoc)}
+                                                            </td>
+                                                            <td>{item.data.SiSo}</td>
+                                                            <td>{item.data.TeacherCode}</td>
+                                                            <td>
+                                                                <button className='btn btn-warning mx-3' onClick={() => handleBoChonMonHoc(item)}>Bỏ chọn</button>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </Table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+
+
         </>)
 }
 

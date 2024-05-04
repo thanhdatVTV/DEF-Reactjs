@@ -1,8 +1,9 @@
 import axios from "../services/customize-axios";
 
-const getDotDangKyList = (keyword, pageNumber, perPage) => {
+const getDotDangKyList = (keyword, MaDDK, pageNumber, perPage) => {
     //console.log("ddddddd", `/api/lecturers/get-list?keyword=${keyword}&pageNumber=${pageNumber}&per_page=${perPage}`)
-    return axios.get(`/api/dot-dang-ky/get-list`, { keyword, pageNumber, perPage })
+    //return axios.get(`/api/dot-dang-ky/get-list`, { keyword, MaDDK, pageNumber, perPage })
+    return axios.get(`/api/dot-dang-ky/get-list?keyword=${keyword}&MaDDK=${MaDDK}&pageNumber=${pageNumber}&perPage=${perPage}`)
 }
 
 const createDotDangKy = ({ MaDDK, MoTa, NamHoc, HocKy, ThoiGianBatDau, ThoiGianKetThuc }) => {

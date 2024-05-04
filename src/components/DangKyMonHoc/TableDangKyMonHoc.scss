@@ -29,3 +29,11 @@ input[type="number"]:focus {
 .PhanCongMonHoc-container {
     margin: 3vw;
 }
+
+.box-header {
+    display: flex;
+    justify-content: center; /* Canh giữa theo chiều ngang */
+    align-items: center; /* Canh giữa theo chiều dọc */
+    height: 50px; /* Điều chỉnh chiều cao nếu cần */
+}
+

@@ -88,6 +88,7 @@ const AppRoutes = () => {
           <Route path="/phancongmonhoc/:MaDDK" element={<TablePhanCongMonHoc />} />
           <Route path="/dotdangkysinhvien" element={<TableDotDangKySinhVien />} />
           <Route path="/dangkymonhoc/:MaDDK" element={<TableDangKyMonHoc />} />
+
         </Routes>
       </>
     );

@@ -78,7 +78,7 @@ const DotDangKy = (props) => {
 
     const getDotDangKys = async (keyword, pageNumber, perPage) => {
 
-        let res = await getDotDangKyList(keyword, pageNumber, perPage);
+        let res = await getDotDangKyList(keyword, "", pageNumber, perPage);
         if (res && res.response) {
             setTotalDotDangKys(res.response.total)
             setTotalPages(res.response.totalPages)
