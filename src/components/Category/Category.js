@@ -72,22 +72,37 @@ const Category = () => {
                 <Divider orientation="left" style={{ fontSize: '20px' }}>Quản lý danh mục</Divider>
                 <Row gutter={[16, 24]}>
                     <Col className="gutter-row" onClick={() => redirectToOtherPage(4)} span={6}>
-                        <div style={style} className='box-content'>Quản lý loại tập tin</div>
+                        <div style={style} className='box-content'>Quản lý Năm học</div>
                     </Col>
                     <Col className="gutter-row" onClick={() => redirectToOtherPage(5)} span={6}>
-                        <div style={style} className='box-content'>Quản lý loại giấy</div>
+                        <div style={style} className='box-content'>Quản lý Học Kỳ</div>
                     </Col>
                     <Col className="gutter-row" onClick={() => redirectToOtherPage(6)} span={6}>
-                        <div style={style} className='box-content'>Quản lý vị trí máy in</div>
+                        <div style={style} className='box-content'>Quản lý Khoa</div>
                     </Col>
                     <Col className="gutter-row" onClick={() => redirectToOtherPage(7)} span={6}>
-                        <div style={style} className='box-content'>Quản lý Máy in</div>
+                        <div style={style} className='box-content'>Quản lý Ngành học</div>
                     </Col>
                     <Col className="gutter-row" onClick={() => redirectToOtherPage(8)} span={6}>
-                        <div style={style} className='box-content'>Quản lý tập tin hệ thống</div>
+                        <div style={style} className='box-content'>Quản lý Môn học</div>
                     </Col>
                     <Col className="gutter-row" onClick={() => redirectToOtherPage(9)} span={6}>
-                        <div style={style} className='box-content'>Cấu hình chung cho hệ thống</div>
+                        <div style={style} className='box-content'>Quản lý Cơ sở</div>
+                    </Col>
+                    <Col className="gutter-row" onClick={() => redirectToOtherPage(9)} span={6}>
+                        <div style={style} className='box-content'>Quản lý Tòa nhà</div>
+                    </Col>
+                    <Col className="gutter-row" onClick={() => redirectToOtherPage(9)} span={6}>
+                        <div style={style} className='box-content'>Quản lý Phòng học</div>
+                    </Col>
+                    <Col className="gutter-row" onClick={() => redirectToOtherPage(9)} span={6}>
+                        <div style={style} className='box-content'>Quản lý lịch thi</div>
+                    </Col>
+                    <Col className="gutter-row" onClick={() => redirectToOtherPage(9)} span={6}>
+                        <div style={style} className='box-content'>Quản lý Nhóm lớp</div>
+                    </Col>
+                    <Col className="gutter-row" onClick={() => redirectToOtherPage(9)} span={6}>
+                        <div style={style} className='box-content'>Quản lý Nhóm Môn học</div>
                     </Col>
                     {/* <Col className="gutter-row" span={6}>
                     <div style={style} className='box-content'>Quản lý loại file</div>

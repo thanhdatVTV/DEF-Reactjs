@@ -26,7 +26,10 @@ import TableRoom from '../Room/TableRoom';
 import Profile from '../Profile/Profile';
 import TableDotDangKy from '../DotDangKy/TableDotDangKy';
 import TablePhanCongMonHoc from '../PhanCongMonHoc/TablePhanCongMonHoc';
-import EduProgram from '../User/EduProgram'
+import TableDotDangKySinhVien from '../DangKyMonHoc/TableDotDangKySinhVien';
+import TableDangKyMonHoc from '../DangKyMonHoc/TableDangKyMonHoc';
+import EduProgram from '../User/EduProgram';
+import ThoiKhoaBieu from '../User/ThoiKhoaBieu';
 
 const AppRoutes = () => {
   const { user } = useContext(UserContext);
@@ -80,10 +83,14 @@ const AppRoutes = () => {
           <Route path="/coso" element={<TableCoSo />} />
           <Route path="/eduprogram" element={<TableEduProgram />} />
           <Route path="/user/eduprogram" element={<EduProgram />} />
+          <Route path="/user/thoikhoabieu" element={<ThoiKhoaBieu />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/room" element={<TableRoom />} />
           <Route path="/dotdangky" element={<TableDotDangKy />} />
           <Route path="/phancongmonhoc/:MaDDK" element={<TablePhanCongMonHoc />} />
+          <Route path="/dotdangkysinhvien" element={<TableDotDangKySinhVien />} />
+          <Route path="/dangkymonhoc/:MaDDK" element={<TableDangKyMonHoc />} />
+
         </Routes>
       </>
     );

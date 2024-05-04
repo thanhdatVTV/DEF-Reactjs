@@ -1,27 +1,18 @@
 import { useEffect, useState } from 'react';
 import Table from 'react-bootstrap/Table';
-import { getDotDangKyList, createDotDangKy, updateDotDangKy, deleteDotDangKy } from '../../services/DotDangKyService';
-import { getSubjectList } from '../../services/SubjectsService';
-import { getPhanCongMonHocs, createPhanCongMonHoc, updatePhanCongMonHoc, deletePhanCongMonHoc } from '../../services/PhanCongMonHocService';
+import { getDotDangKyList } from '../../services/DotDangKyService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from './AddNew';
-import ModalEdit from './Edit';
-import ModalConfirm from './Confirm';
 import '../TableUser.scss'
 import _, { debounce } from "lodash";
 import { useNavigate } from 'react-router-dom';
 
-const DotDangKy = (props) => {
+const DotDangKySinhVien = (props) => {
 
     const navigate = useNavigate();
 
     const [listDotDangKy, setListDotDangKy] = useState([]);
     const [totalDotDangKys, setTotalDotDangKys] = useState(0);
     const [totalPages, setTotalPages] = useState(0);
-
-    const [isShowModalAddNew, setIsShowModalAddNew] = useState(false);
-
-    const [isShowModalEdit, setIsShowModalEdit] = useState(false);
     const [dataDotDangKyEdit, setDataDotDangKyEdit] = useState({});
 
     const [isShowModalDelete, setIsShowModalDelete] = useState(false);
@@ -32,44 +23,7 @@ const DotDangKy = (props) => {
 
     const [keyword, setKeyword] = useState("");
 
-    const inputFieldsAddNew = [
-        { name: "MaDDK", label: "Mã đợt đăng ký", type: "text" },
-        { name: "MoTa", label: "Mô tả", type: "text" },
-        { name: "NamHoc", label: "Năm học", type: "text" },
-        { name: "HocKy", label: "Học kỳ", type: "text" },
-        { name: "ThoiGianBatDau", label: "Thời gian bắt đầu", type: "text" },
-        { name: "ThoiGianKetThuc", label: "Thời gian kết thúc", type: "text" },
-    ];
-    const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
-        { name: "MaDDK", label: "Mã đợt đăng ký", type: "text" },
-        { name: "MoTa", label: "Mô tả", type: "text" },
-        { name: "NamHoc", label: "Năm học", type: "text" },
-        { name: "HocKy", label: "Học kỳ", type: "text" },
-        { name: "ThoiGianBatDau", label: "Thời gian bắt đầu", type: "text" },
-        { name: "ThoiGianKetThuc", label: "Thời gian kết thúc", type: "text" },
-    ];
-
     const tableHeads = ['MaDDK', 'MoTa', 'NamHoc', 'HocKy', 'ThoiGianBatDau', 'ThoiGianKetThuc']
-
-    const handleClose = () => {
-        setIsShowModalAddNew(false);
-        setIsShowModalEdit(false);
-        setIsShowModalDelete(false);
-    }
-
-    const handleUpdateTable = () => {
-        // setListDotDangKy([DotDangKy, ...listDotDangKy]);
-        getDotDangKys("", 1, 6);
-    }
-
-    const handleEditDotDangKyFromModal = (DotDangKy) => {
-        // let cloneListDotDangKys = _.cloneDeep(listDotDangKy);
-        // let index = listDotDangKy.findIndex(item => item.id === DotDangKy.id);
-        // cloneListDotDangKys[index].typeName = DotDangKy.typeName;
-        // setListDotDangKy(cloneListDotDangKys);
-        getDotDangKys("", 1, 6);
-    }
 
     useEffect(() => {
         //call api
@@ -88,25 +42,6 @@ const DotDangKy = (props) => {
 
     const handlePageClick = (event) => {
         getDotDangKys("", +event.selected + 1, 6)
-    }
-
-    const handleEditDotDangKy = (DotDangKy) => {
-        setDataDotDangKyEdit(DotDangKy);
-        setIsShowModalEdit(true);
-    }
-
-    const handleDeleteDotDangKy = (DotDangKy) => {
-        setIsShowModalDelete(true);
-        setDataDotDangKyDelete(DotDangKy);
-    }
-
-    const handleDeleteDotDangKyFromModal = (DotDangKy) => {
-        // let cloneListDotDangKys = _.cloneDeep(listDotDangKy);
-        // cloneListDotDangKys = cloneListDotDangKys.filter(item => item.id !== DotDangKy.id);
-        // setListDotDangKy(cloneListDotDangKys);
-        getDotDangKys("", 1, 6);
-        console.log('d1', listDotDangKy);
-
     }
 
     const handleSort = (sortBy, sortField) => {
@@ -139,44 +74,7 @@ const DotDangKy = (props) => {
     }, 500)
 
     const handleDotDangKy = (item) => {
-        getSubjectList("", 1, 1000).then(subjectsResponse => {
-            const subjects = subjectsResponse.response.map(subject => {
-                return {
-                    MaMH: subject.data.MaMonHoc,
-                    TenMH: subject.data.TenMonHoc
-                };
-            }).filter(subject => subject.MaMH && subject.TenMH);
-            // console.log("Subjects List", subjects);
-            subjects.forEach(subject => {
-                createPhanCongMonHoc({
-                    MaDDK: item.id,
-                    NganhHoc: '',
-                    MaMH: subject.MaMH,
-                    TenMH: subject.TenMH,
-                    NamHoc: item.data.NamHoc,
-                    HocKy: item.data.HocKy,
-                    NhomLop: '',
-                    CoSo: '',
-                    ToaNha: '',
-                    Phong: '',
-                    TuanHoc: '',
-                    Thu: '',
-                    TietHoc: '',
-                    SiSo: '',
-                    TeacherCode: ''
-                }).then(response => {
-                    // console.log("PhanCongMonHoc created", response);
-                }).catch(error => {
-                    console.error("Error creating PhanCongMonHoc", error);
-                });
-            });
-        }).catch(error => {
-            console.error("Error fetching subjects", error);
-        }).finally(() => {
-            // Navigate to @TablePhanCongMonHoc after operations are completed
-            //navigate("/phancongmonhoc");
-            navigate(`/phancongmonhoc/${item.id}`, { state: { MaDDK: item.id } });
-        });
+        navigate(`/dangkymonhoc/${item.id}`, { state: { MaDDK: item.id } });
     }
 
     return (
@@ -184,7 +82,6 @@ const DotDangKy = (props) => {
             <div className='DotDangKy-container' style={{ margin: '3vw' }}>
                 <div className="my-3 add-new">
                     <span><b>Danh sách đợt đăng ký</b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -237,19 +134,10 @@ const DotDangKy = (props) => {
                                         <td>{item.data.ThoiGianKetThuc}</td>
                                         <td>
                                             <button
-                                                className='btn btn-warning mx-3'
-                                                onClick={() => handleEditDotDangKy(item)}
-                                            >Edit</button>
-                                            <button
-                                                className='btn btn-danger mx-3'
-                                                onClick={() => handleDeleteDotDangKy(item)}
-                                            >Delete
-                                            </button>
-                                            <button
                                                 className='btn btn-info'
                                                 onClick={() => handleDotDangKy(item)}
                                                 disabled={!isTimeInRange}
-                                            >Cấu hình</button>
+                                            >Chọn</button>
                                         </td>
                                     </tr>
                                 )
@@ -275,38 +163,8 @@ const DotDangKy = (props) => {
                     containerClassName="pagination"
                     activeClassName='active'
                 />
-                <ModalAddNew
-                    show={isShowModalAddNew}
-                    handleClose={handleClose}
-                    createApi={createDotDangKy}
-                    handleUpdateTable={handleUpdateTable}
-                    title="Thêm đợt đăng ký"
-                    buttonText="Save changes"
-                    successMessage="A new Enrollment is created successfully!"
-                    errorMessage="Failed to create Enrollment."
-                    inputFields={inputFieldsAddNew}
-                />
-                <ModalEdit
-                    show={isShowModalEdit}
-                    dataEdit={dataDotDangKyEdit}
-                    handleClose={handleClose}
-                    handleEditFromModal={handleEditDotDangKyFromModal}
-                    updateApi={updateDotDangKy}
-                    title="Edit Enrollment"
-                    successMessage='Update Enrollment successfully'
-                    inputFields={inputFieldsEdit}
-                />
-                <ModalConfirm
-                    show={isShowModalDelete}
-                    handleClose={handleClose}
-                    dataDelete={dataDotDangKyDelete}
-                    handleDeleteFromModal={handleDeleteDotDangKyFromModal}
-                    deleteApi={deleteDotDangKy}
-                    title='Delete Enrollment'
-                    successMessage='Delete Enrollment successfully'
-                />
             </div>
         </>)
 }
 
-export default DotDangKy;
+export default DotDangKySinhVien;

@@ -68,21 +68,24 @@ const Header = (props) => {
                 <NavLink to="/faculty" className="nav-link">
                   Faculty
                 </NavLink>
-                <NavLink to="/building" className="nav-link">
-                  Building
-                </NavLink>
                 <NavLink to="/major" className="nav-link">
                   Major
                 </NavLink>
                 <NavLink to="/nhomlop" className="nav-link">
                   NhomLop
                 </NavLink>
-                <NavLink to="/semester" className="nav-link">
+                {/* <NavLink to="/semester" className="nav-link">
                   Semester
                 </NavLink>
                 <NavLink to="/year" className="nav-link">
                   Year
                 </NavLink>
+                <NavLink to="/coso" className="nav-link">
+                  Co So
+                </NavLink> 
+                <NavLink to="/building" className="nav-link">
+                  Building
+                </NavLink>*/}
                 <NavLink to="/testschedules" className="nav-link">
                   Test Schedule
                 </NavLink>
@@ -92,9 +95,7 @@ const Header = (props) => {
                 <NavLink to="/subjectgroups" className="nav-link">
                   Subject Group
                 </NavLink>
-                <NavLink to="/coso" className="nav-link">
-                  Co So
-                </NavLink>
+                
                 <NavLink to="/eduprogram" className="nav-link">
                   Education Program
                 </NavLink>
