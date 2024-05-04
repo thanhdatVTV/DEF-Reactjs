@@ -31,6 +31,7 @@ const UserProvider = ({ children }) => {
       let lastName = account.account.lastName;
       let majorName = account.account.majorName;
       let facultyName = account.account.facultyName;
+      let type = account.account.type;
       let data = {
         isAuthenticated: true,
         token: 'fake token',
@@ -41,7 +42,8 @@ const UserProvider = ({ children }) => {
           firstName,
           lastName,
           majorName,
-          facultyName
+          facultyName,
+          type
         },
       };
       console.log('data in context', data)

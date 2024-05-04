@@ -626,7 +626,7 @@ const TablePhanCongMonHoc = (props) => {
                                             >
                                                 <option value="">None</option>
                                                 {listGv.map((gv) => (
-                                                    <option key={gv.id} value={gv.id}>
+                                                    <option key={gv.id} value={gv.data.TenGV}>
                                                         {gv.data.TenGV + " " + gv.data.MaGV}
                                                     </option>
                                                 ))}
