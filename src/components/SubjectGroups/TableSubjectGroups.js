@@ -154,7 +154,6 @@ const TableSubjectGroups = (props) => {
             <tr>
               {/* <th>
                 <div className="sort-header">
-<<<<<<< HEAD
                   <span>ID</span>
                   <span>
                     <i

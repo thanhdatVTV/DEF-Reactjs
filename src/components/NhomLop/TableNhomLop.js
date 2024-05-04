@@ -164,7 +164,6 @@ const TableNhomLop = (props) => {
                     ></i>
                   </span>
                 </div>
-<<<<<<< HEAD
               </th>
               <th>
                 <div className="sort-header">
@@ -182,57 +181,7 @@ const TableNhomLop = (props) => {
                 </div>
               </th>
               {/* <th>
-=======
-                <div className="my-3 add-new">
-                    <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Nhóm Lớp Mới</button>
-                </div>
-                <div className='col-4 my-3'>
-                    <input
-                        className='form-control'
-                        placeholder='Search...'
-                        onChange={(event) => handleSearch(event)}
-                    />
-                </div>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>
-                                <div className='sort-header'>
-                                    {/* <span>ID</span> */}
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>Tên Nhóm</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "TenNhom")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "TenNhom")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            {/* <th>
->>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
+
                                 <div className='sort-header'>
                                     <span>Ma mon hoc</span>
                                     <span>
@@ -266,7 +215,6 @@ const TableNhomLop = (props) => {
                                     </span>
                                 </div>
                             </th> */}
-<<<<<<< HEAD
               <th>Actions</th>
             </tr>
           </thead>
@@ -349,88 +297,5 @@ const TableNhomLop = (props) => {
     </>
   );
 };
-=======
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {listNhomLop && listNhomLop.length > 0 &&
-                            listNhomLop.map((item, index) => {
-                                return (
-                                    <tr key={`users-${index}`}>
-                                        {/* <td>{item.id}</td> */}
-                                        {/* <td>{item.data.MaHK}</td> */}
-                                        <td>{item.data.MaNhom}</td>
-                                        <td>{item.data.TenNhom}</td>
-                                        {/* <td>{item.data.MaMH}</td> */}
-                                        <td>
-                                            <button
-                                                className='btn btn-warning mx-3'
-                                                onClick={() => handleEditNhomLop(item)}
-                                            >Edit</button>
-                                            <button
-                                                className='btn btn-danger'
-                                                onClick={() => handleDeleteNhomLop(item)}
-                                            >Delete
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )
-                            })
-                        }
-                    </tbody>
-                </Table>
-                <ReactPaginate
-                    breakLabel="..."
-                    nextLabel="next >"
-                    onPageChange={handlePageClick}
-                    pageRangeDisplayed={5}
-                    pageCount={totalPages}
-                    previousLabel="< previous"
-                    pageClassName="page-item"
-                    pageLinkClassName="page-link"
-                    previousClassName="page-item"
-                    previousLinkClassName="page-link"
-                    nextClassName="page-item"
-                    nextLinkClassName="page-link"
-                    breakClassName="page-item"
-                    breakLinkClassName="page-link"
-                    containerClassName="pagination"
-                    activeClassName='active'
-                />
-                <ModalAddNew
-                    show={isShowModalAddNew}
-                    handleClose={handleClose}
-                    createApi={createNhomLop}
-                    handleUpdateTable={handleUpdateTable}
-                    title="Thêm nhóm lớp"
-                    buttonText="Save changes"
-                    successMessage="A new NhomLop is created successfully!"
-                    errorMessage="Failed to create NhomLop."
-                    inputFields={inputFieldsAddNew}
-                />
-                <ModalEdit
-                    show={isShowModalEdit}
-                    dataEdit={dataNhomLopEdit}
-                    handleClose={handleClose}
-                    handleEditFromModal={handleEditNhomLopFromModal}
-                    updateApi={updateNhomLop}
-                    title="Sửa nhóm lớp"
-                    successMessage='Update NhomLop successfully'
-                    inputFields={inputFieldsEdit}
-                />
-                <ModalConfirm
-                    show={isShowModalDelete}
-                    handleClose={handleClose}
-                    dataDelete={dataNhomLopDelete}
-                    handleDeleteFromModal={handleDeleteNhomLopFromModal}
-                    deleteApi={deleteNhomLop}
-                    title='Delete NhomLop'
-                    successMessage='Delete NhomLop successfully'
-                />
-            </div>
-        </>)
-}
->>>>>>> 39f29feed879366476d9a484ac735cb85432be1c
 
 export default TableNhomLop;
