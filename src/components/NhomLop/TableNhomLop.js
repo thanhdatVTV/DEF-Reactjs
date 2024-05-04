@@ -30,17 +30,17 @@ const TableNhomLop = (props) => {
     const [keyword, setKeyword] = useState("");
 
     const inputFieldsAddNew = [
-        { name: "MaHK", label: "HK ID", type: "text" },
+        // { name: "MaHK", label: "HK ID", type: "text" },
         { name: "MaNhom", label: "NhomLop ID", type: "text" },
         { name: "TenNhom", label: "Ten NhomLop", type: "text" },
-        { name: "MaMH", label: "MH ID", type: "text" },
+        // { name: "MaMH", label: "MH ID", type: "text" },
     ];
     const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
-        { name: "MaHK", label: "HK ID", type: "text" },
+        // { name: "Id", label: "ID", type: "text" },
+        // { name: "MaHK", label: "HK ID", type: "text" },
         { name: "MaNhom", label: "NhomLop ID", type: "text" },
         { name: "TenNhom", label: "Ten NhomLop", type: "text" },
-        { name: "MaMH", label: "MH ID", type: "text" },
+        // { name: "MaMH", label: "MH ID", type: "text" },
     ];
 
     const handleClose = () => {
@@ -116,9 +116,8 @@ const TableNhomLop = (props) => {
             let cloneListNhomLop = _.cloneDeep(listNhomLop);
             cloneListNhomLop = cloneListNhomLop.filter(item => {
                 return (
-                    item.data.MaMH.includes(term) ||
                     item.data.TenNhom.includes(term) ||
-                    item.data.MaHK.includes(term)
+                    item.data.MaNhom.includes(term)
                     // Thêm các điều kiện khác nếu cần
                 );
             });
@@ -148,7 +147,7 @@ const TableNhomLop = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
+                                    {/* <span>ID</span> */}
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -180,7 +179,7 @@ const TableNhomLop = (props) => {
                                     </span>
                                 </div>
                             </th>
-                            <th>
+                            {/* <th>
                                 <div className='sort-header'>
                                     <span>Ma mon hoc</span>
                                     <span>
@@ -196,8 +195,8 @@ const TableNhomLop = (props) => {
                                         </i>
                                     </span>
                                 </div>
-                            </th>
-                            <th>
+                            </th> */}
+                            {/* <th>
                                 <div className='sort-header'>
                                     <span>Ma hoc ki</span>
                                     <span>
@@ -213,7 +212,7 @@ const TableNhomLop = (props) => {
                                         </i>
                                     </span>
                                 </div>
-                            </th>
+                            </th> */}
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -222,11 +221,11 @@ const TableNhomLop = (props) => {
                             listNhomLop.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
-                                        <td>{item.data.MaHK}</td>
+                                        {/* <td>{item.id}</td> */}
+                                        {/* <td>{item.data.MaHK}</td> */}
                                         <td>{item.data.MaNhom}</td>
                                         <td>{item.data.TenNhom}</td>
-                                        <td>{item.data.MaMH}</td>
+                                        {/* <td>{item.data.MaMH}</td> */}
                                         <td>
                                             <button
                                                 className='btn btn-warning mx-3'
