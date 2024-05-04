@@ -111,7 +111,7 @@ const TableYear = (props) => {
             cloneListYear = cloneListYear.filter(item => {
                 return (
                     item.data.MaNamHoc.includes(term) ||
-                    item.data.NamHoc.includes(term) 
+                    item.data.NamHoc.includes(term)
                     // Thêm các điều kiện khác nếu cần
                 );
             });
@@ -124,8 +124,13 @@ const TableYear = (props) => {
     return (
         <>
             <div className='Year-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        NĂM HỌC
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Nam Hoc:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

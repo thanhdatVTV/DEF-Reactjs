@@ -257,7 +257,7 @@ const TablePhanCongMonHoc = (props) => {
                 TeacherCode: record.data.TeacherCode
             }).then(response => {
                 getPhanCongMonHocs("", MaDDK, 1, 6);
-                toast.success("Dữ liệu đã được cập nhật");
+                //toast.success("Dữ liệu đã được cập nhật");
             }).catch(error => {
                 console.error("Error creating PhanCongMonHoc", error);
             });
