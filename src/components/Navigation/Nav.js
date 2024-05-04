@@ -47,7 +47,7 @@ const Header = (props) => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <NavLink to="/" className="nav-link">
+                {/* <NavLink to="/" className="nav-link">
                   Home
                 </NavLink>
                 <NavLink to="/users" className="nav-link">
@@ -74,18 +74,6 @@ const Header = (props) => {
                 <NavLink to="/nhomlop" className="nav-link">
                   NhomLop
                 </NavLink>
-                {/* <NavLink to="/semester" className="nav-link">
-                  Semester
-                </NavLink>
-                <NavLink to="/year" className="nav-link">
-                  Year
-                </NavLink>
-                <NavLink to="/coso" className="nav-link">
-                  Co So
-                </NavLink> 
-                <NavLink to="/building" className="nav-link">
-                  Building
-                </NavLink>*/}
                 <NavLink to="/testschedules" className="nav-link">
                   Test Schedule
                 </NavLink>
@@ -98,7 +86,7 @@ const Header = (props) => {
                 
                 <NavLink to="/eduprogram" className="nav-link">
                   Education Program
-                </NavLink>
+                </NavLink> */}
               </Nav>
 
               <Nav>

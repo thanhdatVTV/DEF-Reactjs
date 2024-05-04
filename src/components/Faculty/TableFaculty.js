@@ -127,8 +127,13 @@ const TableFaculty = (props) => {
     return (
         <>
             <div className='Faculty-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        KHOA
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Khoa:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

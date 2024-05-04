@@ -130,8 +130,13 @@ const TableBuilding = (props) => {
     return (
         <>
             <div className='Building-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        DANH SÁCH TÒA NHÀ
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Tòa nhà:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

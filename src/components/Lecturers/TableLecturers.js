@@ -113,7 +113,7 @@ const TableLecturers = (props) => {
             cloneListLecturerss = cloneListLecturerss.filter(item => {
                 return (
                     item.data.MaGV.includes(term) ||
-                    item.data.TenGV.includes(term) 
+                    item.data.TenGV.includes(term)
                     // Thêm các điều kiện khác nếu cần
                 );
             });
@@ -127,8 +127,13 @@ const TableLecturers = (props) => {
     return (
         <>
             <div className='Lecturers-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        DANH SÁCH GIẢNG VIÊN
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Giảng viên:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

@@ -113,7 +113,7 @@ const TableCoSo = (props) => {
             cloneListCoSo = cloneListCoSo.filter(item => {
                 return (
                     item.data.MaCS.includes(term) ||
-                    item.data.TenCS.includes(term) 
+                    item.data.TenCS.includes(term)
                     // Thêm các điều kiện khác nếu cần
                 );
             });
@@ -126,8 +126,13 @@ const TableCoSo = (props) => {
     return (
         <>
             <div className='CoSo-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        DANH SÁCH CƠ SỞ GIẢNG DẠY
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Co So:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

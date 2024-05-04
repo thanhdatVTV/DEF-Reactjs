@@ -116,7 +116,7 @@ const TableMajor = (props) => {
                 return (
                     item.data.MaKhoa.includes(term) ||
                     item.data.TenKhoa.includes(term) ||
-                    item.data.MaNganh.includes(term)||
+                    item.data.MaNganh.includes(term) ||
                     item.data.TenNganh.includes(term)
                     // Thêm các điều kiện khác nếu cần
                 );
@@ -131,8 +131,13 @@ const TableMajor = (props) => {
     return (
         <>
             <div className='Major-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        DANH SÁCH NGÀNH HỌC
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Nganh Hoc:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

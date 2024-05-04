@@ -80,8 +80,10 @@ const DotDangKySinhVien = (props) => {
     return (
         <>
             <div className='DotDangKy-container' style={{ margin: '3vw' }}>
-                <div className="my-3 add-new">
-                    <span><b>Danh sách đợt đăng ký</b></span>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        DANH SÁCH ĐỢT ĐĂNG KÝ HIỆN TẠI
+                    </h3>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -122,7 +124,7 @@ const DotDangKySinhVien = (props) => {
                                 const currentTime = new Date();
                                 const startTime = new Date(item.data.ThoiGianBatDau);
                                 const endTime = new Date(item.data.ThoiGianKetThuc);
-                                const isTimeInRange = currentTime <= startTime;// && currentTime <= endTime;
+                                const isTimeInRange = currentTime >= startTime && currentTime <= endTime;
                                 return (
                                     <tr key={item.id}>
                                         {/* <td>{item.id}</td> */}

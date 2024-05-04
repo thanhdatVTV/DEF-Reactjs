@@ -138,9 +138,14 @@ const TableEduProgram = (props) => {
   return (
     <>
       <div className="EduProgram-container">
+        <div class="box-header">
+          <h3 class="box-title">
+            CHƯƠNG TRÌNH ĐÀO TẠO
+          </h3>
+        </div>
         <div className="my-3 add-new">
           <span>
-            <b>Chuong Trinh Dao Tao:</b>
+            <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
             Add New

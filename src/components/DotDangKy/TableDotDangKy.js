@@ -182,8 +182,14 @@ const DotDangKy = (props) => {
     return (
         <>
             <div className='DotDangKy-container' style={{ margin: '3vw' }}>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        DANH SÁCH ĐỢT ĐĂNG KÝ
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Danh sách đợt đăng ký</b></span>
+                    <div class="box-header">
+                    </div>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new</button>
                 </div>
                 <div className='col-4 my-3'>

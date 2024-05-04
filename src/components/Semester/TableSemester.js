@@ -111,7 +111,7 @@ const TableSemester = (props) => {
             cloneListSemester = cloneListSemester.filter(item => {
                 return (
                     item.data.MaHocKy.includes(term) ||
-                    item.data.HocKy.includes(term) 
+                    item.data.HocKy.includes(term)
                     // Thêm các điều kiện khác nếu cần
                 );
             });
@@ -124,8 +124,13 @@ const TableSemester = (props) => {
     return (
         <>
             <div className='Semester-container'>
+                <div class="box-header">
+                    <h3 class="box-title">
+                        HỌC KỲ
+                    </h3>
+                </div>
                 <div className="my-3 add-new">
-                    <span><b>Hoc Ky:</b></span>
+                    <span><b></b></span>
                     <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
                 </div>
                 <div className='col-4 my-3'>

@@ -86,12 +86,12 @@ const UserEduProgram = (props) => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th style={{width: '4%'}}>
+                            <th style={{ width: '4%' }}>
                                 <div>
                                     <span>STT</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>MSMH</span>
                                 </div>
@@ -101,7 +101,7 @@ const UserEduProgram = (props) => {
                                     <span>Tên môn học</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>Tín chỉ</span>
                                 </div>
@@ -110,11 +110,11 @@ const UserEduProgram = (props) => {
                     </thead>
                     <tbody>
                         {
-                        listBatBuoc && listBatBuoc.length > 0 &&
+                            listBatBuoc && listBatBuoc.length > 0 &&
                             listBatBuoc.map((item, index) => {
                                 return (
                                     <tr key={`users-${item.id}`}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
                                         <td>{item.data.SoTC}</td>
@@ -124,8 +124,8 @@ const UserEduProgram = (props) => {
                         }
                     </tbody>
                 </Table>
-                
-                
+
+
 
                 <div className="my-3">
                     <span><b>II. Các môn bắt buộc và tự chọn của chuyên ngành</b></span>
@@ -134,12 +134,12 @@ const UserEduProgram = (props) => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th style={{width: '4%'}}>
+                            <th style={{ width: '4%' }}>
                                 <div>
                                     <span>STT</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>MSMH</span>
                                 </div>
@@ -149,7 +149,7 @@ const UserEduProgram = (props) => {
                                     <span>Tên môn học</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>Tín chỉ</span>
                                 </div>
@@ -161,7 +161,7 @@ const UserEduProgram = (props) => {
                             listBatBuocCN.map((item, index) => {
                                 return (
                                     <tr key={`users-${item.id}`}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
                                         <td>{item.data.SoTC}</td>
@@ -179,12 +179,12 @@ const UserEduProgram = (props) => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th style={{width: '4%'}}>
+                            <th style={{ width: '4%' }}>
                                 <div>
                                     <span>STT</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>MSMH</span>
                                 </div>
@@ -194,7 +194,7 @@ const UserEduProgram = (props) => {
                                     <span>Tên môn học</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>Tín chỉ</span>
                                 </div>
@@ -206,7 +206,7 @@ const UserEduProgram = (props) => {
                             listA.map((item, index) => {
                                 return (
                                     <tr key={`users-${item.id}`}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
                                         <td>{item.data.SoTC}</td>
@@ -223,12 +223,12 @@ const UserEduProgram = (props) => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th style={{width: '4%'}}>
+                            <th style={{ width: '4%' }}>
                                 <div>
                                     <span>STT</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>MSMH</span>
                                 </div>
@@ -238,7 +238,7 @@ const UserEduProgram = (props) => {
                                     <span>Tên môn học</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>Tín chỉ</span>
                                 </div>
@@ -250,7 +250,7 @@ const UserEduProgram = (props) => {
                             listB.map((item, index) => {
                                 return (
                                     <tr key={`users-${item.id}`}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
                                         <td>{item.data.SoTC}</td>
@@ -268,12 +268,12 @@ const UserEduProgram = (props) => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th style={{width: '4%'}}>
+                            <th style={{ width: '4%' }}>
                                 <div>
                                     <span>STT</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>MSMH</span>
                                 </div>
@@ -283,7 +283,7 @@ const UserEduProgram = (props) => {
                                     <span>Tên môn học</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>Tín chỉ</span>
                                 </div>
@@ -295,7 +295,7 @@ const UserEduProgram = (props) => {
                             listC.map((item, index) => {
                                 return (
                                     <tr key={`users-${item.id}`}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
                                         <td>{item.data.SoTC}</td>
@@ -313,12 +313,12 @@ const UserEduProgram = (props) => {
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th style={{width: '4%'}}>
+                            <th style={{ width: '4%' }}>
                                 <div>
                                     <span>STT</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>MSMH</span>
                                 </div>
@@ -328,7 +328,7 @@ const UserEduProgram = (props) => {
                                     <span>Tên môn học</span>
                                 </div>
                             </th>
-                            <th style={{width: '10%'}}>
+                            <th style={{ width: '10%' }}>
                                 <div>
                                     <span>Tín chỉ</span>
                                 </div>
@@ -340,7 +340,7 @@ const UserEduProgram = (props) => {
                             listD.map((item, index) => {
                                 return (
                                     <tr key={`users-${item.id}`}>
-                                        <td>{index+1}</td>
+                                        <td>{index + 1}</td>
                                         <td>{item.data.MaMonHoc}</td>
                                         <td>{item.data.TenMonHoc}</td>
                                         <td>{item.data.SoTC}</td>
@@ -350,7 +350,7 @@ const UserEduProgram = (props) => {
                         }
                     </tbody>
                 </Table>
-                
+
             </div>
         </>
     )

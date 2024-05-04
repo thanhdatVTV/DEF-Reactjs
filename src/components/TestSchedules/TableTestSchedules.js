@@ -134,9 +134,14 @@ const TableTestSchedules = (props) => {
   return (
     <>
       <div className="TestSchedules-container">
+        <div class="box-header">
+          <h3 class="box-title">
+            LỊCH THI
+          </h3>
+        </div>
         <div className="my-3 add-new">
           <span>
-            <b>Lịch thi:</b>
+            <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
             Thêm lịch thi mới

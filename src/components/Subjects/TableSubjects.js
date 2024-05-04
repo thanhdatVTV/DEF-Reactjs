@@ -115,28 +115,33 @@ const TableSubjects = (props) => {
   const handleSearch = debounce((event) => {
     let term = event.target.value;
     if (term) {
-        let cloneListSubjects = _.cloneDeep(listSubjects);
-        cloneListSubjects = cloneListSubjects.filter(item => {
-            return (
-                item.data.MaMonHoc.includes(term) ||
-                item.data.TenMonHoc.includes(term) ||
-                item.data.PrerequisiteCourseID.includes(term)
-                // Thêm các điều kiện khác nếu cần
-            );
-        });
-        setListSubjects(cloneListSubjects);
+      let cloneListSubjects = _.cloneDeep(listSubjects);
+      cloneListSubjects = cloneListSubjects.filter(item => {
+        return (
+          item.data.MaMonHoc.includes(term) ||
+          item.data.TenMonHoc.includes(term) ||
+          item.data.PrerequisiteCourseID.includes(term)
+          // Thêm các điều kiện khác nếu cần
+        );
+      });
+      setListSubjects(cloneListSubjects);
     }
     else {
-        getSubjects("", 1, 6);
+      getSubjects("", 1, 6);
     }
-}, 500)
+  }, 500)
 
   return (
     <>
       <div className="Subjects-container">
+        <div class="box-header">
+          <h3 class="box-title">
+            MÔN HỌC
+          </h3>
+        </div>
         <div className="my-3 add-new">
           <span>
-            <b>Môn học:</b>
+            <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
             Thêm môn học mới
