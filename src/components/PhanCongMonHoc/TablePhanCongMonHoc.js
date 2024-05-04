@@ -14,6 +14,7 @@ import _, { debounce } from "lodash";
 import { useParams } from 'react-router-dom';
 import { Form, Dropdown } from 'react-bootstrap';
 import './TablePhanCongMonHoc.scss';
+import { toast } from "react-toastify";
 
 
 const TablePhanCongMonHoc = (props) => {
@@ -162,10 +163,10 @@ const TablePhanCongMonHoc = (props) => {
         setIsShowModalEdit(true);
     }
 
-    const handleDeletePhanCongMonHoc = (PhanCongMonHoc) => {
-        setIsShowModalDelete(true);
-        setDataPhanCongMonHocDelete(PhanCongMonHoc);
-    }
+    // const handleDeletePhanCongMonHoc = (PhanCongMonHoc) => {
+    //     setIsShowModalDelete(true);
+    //     setDataPhanCongMonHocDelete(PhanCongMonHoc);
+    // }
 
     const handleDeletePhanCongMonHocFromModal = (PhanCongMonHoc) => {
         // let cloneListPhanCongMonHocs = _.cloneDeep(listPhanCongMonHoc);
@@ -404,6 +405,65 @@ const TablePhanCongMonHoc = (props) => {
         </Dropdown.Menu>
     );
 
+    const handleCopyPhanCongMonHoc = async (item) => {
+        const confirmCopy = window.confirm("Bạn có chắc chắn muốn copy Phân công môn học này?");
+        if (confirmCopy) {
+            try {
+                // Sau khi copy thành công, làm mới danh sách
+                let res = await createPhanCongMonHoc({
+                    MaDDK: item.data.MaDDK,
+                    NganhHoc: item.data.NganhHoc,
+                    MaMH: item.data.MaMH,
+                    TenMH: item.data.TenMH,
+                    NamHoc: item.data.NamHoc,
+                    HocKy: item.data.HocKy,
+                    CoSo: item.data.CoSo,
+                    ToaNha: item.data.ToaNha,
+                    Phong: item.data.Phong,
+                    TuanHoc: item.data.TuanHoc,
+                    Thu: item.data.Thu,
+                    TietHoc: item.data.TietHoc,
+                    SiSo: item.data.SiSo,
+                    TeacherCode: item.data.TeacherCode
+                });
+                console.log('dat', res);
+                if (res && res.status) {
+                    //success
+                    toast.success("Copy thành công");
+                    getPhanCongMonHocs("", MaDDK, 1, 6);
+                }
+                else {
+                    //error
+                    toast.error("Copy thất bại");
+                }
+            } catch (error) {
+                console.error("Copy failed:", error);
+            }
+        }
+    };
+
+    const handleDeletePhanCongMonHoc = async (item) => {
+        const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa Phân công môn học này?");
+        if (confirmDelete) {
+            try {
+                // Sau khi xóa thành công, làm mới danh sách
+                let res = await deletePhanCongMonHoc(item.id);
+                console.log('dat', res);
+                if (res && res.status) {
+                    //success
+                    toast.success("Xóa thành công");
+                    getPhanCongMonHocs("", MaDDK, 1, 6);
+                }
+                else {
+                    //error
+                    toast.error("Xóa thất bại");
+                }
+            } catch (error) {
+                console.error("Delete failed:", error);
+            }
+        }
+    };
+
     return (
         <>
             <div className='PhanCongMonHoc-container'>
@@ -544,18 +604,10 @@ const TablePhanCongMonHoc = (props) => {
                                                 ))}
                                             </select>
                                         </td>
-
-                                        {/* <td>
-                                            <button
-                                                className='btn btn-warning mx-3'
-                                                onClick={() => handleEditPhanCongMonHoc(item)}
-                                            >Edit</button>
-                                            <button
-                                                className='btn btn-danger'
-                                                onClick={() => handleDeletePhanCongMonHoc(item)}
-                                            >Delete
-                                            </button>
-                                        </td> */}
+                                        <td>
+                                            <button className='btn btn-warning mx-3' onClick={() => handleCopyPhanCongMonHoc(item)}>Copy</button>
+                                            <button className='btn btn-danger mx-3' onClick={() => handleDeletePhanCongMonHoc(item)}>Delete</button>
+                                        </td>
                                     </tr>
                                 )
                             })
