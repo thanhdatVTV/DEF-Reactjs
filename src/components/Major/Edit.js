@@ -9,15 +9,16 @@ const ModalEdit = (props) => {
     const [inputValues, setInputValues] = useState({});
     const [listFaculty, setListFaculty] = useState([]);
     const [selectedFaculty, setSelectedFaculty] = useState('');
-    const [selectedTenNganh, setSelectedTenNganh] = useState('');
+    const [selectedFacultyName, setSelectedFacultyName] = useState('');
+    const [selectedTenKhoa, setSelectedTenKhoa] = useState('');
 
     useEffect(() => {
         getFacultyList("", 1, 4).then(response => {
             const dataList = response.response.map(item => {
                 return {
                     id: item.id,
-                    MaNganh: item.data.MaNganh,
-                    TenNganh: item.data.TenNganh
+                    MaKhoa: item.data.MaKhoa,
+                    TenKhoa: item.data.TenKhoa
                 };
             });
             setListFaculty(dataList);
@@ -27,10 +28,24 @@ const ModalEdit = (props) => {
     }, []);
 
     const handleSelectFaculty = (value) => {
-        const FacultyTen = listFaculty.find(Faculty => Faculty.id === value).TenNganh;
-        setInputValues({ ...inputValues, TenNganh: FacultyTen, FacultyId: value });
-
-    };
+        if (value) {
+          const FacultyId = listFaculty.find(
+            (Faculty) => Faculty.id === value
+          ).MaKhoa;
+          setSelectedFaculty(FacultyId);
+          const FacultyName = listFaculty.find(
+            (Faculty) => Faculty.id === value
+          ).TenKhoa;
+          setSelectedFacultyName(FacultyName);
+          setInputValues({
+            ...inputValues,
+            MaKhoa: FacultyId,
+            TenKhoa: FacultyName,
+          });
+        } else {
+          setInputValues({ ...inputValues, MaKhoa: '' });
+        }
+      };
 
     const handleInputChange = (fieldName, value) => {
         setInputValues({ ...inputValues, [fieldName]: value });
@@ -86,7 +101,7 @@ const ModalEdit = (props) => {
                     </form> */}
                     <form>
                         {inputFields.map((field, index) => {
-                            if(field.name === "FacultyId"){
+                            if(field.name === "MaKhoa"){
                                 return (
                                     <div key={index} className="mb-3">
                                         <label className="form-label">Select Faculty</label>
@@ -100,7 +115,7 @@ const ModalEdit = (props) => {
                                         >
                                             <option value="">None</option>
                                             {listFaculty.map((Faculty) => (
-                                                <option key={Faculty.id} value={Faculty.id}>{Faculty.TenNganh}</option>
+                                                <option key={Faculty.id} value={Faculty.id}>{Faculty.MaKhoa}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -127,8 +142,8 @@ const ModalEdit = (props) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => handleClose()}>Close</Button>
-                    <Button variant="primary" onClick={() => handleEdit()}>Confirm</Button>
+                    <Button variant="secondary" onClick={() => handleClose()}>Đóng</Button>
+                    <Button variant="primary" onClick={() => handleEdit()}>Xác Nhận</Button>
                 </Modal.Footer>
             </Modal>
         </>

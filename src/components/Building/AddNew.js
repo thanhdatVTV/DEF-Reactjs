@@ -108,8 +108,8 @@ const ModalAddNew = (props) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>Close</Button>
-                    <Button variant="primary" onClick={handleSaveFunc}>{buttonText}</Button>
+                    <Button variant="secondary" onClick={handleClose}>Đóng</Button>
+                    <Button variant="primary" onClick={handleSaveFunc}>Xác Nhận</Button>
                 </Modal.Footer>
             </Modal>
         </>

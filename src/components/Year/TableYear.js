@@ -131,7 +131,7 @@ const TableYear = (props) => {
                 </div>
                 <div className="my-3 add-new">
                     <span><b></b></span>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new file type</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm Năm Học Mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -145,24 +145,7 @@ const TableYear = (props) => {
                         <tr>
                             <th>
                                 <div className='sort-header'>
-                                    <span>ID</span>
-                                    <span>
-                                        <i
-                                            className="fa-solid fa-arrow-down-long"
-                                            onClick={() => handleSort("desc", "id")}
-                                        >
-                                        </i>
-                                        <i
-                                            className="fa-solid fa-arrow-up-long"
-                                            onClick={() => handleSort("asc", "id")}
-                                        >
-                                        </i>
-                                    </span>
-                                </div>
-                            </th>
-                            <th>
-                                <div className='sort-header'>
-                                    <span>Ma Nam Hoc</span>
+                                    <span>Mã Năm Học</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -179,7 +162,7 @@ const TableYear = (props) => {
                             </th>
                             <th>
                                 <div className='sort-header'>
-                                    <span>Nam Hoc</span>
+                                    <span>Năm Học</span>
                                     <span>
                                         <i
                                             className="fa-solid fa-arrow-down-long"
@@ -202,7 +185,6 @@ const TableYear = (props) => {
                             listYear.map((item, index) => {
                                 return (
                                     <tr key={`users-${index}`}>
-                                        <td>{item.id}</td>
                                         <td>{item.data.MaNamHoc}</td>
                                         <td>{item.data.NamHoc}</td>
                                         <td>
@@ -245,7 +227,7 @@ const TableYear = (props) => {
                     handleClose={handleClose}
                     createApi={createYear}
                     handleUpdateTable={handleUpdateTable}
-                    title="Add new Year"
+                    title="Thêm năm học"
                     buttonText="Save changes"
                     successMessage="A new Year is created successfully!"
                     errorMessage="Failed to create Year."
@@ -257,7 +239,7 @@ const TableYear = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditYearFromModal}
                     updateApi={updateYear}
-                    title="Edit Year"
+                    title="Sữar năm học"
                     successMessage='Update Year successfully'
                     inputFields={inputFieldsEdit}
                 />
