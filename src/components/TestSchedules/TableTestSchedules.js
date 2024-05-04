@@ -7,8 +7,8 @@ import {
   deleteTestSchedules,
 } from '../../services/TestSchedulesService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from '../Modal/AddNew';
-import ModalEdit from '../Modal/Edit';
+import ModalAddNew from './AddNew';
+import ModalEdit from './Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss';
 import _, { debounce } from 'lodash';
@@ -33,21 +33,21 @@ const TableTestSchedules = (props) => {
   const [keyword, setKeyword] = useState('');
 
   const inputFieldsAddNew = [
-    { name: 'TenLichThi', label: 'TenLichThi', type: 'text' },
-    { name: 'PhanCongMonHocId', label: 'PhanCongMonHocId', type: 'text' },
-    { name: 'MaCS', label: 'MaCS', type: 'text' },
-    { name: 'MaTN', label: 'MaTN', type: 'text' },
-    { name: 'MaPhong', label: 'MaPhong', type: 'text' },
-    { name: 'MaNhom', label: 'MaNhom', type: 'text' },
+    { name: 'TenLichThi', label: 'Tên Lịch Thi', type: 'text' },
+    { name: 'PhanCongMonHocId', label: 'Mã Môn Thi', type: 'text' },
+    { name: 'MaCS', label: 'Mã Cơ Sở', type: 'text' },
+    { name: 'MaTN', label: 'Mã Tòa Nhà', type: 'text' },
+    { name: 'MaPhong', label: 'Mã Phòng', type: 'text' },
+    { name: 'MaNhom', label: 'Mã Nhóm Lớp', type: 'text' },
   ];
   const inputFieldsEdit = [
-    { name: 'Id', label: 'ID', type: 'text' },
-    { name: 'TenLichThi', label: 'TenLichThi', type: 'text' },
-    { name: 'PhanCongMonHocId', label: 'PhanCongMonHocId', type: 'text' },
-    { name: 'MaCS', label: 'MaCS', type: 'text' },
-    { name: 'MaTN', label: 'MaTN', type: 'text' },
-    { name: 'MaPhong', label: 'MaPhong', type: 'text' },
-    { name: 'MaNhom', label: 'MaNhom', type: 'text' },
+    // { name: 'Id', label: 'ID', type: 'text' },
+    { name: 'TenLichThi', label: 'Tên Lịch Thi', type: 'text' },
+    { name: 'PhanCongMonHocId', label: 'Mã Môn Thi', type: 'text' },
+    { name: 'MaCS', label: 'Mã Cơ Sở', type: 'text' },
+    { name: 'MaTN', label: 'Mã Tòa Nhà', type: 'text' },
+    { name: 'MaPhong', label: 'Mã Phòng', type: 'text' },
+    { name: 'MaNhom', label: 'Mã Nhóm Lớp', type: 'text' },
   ];
 
   const handleClose = () => {
@@ -121,9 +121,16 @@ const TableTestSchedules = (props) => {
     let term = event.target.value;
     if (term) {
       let cloneListTestScheduless = _.cloneDeep(listTestSchedules);
-      cloneListTestScheduless = cloneListTestScheduless.filter((item) =>
-        item.typeName.includes(term)
-      );
+      cloneListTestScheduless = cloneListTestScheduless.filter((item) => {
+        return (
+          item.data.TenLichThi.includes(term) ||
+          item.data.PhanCongMonHocId.includes(term) ||
+          item.data.MaCS.includes(term) ||
+          item.data.MaTN.includes(term) ||
+          item.data.MaPhong.includes(term) ||
+          item.data.MaNhom.includes(term)
+        );
+      });
       setListTestSchedules(cloneListTestScheduless);
     } else {
       getTestScheduless('', 1, 6);
@@ -135,16 +142,14 @@ const TableTestSchedules = (props) => {
     <>
       <div className="TestSchedules-container">
         <div class="box-header">
-          <h3 class="box-title">
-            LỊCH THI
-          </h3>
+          <h3 class="box-title">LỊCH THI</h3>
         </div>
         <div className="my-3 add-new">
           <span>
             <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
-            Thêm lịch thi mới
+            Thêm mới
           </button>
         </div>
         <div className="col-4 my-3">
@@ -157,7 +162,7 @@ const TableTestSchedules = (props) => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <div className="sort-header">
                   <span>ID</span>
                   <span>
@@ -171,7 +176,7 @@ const TableTestSchedules = (props) => {
                     ></i>
                   </span>
                 </div>
-              </th>
+              </th> */}
               <th>
                 <div className="sort-header">
                   <span>Tên Lịch Thi</span>
@@ -189,7 +194,7 @@ const TableTestSchedules = (props) => {
               </th>
               <th>
                 <div className="sort-header">
-                  <span>Phân công môn học ID</span>
+                  <span>Mã Môn Thi</span>
                   <span>
                     <i
                       className="fa-solid fa-arrow-down-long"
@@ -219,7 +224,7 @@ const TableTestSchedules = (props) => {
               </th>
               <th>
                 <div className="sort-header">
-                  <span>Mã TN</span>
+                  <span>Mã Tòa Nhà</span>
                   <span>
                     <i
                       className="fa-solid fa-arrow-down-long"
@@ -234,7 +239,7 @@ const TableTestSchedules = (props) => {
               </th>
               <th>
                 <div className="sort-header">
-                  <span>Mã phòng</span>
+                  <span>Mã Phòng</span>
                   <span>
                     <i
                       className="fa-solid fa-arrow-down-long"
@@ -249,7 +254,7 @@ const TableTestSchedules = (props) => {
               </th>
               <th>
                 <div className="sort-header">
-                  <span>Mã nhóm</span>
+                  <span>Mã Nhóm Lớp</span>
                   <span>
                     <i
                       className="fa-solid fa-arrow-down-long"
@@ -272,7 +277,7 @@ const TableTestSchedules = (props) => {
               listTestSchedules.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
-                    <td>{item.id}</td>
+                    {/* <td>{item.id}</td> */}
                     <td>{item.data.TenLichThi}</td>
                     <td>{item.data.PhanCongMonHocId}</td>
                     <td>{item.data.MaCS}</td>
@@ -321,8 +326,8 @@ const TableTestSchedules = (props) => {
           handleClose={handleClose}
           createApi={createTestSchedules}
           handleUpdateTable={handleUpdateTable}
-          title="Add new TestSchedule"
-          buttonText="Save changes"
+          title="Thêm Lịch Thi Mới"
+          buttonText="Xác nhận"
           successMessage="A new TestSchedule is created successfully!"
           errorMessage="Failed to create TestSchedule."
           inputFields={inputFieldsAddNew}
@@ -333,7 +338,7 @@ const TableTestSchedules = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditTestSchedulesFromModal}
           updateApi={updateTestSchedules}
-          title="Edit TestSchedule"
+          title="Chỉnh Sửa Lịch Thi Mới"
           successMessage="Update TestSchedule successfully"
           inputFields={inputFieldsEdit}
         />

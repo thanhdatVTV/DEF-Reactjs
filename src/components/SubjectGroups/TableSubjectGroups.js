@@ -8,7 +8,7 @@ import {
 } from '../../services/SubjectGroupsService';
 import ReactPaginate from 'react-paginate';
 import ModalAddNew from '../Modal/AddNew';
-import ModalEdit from '../Modal/Edit';
+import ModalEdit from './Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss';
 import _, { debounce } from 'lodash';
@@ -33,15 +33,15 @@ const TableSubjectGroups = (props) => {
   const [keyword, setKeyword] = useState('');
 
   const inputFieldsAddNew = [
-    { name: 'SubjectGroupID', label: 'SubjectGroupID', type: 'text' },
-    { name: 'SubjectGroupName', label: 'SubjectGroupName', type: 'text' },
-    { name: 'SoTCYeuCau', label: 'SoTCYeuCau', type: 'text' },
+    { name: 'SubjectGroupID', label: 'Mã Nhóm Môn Học', type: 'text' },
+    { name: 'SubjectGroupName', label: 'Tên Nhóm Môn Học', type: 'text' },
+    { name: 'SoTCYeuCau', label: 'Số Tín Chỉ Yêu Cầu', type: 'text' },
   ];
   const inputFieldsEdit = [
-    { name: 'Id', label: 'Id', type: 'text' },
-    { name: 'SubjectGroupID', label: 'SubjectGroupID', type: 'text' },
-    { name: 'SubjectGroupName', label: 'SubjectGroupName', type: 'text' },
-    { name: 'SoTCYeuCau', label: 'SoTCYeuCau', type: 'text' },
+    // { name: 'Id', label: 'Id', type: 'text' },
+    { name: 'SubjectGroupID', label: 'Mã Nhóm Môn Học', type: 'text' },
+    { name: 'SubjectGroupName', label: 'Tên Nhóm Môn Học', type: 'text' },
+    { name: 'SoTCYeuCau', label: 'Số Tín Chỉ Yêu Cầu', type: 'text' },
   ];
 
   const handleClose = () => {
@@ -114,7 +114,7 @@ const TableSubjectGroups = (props) => {
     let term = event.target.value;
     if (term) {
       let cloneListSubjectGroups = _.cloneDeep(listSubjectGroups);
-      cloneListSubjectGroups = cloneListSubjectGroups.filter(item => {
+      cloneListSubjectGroups = cloneListSubjectGroups.filter((item) => {
         return (
           item.data.SubjectGroupID.includes(term) ||
           item.data.SubjectGroupName.includes(term) ||
@@ -123,26 +123,23 @@ const TableSubjectGroups = (props) => {
         );
       });
       setListSubjectGroups(cloneListSubjectGroups);
+    } else {
+      getSubjectGroups('', 1, 6);
     }
-    else {
-      getSubjectGroups("", 1, 6);
-    }
-  }, 500)
+  }, 500);
 
   return (
     <>
       <div className="SubjectGroups-container">
         <div class="box-header">
-          <h3 class="box-title">
-            NHÓM MÔN HỌC
-          </h3>
+          <h3 class="box-title">NHÓM MÔN HỌC</h3>
         </div>
         <div className="my-3 add-new">
           <span>
             <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
-            Thêm nhóm môn học mới
+            Thêm mới
           </button>
         </div>
         <div className="col-4 my-3">
@@ -155,7 +152,7 @@ const TableSubjectGroups = (props) => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <div className="sort-header">
                   <span>ID</span>
                   <span>
@@ -169,7 +166,7 @@ const TableSubjectGroups = (props) => {
                     ></i>
                   </span>
                 </div>
-              </th>
+              </th> */}
               <th>
                 <div className="sort-header">
                   <span>Mã Nhóm Môn Học</span>
@@ -224,7 +221,7 @@ const TableSubjectGroups = (props) => {
               listSubjectGroups.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
-                    <td>{item.id}</td>
+                    {/* <td>{item.id}</td> */}
                     <td>{item.data.SubjectGroupID}</td>
                     <td>{item.data.SubjectGroupName}</td>
                     <td>{item.data.SoTCYeuCau}</td>
@@ -270,8 +267,8 @@ const TableSubjectGroups = (props) => {
           handleClose={handleClose}
           createApi={createSubjectGroups}
           handleUpdateTable={handleUpdateTable}
-          title="Add new SubjectGroup"
-          buttonText="Save changes"
+          title="Thêm Nhóm Môn Học Mới"
+          buttonText="Xác nhận"
           successMessage="A new SubjectGroup is created successfully!"
           errorMessage="Failed to create SubjectGroup."
           inputFields={inputFieldsAddNew}
@@ -282,7 +279,7 @@ const TableSubjectGroups = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditSubjectGroupsFromModal}
           updateApi={updateSubjectGroups}
-          title="Edit SubjectGroup"
+          title="Chỉnh Sửa Nhóm Môn Học"
           successMessage="Update SubjectGroup successfully"
           inputFields={inputFieldsEdit}
         />

@@ -109,11 +109,11 @@ const ModalAddNew = (props) => {
   const handleSelectSubject = (value) => {
     if (value) {
       const SubjectId = listSubject.find((Subject) => Subject.id === value).MaMonHoc;
-      setSelectedMajor(SubjectId);
+      setSelectedSubject(SubjectId);
       const SubjectName = listSubject.find((Subject) => Subject.id === value).TenMonHoc;
-      setSelectedMajorName(SubjectName);
+      setSelectedSubjectName(SubjectName);
       const SoTC = listSubject.find((Subject) => Subject.id === value).SoTC;
-      setSelectedMajorName(SoTC);
+      setSoTC(SoTC);
       setInputValues({
         ...inputValues,
         MaMonHoc: SubjectId,
@@ -189,7 +189,7 @@ const ModalAddNew = (props) => {
               if (field.name === 'NganhId') {
                 return (
                   <div key={index} className="mb-3">
-                    <label className="form-label">Chọn ngành</label>
+                    <label className="form-label">Chọn Ngành</label>
                     <select
                       className="form-select"
                       // value={selectedFaculty}
@@ -210,7 +210,7 @@ const ModalAddNew = (props) => {
               } else if (field.name === 'MaMonHoc') {
                 return (
                   <div key={index} className="mb-3">
-                    <label className="form-label">Chọn môn học</label>
+                    <label className="form-label">Chọn Môn Học</label>
                     <select
                       className="form-select"
                       // value={selectedFaculty}
@@ -231,7 +231,7 @@ const ModalAddNew = (props) => {
               } else if (field.name === 'GroupId') {
                 return (
                   <div key={index} className="mb-3">
-                    <label className="form-label">Chọn nhóm môn học</label>
+                    <label className="form-label">Chọn Nhóm Môn Học</label>
                     <select
                       className="form-select"
                       // value={selectedFaculty}
@@ -240,6 +240,7 @@ const ModalAddNew = (props) => {
                         handleSelectSubjectGroup(event.target.value);
                       }}
                     >
+                      <option value="">None</option>
                       {listSubjectGroup.map((Major) => (
                         <option key={Major.id} value={Major.id}>
                           {Major.GroupId}
@@ -251,7 +252,7 @@ const ModalAddNew = (props) => {
               } else if (field.name === 'IsCompulsory') {
                 return (
                   <div key={index} className="mb-3">
-                    <label className="form-label">Có bắt buộc không</label>
+                    <label className="form-label">Có Bắt Buộc Không</label>
                     <select
                       className="form-select"
                       // value={selectedFaculty}
@@ -286,7 +287,7 @@ const ModalAddNew = (props) => {
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Đóng
           </Button>
           <Button variant="primary" onClick={handleSaveFunc}>
             {buttonText}

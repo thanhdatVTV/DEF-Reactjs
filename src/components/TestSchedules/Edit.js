@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
-import { getSubjectGroupList } from '../../services/SubjectGroupsService';
 
 const ModalEdit = (props) => {
   const {
@@ -16,54 +15,6 @@ const ModalEdit = (props) => {
     inputFields,
   } = props;
   const [inputValues, setInputValues] = useState({});
-
-  const [listSubjectGroup, setListSubjectGroup] = useState([]);
-  const [selectedSubjectGroup, setSelectedSubjectGroup] = useState('');
-
-  const [selectedIsCompulsory, setSelectedIsCompulsory] = useState('');
-
-  useEffect(() => {
-    getSubjectGroupList('', 1, 4)
-      .then((response) => {
-        const dataList = response.response.map((item) => {
-          return {
-            id: item.id,
-            GroupId: item.data.SubjectGroupID,
-          };
-        });
-        setListSubjectGroup(dataList);
-      })
-      .catch((error) => {
-        console.error('Error fetching Subject Group list', error);
-      });
-  }, []);
-
-  const handleSelectSubjectGroup = (value) => {
-    if (value) {
-      const SubjectGroupId = listSubjectGroup.find(
-        (SubjectGroup) => SubjectGroup.id === value
-      ).GroupId;
-      setSelectedSubjectGroup(SubjectGroupId);
-      setInputValues({
-        ...inputValues,
-        GroupId: SubjectGroupId,
-      });
-    } else {
-      setInputValues({ ...inputValues, GroupId: '' });
-    }
-  };
-
-  const handleSelectIsCompulsory = (value) => {
-    if (value) {
-      setSelectedIsCompulsory(value);
-      setInputValues({
-        ...inputValues,
-        IsCompulsory: value,
-      });
-    } else {
-      setInputValues({ ...inputValues, IsCompulsory: '' });
-    }
-  };
 
   const handleInputChange = (fieldName, value) => {
     setInputValues({ ...inputValues, [fieldName]: value });
@@ -116,7 +67,7 @@ const ModalEdit = (props) => {
               if (field.name === 'IsCompulsory') {
                 return (
                   <div key={index} className="mb-3">
-                    <label className="form-label">Có bắt buộc không</label>
+                    {/* <label className="form-label">Có bắt buộc không</label>
                     <select
                       className="form-select"
                       // value={selectedCoSo}
@@ -128,27 +79,7 @@ const ModalEdit = (props) => {
                       <option></option>
                       <option value="true">true</option>
                       <option value="false">false</option>
-                    </select>
-                  </div>
-                );
-              } else if (field.name === 'GroupId') {
-                return (
-                  <div key={index} className="mb-3">
-                    <label className="form-label">Chọn nhóm môn học</label>
-                    <select
-                      className="form-select"
-                      // value={selectedFaculty}
-                      onChange={(event) => {
-                        // setSelectedFaculty(event.target.value);
-                        handleSelectSubjectGroup(event.target.value);
-                      }}
-                    >
-                      {listSubjectGroup.map((Major) => (
-                        <option key={Major.id} value={Major.id}>
-                          {Major.GroupId}
-                        </option>
-                      ))}
-                    </select>
+                    </select> */}
                   </div>
                 );
               } else {

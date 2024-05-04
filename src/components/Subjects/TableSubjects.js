@@ -7,8 +7,8 @@ import {
   deleteSubjects,
 } from '../../services/SubjectsService';
 import ReactPaginate from 'react-paginate';
-import ModalAddNew from '../Modal/AddNew';
-import ModalEdit from '../Modal/Edit';
+import ModalAddNew from './AddNew';
+import ModalEdit from './Edit';
 import ModalConfirm from '../Modal/Confirm';
 import '../TableUser.scss';
 import _, { debounce } from 'lodash';
@@ -33,17 +33,17 @@ const TableSubjects = (props) => {
   const [keyword, setKeyword] = useState('');
 
   const inputFieldsAddNew = [
-    { name: 'MaMonHoc', label: 'MaMonHoc', type: 'text' },
-    { name: 'TenMonHoc', label: 'TenMonHoc', type: 'text' },
-    { name: 'PrerequisiteCourseID', label: 'PrerequisiteCourseID', type: 'text' },
-    { name: 'SoTC', label: 'SoTC', type: 'text' },
+    { name: 'MaMonHoc', label: 'Mã Môn Học', type: 'text' },
+    { name: 'TenMonHoc', label: 'Tên Môn Học', type: 'text' },
+    { name: 'PrerequisiteCourseID', label: 'Môn Học Tiên Quyết', type: 'text' },
+    { name: 'SoTC', label: 'Số Tín Chỉ', type: 'text' },
   ];
   const inputFieldsEdit = [
-    { name: 'Id', label: 'Id', type: 'text' },
-    { name: 'MaMonHoc', label: 'MaMonHoc', type: 'text' },
-    { name: 'TenMonHoc', label: 'TenMonHoc', type: 'text' },
-    { name: 'PrerequisiteCourseID', label: 'PrerequisiteCourseID', type: 'text' },
-    { name: 'SoTC', label: 'SoTC', type: 'text' },
+    // { name: 'Id', label: 'Id', type: 'text' },
+    { name: 'MaMonHoc', label: 'Mã Môn Học', type: 'text' },
+    { name: 'TenMonHoc', label: 'Tên Môn Học', type: 'text' },
+    { name: 'PrerequisiteCourseID', label: 'Môn Học Tiên Quyết', type: 'text' },
+    { name: 'SoTC', label: 'Số Tín Chỉ', type: 'text' },
   ];
 
   const handleClose = () => {
@@ -116,7 +116,7 @@ const TableSubjects = (props) => {
     let term = event.target.value;
     if (term) {
       let cloneListSubjects = _.cloneDeep(listSubjects);
-      cloneListSubjects = cloneListSubjects.filter(item => {
+      cloneListSubjects = cloneListSubjects.filter((item) => {
         return (
           item.data.MaMonHoc.includes(term) ||
           item.data.TenMonHoc.includes(term) ||
@@ -125,26 +125,23 @@ const TableSubjects = (props) => {
         );
       });
       setListSubjects(cloneListSubjects);
+    } else {
+      getSubjects('', 1, 6);
     }
-    else {
-      getSubjects("", 1, 6);
-    }
-  }, 500)
+  }, 500);
 
   return (
     <>
       <div className="Subjects-container">
         <div class="box-header">
-          <h3 class="box-title">
-            MÔN HỌC
-          </h3>
+          <h3 class="box-title">MÔN HỌC</h3>
         </div>
         <div className="my-3 add-new">
           <span>
             <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
-            Thêm môn học mới
+            Thêm mới
           </button>
         </div>
         <div className="col-4 my-3">
@@ -157,7 +154,7 @@ const TableSubjects = (props) => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <div className="sort-header">
                   <span>ID</span>
                   <span>
@@ -171,7 +168,7 @@ const TableSubjects = (props) => {
                     ></i>
                   </span>
                 </div>
-              </th>
+              </th> */}
               <th>
                 <div className="sort-header">
                   <span>Mã Môn Học</span>
@@ -241,7 +238,7 @@ const TableSubjects = (props) => {
               listSubjects.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
-                    <td>{item.id}</td>
+                    {/* <td>{item.id}</td> */}
                     <td>{item.data.MaMonHoc}</td>
                     <td>{item.data.TenMonHoc}</td>
                     <td>{item.data.PrerequisiteCourseID}</td>
@@ -285,8 +282,8 @@ const TableSubjects = (props) => {
           handleClose={handleClose}
           createApi={createSubjects}
           handleUpdateTable={handleUpdateTable}
-          title="Add new Subject"
-          buttonText="Save changes"
+          title="Thêm Môn Học Mới"
+          buttonText="Xác nhận"
           successMessage="A new Subject is created successfully!"
           errorMessage="Failed to create Subject."
           inputFields={inputFieldsAddNew}

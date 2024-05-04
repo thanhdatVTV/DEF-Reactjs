@@ -37,19 +37,18 @@ const TableEduProgram = (props) => {
     { name: 'TenNganh', label: 'Tên Ngành', type: 'text' },
     { name: 'MaMonHoc', label: 'Mã Môn Học', type: 'text' },
     { name: 'TenMonHoc', label: 'Tên Môn Học', type: 'text' },
-    { name: 'SoTC', label: 'Số tín chỉ', type: 'text' },
-    { name: 'GroupId', label: 'Nhóm môn học', type: 'text' },
-    { name: 'IsCompulsory', label: 'Bắt buộc', type: 'text' },
+    { name: 'SoTC', label: 'Số Tín Chỉ', type: 'text' },
+    { name: 'GroupId', label: 'Mã Nhóm Môn Học', type: 'text' },
+    { name: 'IsCompulsory', label: 'Bắt Buộc', type: 'text' },
   ];
   const inputFieldsEdit = [
-    { name: 'Id', label: 'ID', type: 'text' },
-    { name: 'NganhId', label: 'Nganh ID', type: 'text' },
-    { name: 'TenNganh', label: 'Ten Nganh', type: 'text' },
-    { name: 'MaMonHoc', label: 'Ma Mon Hoc', type: 'text' },
-    { name: 'TenMonHoc', label: 'Ten Mon Hoc', type: 'text' },
-    { name: 'SoTC', label: 'So tin chi', type: 'text' },
-    { name: 'GroupId', label: 'Group ID', type: 'text' },
-    { name: 'IsCompulsory', label: 'Is Compulsory', type: 'text' },
+    { name: 'NganhId', label: 'Mã Ngành', type: 'text' },
+    { name: 'TenNganh', label: 'Tên Ngành', type: 'text' },
+    { name: 'MaMonHoc', label: 'Mã Môn Học', type: 'text' },
+    { name: 'TenMonHoc', label: 'Tên Môn Học', type: 'text' },
+    { name: 'SoTC', label: 'Số Tín Chỉ', type: 'text' },
+    { name: 'GroupId', label: 'Mã Nhóm Môn Học', type: 'text' },
+    { name: 'IsCompulsory', label: 'Bắt Buộc', type: 'text' },
   ];
 
   const handleClose = () => {
@@ -139,16 +138,14 @@ const TableEduProgram = (props) => {
     <>
       <div className="EduProgram-container">
         <div class="box-header">
-          <h3 class="box-title">
-            CHƯƠNG TRÌNH ĐÀO TẠO
-          </h3>
+          <h3 class="box-title">CHƯƠNG TRÌNH ĐÀO TẠO</h3>
         </div>
         <div className="my-3 add-new">
           <span>
             <b></b>
           </span>
           <button className="btn btn-success" onClick={() => setIsShowModalAddNew(true)}>
-            Add New
+            Thêm mới
           </button>
         </div>
         <div className="col-4 my-3">
@@ -161,7 +158,7 @@ const TableEduProgram = (props) => {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th>
+              {/* <th>
                 <div className="sort-header">
                   <span>ID</span>
                   <span>
@@ -175,7 +172,7 @@ const TableEduProgram = (props) => {
                     ></i>
                   </span>
                 </div>
-              </th>
+              </th> */}
               <th>
                 <div className="sort-header">
                   <span>Ma Nganh</span>
@@ -290,7 +287,7 @@ const TableEduProgram = (props) => {
               listEduProgram.map((item, index) => {
                 return (
                   <tr key={`users-${index}`}>
-                    <td>{item.id}</td>
+                    {/* <td>{item.id}</td> */}
                     <td>{item.data.NganhId}</td>
                     <td>{item.data.TenNganh}</td>
                     <td>{item.data.MaMonHoc}</td>
@@ -340,8 +337,8 @@ const TableEduProgram = (props) => {
           handleClose={handleClose}
           createApi={createEduProgram}
           handleUpdateTable={handleUpdateTable}
-          title="Add new EduProgram"
-          buttonText="Save changes"
+          title="Thêm Chương Trình Đào Tạo Mới"
+          buttonText="Xác nhận"
           successMessage="A new EduProgram is created successfully!"
           errorMessage="Failed to create EduProgram."
           inputFields={inputFieldsAddNew}
@@ -352,7 +349,7 @@ const TableEduProgram = (props) => {
           handleClose={handleClose}
           handleEditFromModal={handleEditEduProgramFromModal}
           updateApi={updateEduProgram}
-          title="Edit EduProgram"
+          title="Chỉnh Sửa Chương Trình Đào Tạo"
           successMessage="Update EduProgram successfully"
           inputFields={inputFieldsEdit}
         />
