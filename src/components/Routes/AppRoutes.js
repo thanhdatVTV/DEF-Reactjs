@@ -26,6 +26,8 @@ import TableRoom from '../Room/TableRoom';
 import Profile from '../Profile/Profile';
 import TableDotDangKy from '../DotDangKy/TableDotDangKy';
 import TablePhanCongMonHoc from '../PhanCongMonHoc/TablePhanCongMonHoc';
+import TableDotDangKySinhVien from '../DangKyMonHoc/TableDotDangKySinhVien';
+import TableDangKyMonHoc from '../DangKyMonHoc/TableDangKyMonHoc';
 import EduProgram from '../User/EduProgram'
 
 const AppRoutes = () => {
@@ -84,6 +86,8 @@ const AppRoutes = () => {
           <Route path="/room" element={<TableRoom />} />
           <Route path="/dotdangky" element={<TableDotDangKy />} />
           <Route path="/phancongmonhoc/:MaDDK" element={<TablePhanCongMonHoc />} />
+          <Route path="/dotdangkysinhvien" element={<TableDotDangKySinhVien />} />
+          <Route path="/dangkymonhoc/:MaDDK" element={<TableDangKyMonHoc />} />
         </Routes>
       </>
     );

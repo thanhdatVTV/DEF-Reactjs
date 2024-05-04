@@ -13,7 +13,7 @@ const Home = () => {
             navigate("/dotdangky")
         }
         if (item === 2) {
-            navigate("/purchase")
+            navigate("/dotdangkysinhvien")
         }
         if (item === 3) {
             navigate("/user/eduprogram")
@@ -40,7 +40,7 @@ const Home = () => {
                         <span className="title"><i className="fa-solid fa-file"></i> Đợt đăng ký</span>
                     </Button>
                     <Button className="col-md-4 col-6 btn btn-secondary btn-home" onClick={() => redirectToOtherPage(2)}>
-                        <span className="title"><i className="fa-solid fa-money-bill"></i> Mua trang in</span>
+                        <span className="title"><i className="fa-solid fa-money-bill"></i> Đăng ký môn học</span>
                     </Button>
                     <Button className="col-md-4 col-6 btn btn-success btn-home" onClick={() => redirectToOtherPage(3)}>
                         <span className="title"><i className="fa-solid fa-clipboard"></i> Xem chương trình đào tạo</span>

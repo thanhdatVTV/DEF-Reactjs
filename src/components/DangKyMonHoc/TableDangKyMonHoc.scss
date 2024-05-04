@@ -1,0 +1,31 @@
+.multi-column-dropdown .dropdown-columns {
+    column-count: 8; /* Số cột muốn hiển thị */
+    column-gap: 1px; /* Khoảng cách giữa các cột */
+    //display: flex;
+    flex-wrap: wrap;
+}
+
+.multi-column-dropdown .dropdown-columns label {
+    display: block;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+input[type="number"] {
+    width: 70px; /* Adjust the width as needed */
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Style for the input field when it's in focus */
+input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff; /* Change border color on focus */
+}
+
+.PhanCongMonHoc-container {
+    margin: 3vw;
+}
