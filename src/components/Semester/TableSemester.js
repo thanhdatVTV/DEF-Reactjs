@@ -32,7 +32,6 @@ const TableSemester = (props) => {
         { name: "HocKy", label: "Semester name", type: "text" },
     ];
     const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
         { name: "MaHocKy", label: "Semester ID", type: "text" },
         { name: "HocKy", label: "Semester name", type: "text" },
     ];

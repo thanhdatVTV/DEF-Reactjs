@@ -268,10 +268,10 @@ const TableNhomLop = (props) => {
           handleClose={handleClose}
           createApi={createNhomLop}
           handleUpdateTable={handleUpdateTable}
-          title="Thêm Nhóm Lớp Mới"
+          title="Thêm Nhóm Lớp"
           buttonText="Xác nhận"
-          successMessage="A new NhomLop is created successfully!"
-          errorMessage="Failed to create NhomLop."
+          successMessage="Thêm mới thành công!"
+          errorMessage="Thêm mới thất bại."
           inputFields={inputFieldsAddNew}
         />
         <ModalEdit
@@ -281,7 +281,7 @@ const TableNhomLop = (props) => {
           handleEditFromModal={handleEditNhomLopFromModal}
           updateApi={updateNhomLop}
           title="Chỉnh Sửa Nhóm Lớp"
-          successMessage="Update NhomLop successfully"
+          successMessage="Cập nhật thành công!"
           inputFields={inputFieldsEdit}
         />
         <ModalConfirm
@@ -290,8 +290,8 @@ const TableNhomLop = (props) => {
           dataDelete={dataNhomLopDelete}
           handleDeleteFromModal={handleDeleteNhomLopFromModal}
           deleteApi={deleteNhomLop}
-          title="Delete NhomLop"
-          successMessage="Delete NhomLop successfully"
+          title="Xác nhận xóa"
+          successMessage="Xóa thành công!"
         />
       </div>
     </>

@@ -28,17 +28,16 @@ const TableMajor = (props) => {
     const [keyword, setKeyword] = useState("");
 
     const inputFieldsAddNew = [
-        { name: "MaKhoa", label: "Faculty ID", type: "text" },
-        { name: "TenKhoa", label: "Faculty name", type: "text" },
-        { name: "MaNganh", label: "Major ID", type: "text" },
-        { name: "TenNganh", label: "Major name", type: "text" },
+        { name: "MaKhoa", label: "Mã Khoa", type: "text" },
+        { name: "TenKhoa", label: "Tên Khoa", type: "text" },
+        { name: "MaNganh", label: "Mã Ngành", type: "text" },
+        { name: "TenNganh", label: "Tên Ngành", type: "text" },
     ];
     const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
-        { name: "MaKhoa", label: "Faculty ID", type: "text" },
-        { name: "TenKhoa", label: "Faculty name", type: "text" },
-        { name: "MaNganh", label: "Major ID", type: "text" },
-        { name: "TenNganh", label: "Major name", type: "text" },
+        { name: "MaKhoa", label: "Mã Khoa", type: "text" },
+        { name: "TenKhoa", label: "Tên Khoa", type: "text" },
+        { name: "MaNganh", label: "Mã Ngành", type: "text" },
+        { name: "TenNganh", label: "Tên Ngành", type: "text" },
     ];
 
     const handleClose = () => {
@@ -272,8 +271,8 @@ const TableMajor = (props) => {
                     handleUpdateTable={handleUpdateTable}
                     title="Thêm mới Ngành Học"
                     buttonText="Xác Nhận"
-                    successMessage="A new Major is created successfully!"
-                    errorMessage="Failed to create Major."
+                    successMessage="Thêm mới ngành học thành công!"
+                    errorMessage="Thêm mới thất bại."
                     inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
@@ -282,8 +281,8 @@ const TableMajor = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditMajorFromModal}
                     updateApi={updateMajor}
-                    title="Edit Major"
-                    successMessage='Update Major successfully'
+                    title="Sửa Ngành học"
+                    successMessage='Cập nhật thành công!'
                     inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
@@ -293,7 +292,7 @@ const TableMajor = (props) => {
                     handleDeleteFromModal={handleDeleteMajorFromModal}
                     deleteApi={deleteMajor}
                     title='Delete Major'
-                    successMessage='Delete Major successfully'
+                    successMessage='Xóa thành công!'
                 />
             </div>
         </>

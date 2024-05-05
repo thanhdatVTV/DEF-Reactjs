@@ -244,8 +244,8 @@ const TableBuilding = (props) => {
                     handleUpdateTable={handleUpdateTable}
                     title="Thêm phòng"
                     buttonText="Save changes"
-                    successMessage="A new Building is created successfully!"
-                    errorMessage="Failed to create Building."
+                    successMessage="Thêm mới Phòng học thành công!"
+                    errorMessage="Thêm mới Phòng học thất bại!"
                     inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
@@ -255,7 +255,7 @@ const TableBuilding = (props) => {
                     handleEditFromModal={handleEditBuildingFromModal}
                     updateApi={updateRoom}
                     title="Sửa phòng"
-                    successMessage='Update Building successfully'
+                    successMessage='Cập nhật phòng thành công.'
                     inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
@@ -264,8 +264,8 @@ const TableBuilding = (props) => {
                     dataDelete={dataBuildingDelete}
                     handleDeleteFromModal={handleDeleteBuildingFromModal}
                     deleteApi={deleteRoom}
-                    title='Delete Building'
-                    successMessage='Delete Building successfully'
+                    title='Xóa Phòng học thất bại!'
+                    successMessage='Xóa phòng học thành công!'
                 />
             </div>
         </>)

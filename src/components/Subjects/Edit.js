@@ -85,7 +85,7 @@ const ModalEdit = (props) => {
                       className="form-control"
                       value={inputValues[field.name] || ''}
                       onChange={(event) => handleInputChange(field.name, event.target.value)}
-                      readOnly
+                    // readOnly
                     />
                   </div>
                 );

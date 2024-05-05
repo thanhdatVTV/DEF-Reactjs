@@ -30,15 +30,14 @@ const TableBuilding = (props) => {
     const [keyword, setKeyword] = useState("");
 
     const inputFieldsAddNew = [
-        { name: "MaTN", label: "Building ID", type: "text" },
-        { name: "TenTN", label: "Building name", type: "text" },
-        { name: "CoSoId", label: "CoSo ID", type: "text" },
+        { name: "MaTN", label: "Mã tòa nhà", type: "text" },
+        { name: "TenTN", label: "Tên tòa nhà", type: "text" },
+        { name: "CoSoId", label: "Cơ sở", type: "text" },
     ];
     const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
-        { name: "MaTN", label: "Building ID", type: "text" },
-        { name: "TenTN", label: "Building name", type: "text" },
-        { name: "CoSoId", label: "CoSo ID", type: "text" },
+        { name: "MaTN", label: "Mã tòa nhà", type: "text" },
+        { name: "TenTN", label: "Tên tòa nhà", type: "text" },
+        { name: "CoSoId", label: "Cơ sở", type: "text" },
     ];
 
     const handleClose = () => {
@@ -253,8 +252,8 @@ const TableBuilding = (props) => {
                     handleUpdateTable={handleUpdateTable}
                     title="Thêm Tòa Nhà"
                     buttonText="Save changes"
-                    successMessage="A new Building is created successfully!"
-                    errorMessage="Failed to create Building."
+                    successMessage="Thêm mới thành công!"
+                    errorMessage="Thêm mới thất bại."
                     inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
@@ -263,8 +262,8 @@ const TableBuilding = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditBuildingFromModal}
                     updateApi={updateBuilding}
-                    title="Sửa Tòa nhà"
-                    successMessage='Update Building successfully'
+                    title="Cập nhật Tòa nhà"
+                    successMessage='Cập nhật thành công!'
                     inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
@@ -273,8 +272,8 @@ const TableBuilding = (props) => {
                     dataDelete={dataBuildingDelete}
                     handleDeleteFromModal={handleDeleteBuildingFromModal}
                     deleteApi={deleteBuilding}
-                    title='Delete Building'
-                    successMessage='Delete Building successfully'
+                    title='Xác nhận xóa'
+                    successMessage='Xóa thành công!'
                 />
             </div>
         </>)

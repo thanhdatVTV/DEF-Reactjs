@@ -190,7 +190,7 @@ const DotDangKy = (props) => {
                 <div className="my-3 add-new">
                     <div class="box-header">
                     </div>
-                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Add new</button>
+                    <button className='btn btn-success' onClick={() => setIsShowModalAddNew(true)}>Thêm mới</button>
                 </div>
                 <div className='col-4 my-3'>
                     <input
@@ -288,8 +288,8 @@ const DotDangKy = (props) => {
                     handleUpdateTable={handleUpdateTable}
                     title="Thêm đợt đăng ký"
                     buttonText="Save changes"
-                    successMessage="A new Enrollment is created successfully!"
-                    errorMessage="Failed to create Enrollment."
+                    successMessage="Thêm mới thành công!"
+                    errorMessage="Thêm mới thất bại!."
                     inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
@@ -298,8 +298,8 @@ const DotDangKy = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditDotDangKyFromModal}
                     updateApi={updateDotDangKy}
-                    title="Edit Enrollment"
-                    successMessage='Update Enrollment successfully'
+                    title="Cập nhật đợt đăng ký"
+                    successMessage='Cập nhật thành công!'
                     inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
@@ -308,8 +308,8 @@ const DotDangKy = (props) => {
                     dataDelete={dataDotDangKyDelete}
                     handleDeleteFromModal={handleDeleteDotDangKyFromModal}
                     deleteApi={deleteDotDangKy}
-                    title='Delete Enrollment'
-                    successMessage='Delete Enrollment successfully'
+                    title='Xác nhận xóa'
+                    successMessage='Xóa thành công!'
                 />
             </div>
         </>)

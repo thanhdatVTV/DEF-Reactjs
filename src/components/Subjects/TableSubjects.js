@@ -283,8 +283,8 @@ const TableSubjects = (props) => {
           handleUpdateTable={handleUpdateTable}
           title="Thêm Môn Học Mới"
           buttonText="Xác nhận"
-          successMessage="A new Subject is created successfully!"
-          errorMessage="Failed to create Subject."
+          successMessage="Thêm mới thành công!"
+          errorMessage="Thêm mới thất bại."
           inputFields={inputFieldsAddNew}
         />
         <ModalEdit
@@ -294,7 +294,7 @@ const TableSubjects = (props) => {
           handleEditFromModal={handleEditSubjectsFromModal}
           updateApi={updateSubjects}
           title="Sửa môn học"
-          successMessage="Update Subject successfully"
+          successMessage="Cập nhật thành công!"
           inputFields={inputFieldsEdit}
         />
         <ModalConfirm
@@ -303,8 +303,8 @@ const TableSubjects = (props) => {
           dataDelete={dataSubjectsDelete}
           handleDeleteFromModal={handleDeleteSubjectsFromModal}
           deleteApi={deleteSubjects}
-          title="Delete Subject"
-          successMessage="Delete Subject successfully"
+          title="Xác nhận xóa"
+          successMessage="Xóa thành công!"
         />
       </div>
     </>

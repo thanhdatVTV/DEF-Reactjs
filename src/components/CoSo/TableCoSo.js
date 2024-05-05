@@ -28,15 +28,14 @@ const TableCoSo = (props) => {
     const [keyword, setKeyword] = useState("");
 
     const inputFieldsAddNew = [
-        { name: "MaCS", label: "CoSo ID", type: "text" },
+        { name: "MaCS", label: "Mã Cơ sở", type: "text" },
         { name: "DiaChi", label: "Địa chỉ", type: "text" },
-        { name: "TenCS", label: "CoSo name", type: "text" },
+        { name: "TenCS", label: "Tên Cơ sở", type: "text" },
     ];
     const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
-        { name: "MaCS", label: "CoSo ID", type: "text" },
+        { name: "MaCS", label: "Mã Cơ sở", type: "text" },
         { name: "DiaChi", label: "Địa chỉ", type: "text" },
-        { name: "TenCS", label: "CoSo name", type: "text" },
+        { name: "TenCS", label: "Tên Cơ sở", type: "text" },
     ];
 
     const handleClose = () => {
@@ -241,7 +240,7 @@ const TableCoSo = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditCoSoFromModal}
                     updateApi={updateCoSo}
-                    title="chỉnh sửa cơ sở"
+                    title="Sửa cơ sở"
                     successMessage='Update CoSo successfully'
                     inputFields={inputFieldsEdit}
                 />

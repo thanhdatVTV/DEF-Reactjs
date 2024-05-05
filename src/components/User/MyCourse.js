@@ -29,7 +29,7 @@ const MyCourse = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await getListByMaSV(user.account.maSV);
+                const res = await getListByMaSV(user.account.codeId);
                 if (res && res.response) {
                     const hocKySorted = res.response.reduce((acc, curr) => {
                         if (acc[curr.data.HocKy]) {
@@ -64,7 +64,7 @@ const MyCourse = (props) => {
                 <div className='text-center'>
                     <h5><b>CÁC KHÓA HỌC CỦA TÔI</b></h5>
                 </div>
-                <div className="container card" style={{maxWidth: '80%'}}>
+                <div className="container card" style={{ maxWidth: '80%' }}>
                     {
                         listHocKy && listHocKy.length > 0 &&
                         listHocKy.map((hocKy, index) => {
@@ -79,7 +79,7 @@ const MyCourse = (props) => {
                                             hocKy.hocKyData.map((item, index) => {
                                                 return (
                                                     <div className="card col-4">
-                                                        <img src={imageList[index]} className="card-img-top" alt=""/>
+                                                        <img src={imageList[index]} className="card-img-top" alt="" />
                                                         <div className="card-body">
                                                             <h5 className="card-title link-primary" onClick={() => handleClickCard(item)}>{item.data.TenMH}</h5>
                                                             <p className="card-text">({item.data.MaMH}) [{item.data.NhomLop}]</p>
@@ -88,9 +88,9 @@ const MyCourse = (props) => {
                                                 )
                                             })
                                         }
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                             )
                         })

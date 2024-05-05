@@ -32,7 +32,6 @@ const TableYear = (props) => {
         { name: "NamHoc", label: "Year name", type: "text" },
     ];
     const inputFieldsEdit = [
-        { name: "Id", label: "ID", type: "text" },
         { name: "MaNamHoc", label: "Year ID", type: "text" },
         { name: "NamHoc", label: "Year name", type: "text" },
     ];
@@ -229,8 +228,8 @@ const TableYear = (props) => {
                     handleUpdateTable={handleUpdateTable}
                     title="Thêm năm học"
                     buttonText="Save changes"
-                    successMessage="A new Year is created successfully!"
-                    errorMessage="Failed to create Year."
+                    successMessage="Thêm mới năm học thành công!"
+                    errorMessage="Thêm mới năm học thất bại."
                     inputFields={inputFieldsAddNew}
                 />
                 <ModalEdit
@@ -239,8 +238,8 @@ const TableYear = (props) => {
                     handleClose={handleClose}
                     handleEditFromModal={handleEditYearFromModal}
                     updateApi={updateYear}
-                    title="Sữar năm học"
-                    successMessage='Update Year successfully'
+                    title="Sửa năm học"
+                    successMessage='Cập nhật năm học thành công'
                     inputFields={inputFieldsEdit}
                 />
                 <ModalConfirm
@@ -250,7 +249,7 @@ const TableYear = (props) => {
                     handleDeleteFromModal={handleDeleteYearFromModal}
                     deleteApi={deleteYear}
                     title='Delete Year'
-                    successMessage='Delete Year successfully'
+                    successMessage='Xóa năm học thành công.'
                 />
             </div>
         </>

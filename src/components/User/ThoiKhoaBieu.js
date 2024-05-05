@@ -12,7 +12,7 @@ const ThoiKhoaBieu = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await getListByMaSV(user.account.maSV);
+                const res = await getListByMaSV(user.account.codeId);
                 if (res && res.response) {
                     const hocKySorted = res.response.reduce((acc, curr) => {
                         if (acc[curr.data.HocKy]) {

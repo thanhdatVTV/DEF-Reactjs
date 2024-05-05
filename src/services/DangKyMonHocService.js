@@ -7,7 +7,8 @@ const getDangKyMonHocList = (keyword, MaDDK, MaSV, pageNumber, perPage) => {
 }
 
 const getListByMaSV = (MaSV) => {
-    return axios.get(`/api/dang-ky-mon-hoc/get-list-by-ma-sv`, {MaSV});
+    //return axios.get(`/api/dang-ky-mon-hoc/get-list-by-ma-sv`, {MaSV});
+    return axios.get(`/api/dang-ky-mon-hoc/get-list-by-ma-sv?MaSV=${MaSV}`);
 }
 
 const createDangKyMonHoc = ({ MaSV, MaDDK, NganhHoc, MaMH, TenMH, NamHoc, HocKy, NhomLop, CoSo, ToaNha, Phong, TuanHoc, Thu, TietHoc, SiSo, TeacherCode }) => {
